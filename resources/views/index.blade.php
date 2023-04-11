@@ -56,83 +56,155 @@
     <div class="container">
         <h2 class="text-center my-4" style="font-size: 3em;">Nowości</h2>
         <div class="row g-4">
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
-            <div class="col-3">
-                <div class="border rounded text-center p-4 rounded">
-                    <div class="bg-img-4"></div>
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                    <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                     <h3>Nazwa produktu</h3>
-                    <div>
-                        <div class="text-danger">100 PLN</div>
-                        <button class="btn btn-custom-1">Wybierz</button>
+                    <p class="text-muted">Opis produktu</p>
+                    <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                        <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                        <div class="text-custom-1 fs-4"> 80 PLN</div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                        <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                    </div>
+                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                        <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                     </div>
                 </div>
             </div>
@@ -145,111 +217,49 @@
         <div class="row g-4">
             <div class="col-6">
                 <div class="row">
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-5"></div>
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                            <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                             <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
+                            <p class="text-muted">Opis produktu</p>
+                            <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                                <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                                <div class="text-custom-1 fs-4"> 80 PLN</div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between align-items-center">
+                                <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                                <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                            </div>
+                            <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                                <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                                <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-5"></div>
+                    <div class="col-12 col-md-6 mb-4">
+                        <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center rounded">
+                            <img alt="" src="{{ asset('photos/product-1.jpg')}}" class="img-fluid">
                             <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
+                            <p class="text-muted">Opis produktu</p>
+                            <div class="d-flex flex-row justify-content-center align-items-center mb-4">
+                                <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">100 PLN</div>
+                                <div class="text-custom-1 fs-4"> 80 PLN</div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-5"></div>
-                            <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
+                            <div class="d-flex flex-row justify-content-between align-items-center">
+                                <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                                <a href="" class="btn btn-custom-2 w-25 h-100  d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-5"></div>
-                            <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
+                            <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
+                                <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+                                <div class="bg-custom-2 p-2 text-white shadow rounded">-20%</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-6">
-                <div class="row">
-                    <div class="col-12">
-                        <img alt="bag" src="{{ asset('photos/bag.jpg')}}" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section>
-    <div class="container">
-        <h2 class="text-end my-4" style="font-size: 3em;">Sukienki</h2>
-        <div class="row g-4">
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-12">
-                        <img alt="bag" src="{{ asset('photos/dress.jpg')}}" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="row">
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-6"></div>
-                            <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-6"></div>
-                            <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-6"></div>
-                            <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="border rounded text-center p-4 rounded">
-                            <div class="bg-img-6"></div>
-                            <h3>Nazwa produktu</h3>
-                            <div>
-                                <div class="text-danger">100 PLN</div>
-                                <button class="btn btn-custom-1">Wybierz</button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="d-flex flex-row justify-content-center align-items-center h-100">
+                    <img alt="bag" src="{{ asset('photos/bag.jpg')}}" class="img-fluid shadow rounded">
                 </div>
             </div>
         </div>

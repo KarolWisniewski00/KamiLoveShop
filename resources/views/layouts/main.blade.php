@@ -14,18 +14,18 @@
     <!--NAV + HEADER-->
     <section>
         <header class="d-flex flex-wrap justify-content-center py-2 container align-items-center">
-            <a href="/" class="d-flex align-items-center mb-2 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <a href="{{route('index')}}" class="d-flex align-items-center mb-2 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <img src="{{ asset('photos/logo-male-beztla.png')}}" alt="logo" class="img-fluid" style="max-height: 6em;">
                 <span class="fs-2">KamiLove</span>
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#" class="text-dark nav-link">Start</a></li>
+                <li class="nav-item"><a href="{{route('index')}}" class="text-dark nav-link">Start</a></li>
                 <li class="nav-item"><a href="#" class="text-dark nav-link">Torebki</a></li>
                 <li class="nav-item"><a href="#" class="text-dark nav-link">Sukienki</a></li>
                 <li class="nav-item"><a href="#" class="text-dark nav-link">Obuwie</a></li>
                 <li class="nav-item"><a href="#" class="text-dark nav-link">Biżuteria</a></li>
-                <li class="nav-item"><a href="#" class="btn btn-custom-1 mx-2"><i class="fa-solid fa-user"></i></a></li>
+                <li class="nav-item"><a href="{{ url('account')}}" class="btn btn-custom-1 mx-2"><i class="fa-solid fa-user"></i></a></li>
                 <li class="nav-item"><a href="#" class="btn btn-custom-2 mx-2"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </li>
             </ul>
@@ -59,8 +59,8 @@
             <div class="col mb-3">
                 <h5>Zakupy</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Koszyk</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Twoje zamówienia</a></li>
+                    <li class="nav-item mb-2"><a href="{{ url('busket')}}" class="nav-link p-0 text-muted">Koszyk</a></li>
+                    <li class="nav-item mb-2"><a href="{{ url('history')}}" class="nav-link p-0 text-muted">Twoje zamówienia</a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Formy płatności</a></li>
                 </ul>
             </div>

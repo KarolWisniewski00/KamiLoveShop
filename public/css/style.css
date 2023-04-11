@@ -1,3 +1,4 @@
+/*BUTTON*/
 .btn-custom-1 {
     --bs-btn-color: #fff;
     --bs-btn-bg: #EA2F83;
@@ -78,6 +79,7 @@
     --bs-btn-disabled-bg: #0597D5;
     --bs-btn-disabled-border-color: #0597D5
 }
+/*TEXT*/
 .text-custom-1{
     color: #EA2F83;
 }
@@ -93,6 +95,14 @@
 .text-custom-5{
     color: #0597D5;
 }
+/*BG*/
+.bg-custom-1{
+    background-color: #EA2F83;
+}
+.bg-custom-2{
+    background-color: #FEA706;
+}
+/*IMG*/
 .bg-img-1 {
     background-image: url("../photos/hero-1.jpg");
     background-color: #cccccc;
