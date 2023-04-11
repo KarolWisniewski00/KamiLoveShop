@@ -30,7 +30,7 @@ class AuthController extends Controller
                 if ($user->admin == true) {
                     $request->session()->put('admin', $user->admin);
                 }
-                return redirect('/');
+                return redirect('/')->with('success', 'Logowanie zakończone powodzeniem!');
             } else {
                 return redirect('/login')->with('fail', "Złe hasło!");
             }

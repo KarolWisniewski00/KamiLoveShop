@@ -21,10 +21,9 @@
 
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="{{route('index')}}" class="text-dark nav-link">Start</a></li>
-                <li class="nav-item"><a href="#" class="text-dark nav-link">Torebki</a></li>
-                <li class="nav-item"><a href="#" class="text-dark nav-link">Sukienki</a></li>
-                <li class="nav-item"><a href="#" class="text-dark nav-link">Obuwie</a></li>
-                <li class="nav-item"><a href="#" class="text-dark nav-link">Biżuteria</a></li>
+                @foreach ($categories as $category)
+                <li class="nav-item"><a href="{{ url('category/'.$category->url)}}" class="text-dark nav-link">{{$category->plural}}</a></li>
+                @endforeach
                 <li class="nav-item"><a href="{{ url('account')}}" class="btn btn-custom-1 mx-2"><i class="fa-solid fa-user"></i></a></li>
                 <li class="nav-item"><a href="#" class="btn btn-custom-2 mx-2"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </li>
@@ -32,6 +31,24 @@
         </header>
     </section>
     <!--END ANV + HEADER-->
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    @if(Session::has('success'))
+                    <div>
+                        <div class="alert alert-success">{{Session::get('success')}}</div>
+                    </div>
+                    @endif
+                    @if(Session::has('fail'))
+                    <div>
+                        <div class="alert alert-danger">{{Session::get('fail')}}</div>
+                    </div>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
     @yield('content')
     <!--FOOTER-->
     <div class="container">
@@ -49,10 +66,9 @@
             <div class="col mb-3">
                 <h5>Nowości</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Torebki</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sukienki</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Obuwie</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Biżuteria</a></li>
+                    @foreach ($categories as $category)
+                    <li class="nav-item mb-2"><a href="{{ url('category/'.$category->url)}}" class="nav-link p-0 text-muted">{{$category->plural}}</a></li>
+                    @endforeach
                 </ul>
             </div>
 

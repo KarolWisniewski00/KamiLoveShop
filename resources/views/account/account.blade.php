@@ -38,8 +38,8 @@
                         </li>
                     </ul>
                     <div class="d-flex justify-content-start align-items-center mt-4">
-                        <a href="{{url('edit')}}" class="me-2 btn btn-custom-1">Edytuj konto</a>
-                        <a href="" class="btn btn-custom-2">Usuń konto</a>
+                        <a href="{{url('edit')}}" class="me-2 btn btn-custom-1"><i class="fa-solid fa-pen-to-square"></i> Edytuj konto</a>
+                        <a href="" class="btn btn-custom-2" onclick="return confirm('Czy na pewno chcesz usunąć to konto?');"><i class="fa-solid fa-trash"></i> Usuń konto</a>
                     </div>
                     @else
                     <form class="form text-center my-4" action="{{route('edit_form')}}" method="POST">
@@ -77,8 +77,8 @@
                         </div>
 
                         <div class="d-flex justify-content-start align-items-center mt-4">
-                            <button class="btn btn-custom-1 me-2" type="submit">Zapisz</button>
-                            <a href="{{url('account')}}" class="btn btn-custom-2">Anuluj</a>
+                            <button class="btn btn-custom-1 me-2" type="submit"><i class="fa-solid fa-floppy-disk"></i> Zapisz</button>
+                            <a href="{{url('account')}}" class="btn btn-custom-2"><i class="fa-solid fa-xmark"></i> Anuluj</a>
                         </div>
                     </form>
                     @endif
