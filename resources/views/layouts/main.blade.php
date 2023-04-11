@@ -24,6 +24,7 @@
                 <li class="nav-item"><a href="#" class="text-dark nav-link">Torebki</a></li>
                 <li class="nav-item"><a href="#" class="text-dark nav-link">Sukienki</a></li>
                 <li class="nav-item"><a href="#" class="text-dark nav-link">Obuwie</a></li>
+                <li class="nav-item"><a href="#" class="text-dark nav-link">Biżuteria</a></li>
                 <li class="nav-item"><a href="#" class="btn btn-custom-1 mx-2"><i class="fa-solid fa-user"></i></a></li>
                 <li class="nav-item"><a href="#" class="btn btn-custom-2 mx-2"><i class="fa-solid fa-magnifying-glass"></i></a>
                 </li>
@@ -46,35 +47,32 @@
             </div>
 
             <div class="col mb-3">
-                <h5>Section</h5>
+                <h5>Nowości</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Torebki</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Sukienki</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Obuwie</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Biżuteria</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3">
-                <h5>Section</h5>
+                <h5>Zakupy</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Koszyk</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Twoje zamówienia</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Formy płatności</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3">
-                <h5>Section</h5>
+                <h5>Informacje</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">O nas</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Zwroty i reklamacje</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Regulamin</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Polityka prywatności</a></li>
+                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Kontakt</a></li>
                 </ul>
             </div>
         </footer>
