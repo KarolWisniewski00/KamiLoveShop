@@ -10,7 +10,7 @@ use Exception;
 class PagesController extends Controller
 {
     //INDEX PAGES
-    public function pages($url)
+    public function pages(Request $request,$url)
     {
         $max = 0;
         $category = Category::where('url', '=', $url)->get();

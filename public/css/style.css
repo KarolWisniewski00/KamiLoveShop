@@ -165,6 +165,18 @@
     cursor: pointer;
 }
 
+.accordion-button:not(.collapsed) {
+    color: #EA2F83 !important;
+}
+
+.accordion {
+    --bs-accordion-active-color: #EA2F83 !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: var(--bs-accordion-btn-icon);
+}
+
 /*OTHERS*/
 .no-link:link {
     text-decoration: none !important;

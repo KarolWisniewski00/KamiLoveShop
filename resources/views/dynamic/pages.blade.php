@@ -34,7 +34,7 @@
         <div class="row">
             <!--FILTERS-->
             <div class="col-12 col-lg-3 col-xl-2 mb-4">
-                <div class="accordion shadow" id="accordionPanelsStayOpenExample">
+                <form class="accordion shadow" id="accordionPanelsStayOpenExample" method="GET">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -45,17 +45,17 @@
                             <div class="accordion-body d-flex flex-column justify-content-center align-items-center">
                                 <div data-role="rangeslider" class="d-flex flex-column justify-content-center align-items-center">
                                     <div>
-                                        <label for="price-min">Od:</label>
-                                        <input type="range" name="price-min" id="price-min" class="slider my-2" value="0" min="0" max="{{$max}}">
+                                        <label for="price_min">Od:</label>
+                                        <input type="range" name="price_min" id="price_min" class="slider my-2" value="0" min="0" max="{{$max}}">
                                     </div>
                                     <div>
-                                        <label for="price-max">Do:</label>
-                                        <input type="range" name="price-max" id="price-max" class="slider my-2" value="{{$max}}" min="0" max="{{$max}}">
+                                        <label for="price_max">Do:</label>
+                                        <input type="range" name="price_max" id="price_max" class="slider my-2" value="{{$max}}" min="0" max="{{$max}}">
                                     </div>
                                 </div>
                                 <div>
-                                    <span id="price-min-value"></span> PLN -
-                                    <span id="price-max-value"></span> PLN
+                                    <span id="price_min_value"></span> PLN -
+                                    <span id="price_max_value"></span> PLN
                                 </div>
                             </div>
                         </div>
@@ -81,24 +81,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="panelsStayOpen-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
-                                Rotacyjny
-                            </button>
-                        </h2>
-                        <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
-                            <div class="accordion-body">
-                                <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                            </div>
-                        </div>
-                    </div>
                     <div class="accordion-item py-4">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-lg btn-custom-1">Filtruj</button>
+                            <button class="btn btn-lg btn-custom-1" type="submit">Filtruj</button>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <!--END FILTERS-->
             <!--PRODUCTS GRID-->
@@ -193,10 +181,10 @@
     });
 
     //FILTER
-    const priceMin = document.getElementById('price-min');
-    const priceMax = document.getElementById('price-max');
-    const priceMinValue = document.getElementById('price-min-value');
-    const priceMaxValue = document.getElementById('price-max-value');
+    const priceMin = document.getElementById('price_min');
+    const priceMax = document.getElementById('price_max');
+    const priceMinValue = document.getElementById('price_min_value');
+    const priceMaxValue = document.getElementById('price_max_value');
 
     priceMin.addEventListener('input', function() {
         priceMinValue.textContent = priceMin.value;

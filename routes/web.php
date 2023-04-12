@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ReturnController;
+use App\Http\Controllers\RulesController;
+use App\Http\Controllers\PolicyController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
@@ -56,3 +61,10 @@ Route::post('/admin/hero/edit/{id}',[AdminController::class, 'hero_edit_form'])-
 //PAGES DYNAMIC
 Route::get('/category/{url}',[PagesController::class, 'pages']);
 Route::get('/product/{id}',[ProductController::class, 'product']);
+
+//PAGES STATIC
+Route::get('/about',[AboutController::class, 'about'])->name('about');
+Route::get('/return',[ReturnController::class, 'return'])->name('return');
+Route::get('/rules',[RulesController::class, 'rules'])->name('rules');
+Route::get('/policy',[PolicyController::class, 'policy'])->name('policy');
+Route::get('/contact',[ContactController::class, 'contact'])->name('contact');

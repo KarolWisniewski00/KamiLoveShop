@@ -77,18 +77,17 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="{{ url('busket')}}" class="nav-link p-0 text-muted">Koszyk</a></li>
                     <li class="nav-item mb-2"><a href="{{ url('history')}}" class="nav-link p-0 text-muted">Twoje zamówienia</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Formy płatności</a></li>
                 </ul>
             </div>
 
             <div class="col mb-3">
                 <h5>Informacje</h5>
                 <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">O nas</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Zwroty i reklamacje</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Regulamin</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Polityka prywatności</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Kontakt</a></li>
+                    <li class="nav-item mb-2"><a href="{{route('about')}}" class="nav-link p-0 text-muted">O nas</a></li>
+                    <li class="nav-item mb-2"><a href="{{route('return')}}" class="nav-link p-0 text-muted">Zwroty i reklamacje</a></li>
+                    <li class="nav-item mb-2"><a href="{{route('rules')}}" class="nav-link p-0 text-muted">Regulamin</a></li>
+                    <li class="nav-item mb-2"><a href="{{route('policy')}}" class="nav-link p-0 text-muted">Polityka prywatności</a></li>
+                    <li class="nav-item mb-2"><a href="{{route('contact')}}" class="nav-link p-0 text-muted">Kontakt</a></li>
                 </ul>
             </div>
         </footer>
