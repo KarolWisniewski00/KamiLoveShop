@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Product;
+use Exception;
 
 class PagesController extends Controller
 {
@@ -12,7 +13,13 @@ class PagesController extends Controller
     {
         $max = 0;
         $category = Category::where('url', '=', $url)->get();
-        $products = Product::where('category_id', '=', $category[0]->id)->get();
+
+        try {
+            $products = Product::where('category_id', '=', $category[0]->id)->get();
+        } catch (Exception $e) {
+            return redirect('/')->with('fail','Nie ma takiej strony!');
+            exit;
+        }
 
         $categories = Category::get();
         foreach ($categories as $cat) {
@@ -35,7 +42,7 @@ class PagesController extends Controller
             'url' => $url,
             'products' => $products,
             'categories_count' => $categories,
-            'max'=>$max
+            'max' => $max
         ]);
     }
 }

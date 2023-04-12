@@ -7,6 +7,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BusketController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,13 @@ Route::get('/admin/categories/edit/{id}',[AdminController::class, 'categories_ed
 Route::post('/admin/categories/edit/{id}',[AdminController::class, 'categories_edit_form'])->middleware('AdminCheck');
 
 Route::get('/admin/products',[AdminController::class, 'products'])->name('products')->middleware('AdminCheck');
+
+Route::get('/admin/hero',[AdminController::class, 'hero'])->name('hero')->middleware('AdminCheck');
+Route::get('/admin/hero/new',[AdminController::class, 'hero_new'])->name('hero_new')->middleware('AdminCheck');
+Route::post('/admin/hero/new',[AdminController::class, 'hero_new_form'])->name('hero_new_form');
+Route::get('/admin/hero/delete/{id}',[AdminController::class, 'hero_delete']);
+Route::get('/admin/hero/edit/{id}',[AdminController::class, 'hero_edit'])->middleware('AdminCheck');
+Route::post('/admin/hero/edit/{id}',[AdminController::class, 'hero_edit_form'])->middleware('AdminCheck');
 
 //PAGES DYNAMIC
 Route::get('/category/{url}',[PagesController::class, 'pages']);

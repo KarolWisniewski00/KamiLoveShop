@@ -17,7 +17,7 @@
             <section>
                 <div class="col-12">
                     <div class="d-flex justify-content-start align-items-center mb-4">
-                        <a href="{{route('index')}}" class="text-custom-2 mx-1 text-decoration-none">Strona główna</a>
+                        <a href="{{route('index')}}" class="text-custom-1 mx-1 text-decoration-none">Strona główna</a>
                         <div class="mx-1"><i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i></div>
                         <div class="mx-1">Kategorie</div>
                         <div class="mx-1"><i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i></div>
@@ -74,7 +74,7 @@
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">{{$category->plural}}</div>
                                     </div>
-                                    <span class="badge bg-custom rounded-pill">{{$category->count}}</span>
+                                    <span class="badge bg-custom-1 rounded-pill">{{$category->count}}</span>
                                 </a>
                                 @endif
                                 @endforeach
@@ -95,7 +95,7 @@
                     </div>
                     <div class="accordion-item py-4">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-lg btn-custom rounded-0">Filtruj</button>
+                            <button class="btn btn-lg btn-custom-1">Filtruj</button>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                     <div class="col-6">
                         <div class="d-flex justify-content-end align-items-center">
                             <div class="dropdown">
-                                <button class="btn btn-custom dropdown-toggle rounded-0" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sortuj</button>
+                                <button class="btn btn-custom-1 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sortuj</button>
                                 <ul class="dropdown-menu rounded-0">
                                     <li><button class="dropdown-item">Domyślne sortowanie</button></li>
                                     <li><button class="dropdown-item">Sortuj po cenie od najniższej</button></li>
@@ -142,21 +142,21 @@
                                 <div class="d-flex flex-row justify-content-center align-items-center mb-4">
                                     @if ($product->sale_price != 0)
                                     <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">{{$product->normal_price}} PLN</div>
-                                    <div class="text-custom-2 fs-4"> {{$product->sale_price}} PLN</div>
+                                    <div class="text-custom-1 fs-4"> {{$product->sale_price}} PLN</div>
                                     @else
-                                    <div class="text-custom-2 fs-4"> {{$product->normal_price}} PLN</div>
+                                    <div class="text-custom-1 fs-4"> {{$product->normal_price}} PLN</div>
                                     @endif
                                 </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center">
-                                    <button class="btn btn-custom rounded-0 w-75 h-100 me-2">Dodaj do koszyka</button>
-                                    <a href="{{ url('product/'.$product->id)}}" class="btn btn-custom-1 rounded-0 w-25 h-100 text-black d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                                    <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+                                    <a href="{{ url('product/'.$product->id)}}" class="btn btn-custom-2 w-25 h-100 text-white d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
                                 </div>
                                 <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
                                     @if ($product->new != 0)
-                                    <div class="bg-custom p-2 text-white mb-2 shadow">Nowość!</div>
+                                    <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
                                     @endif
                                     @if ($product->sale_price != 0)
-                                    <div class="bg-custom-1 p-2 text-white shadow">-{{100-(($product->sale_price*100)/$product->normal_price)}}%</div>
+                                    <div class="bg-custom-2 p-2 text-white shadow rounded">-{{100-(($product->sale_price*100)/$product->normal_price)}}%</div>
                                     @endif
                                 </div>
                             </div>
