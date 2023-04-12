@@ -144,23 +144,21 @@ class AdminController extends Controller
     //INDEX HERO
     public function hero()
     {
-        $heros = Hero::get();
         return view('account.admin', [
             'panel' => 3,
             'new' => 0,
             'id' => null,
-            'heros' => $heros,
+            'heros' => Hero::get(),
         ]);
     }
     //NEW HERO
     public function hero_new()
     {
-        $heros = Hero::get();
         return view('account.admin', [
             'panel' => 3,
             'new' => 1,
             'id' => null,
-            'heros' => $heros,
+            'heros' => Hero::get(),
         ]);
     }
     //NEW FORM HERO
@@ -186,24 +184,22 @@ class AdminController extends Controller
         $hero->photo = $photo_name;
 
         $hero->save();
-        $heros = Hero::get();
 
         return view('account.admin', [
             'panel' => 3,
             'new' => 0,
             'id' => null,
-            'heros' => $heros,
+            'heros' => Hero::get(),
         ]);
     }
     //EDIT HERO
     public function hero_edit($id)
     {
-        $heros = Hero::get();
         return view('account.admin', [
             'panel' => 3,
             'new' => 0,
             'id' => $id,
-            'heros' => $heros,
+            'heros' => Hero::get(),
         ]);
     }
     //EDIT FORM HERO
@@ -235,31 +231,31 @@ class AdminController extends Controller
             'button' => $request->button,
             'href' => $request->href,
         ]);
-        $heros = Hero::get();
 
         return view('account.admin', [
             'panel' => 3,
             'new' => 0,
             'id' => null,
-            'heros' => $heros,
+            'heros' => Hero::get(),
         ]);
     }
     //DELETE HERO
     public function hero_delete($id)
     {
         $hero = Hero::where('id', '=', $id)->first();
+
         try {
             unlink(public_path() . '\photos\\' . $hero->photo);
         } catch (Exception $e) {
         }
+
         Hero::where('id', '=', $id)->delete();
-        $heros = Hero::get();
 
         return view('account.admin', [
             'panel' => 3,
             'new' => 0,
             'id' => null,
-            'heros' => $heros,
+            'heros' => Hero::get(),
         ]);
     }
 }
