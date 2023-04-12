@@ -11,6 +11,7 @@
                 @include('layouts.account')
                 <div class="col-12">
                     @if ($edit == 0)
+                    <!--VIEW-->
                     <ul class="list-group shadow">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
@@ -41,7 +42,9 @@
                         <a href="{{url('edit')}}" class="me-2 btn btn-custom-1"><i class="fa-solid fa-pen-to-square"></i> Edytuj konto</a>
                         <a href="" class="btn btn-custom-2" onclick="return confirm('Czy na pewno chcesz usunąć to konto?');"><i class="fa-solid fa-trash"></i> Usuń konto</a>
                     </div>
+                    <!--END VIEW-->
                     @else
+                    <!--EDIT-->
                     <form class="form text-center my-4" action="{{route('edit_form')}}" method="POST">
                         <p class="text-muted">Edytowanie hasła jest opcjonalne, jeśli chcesz zachować stare hasło pozostaw pola puste, w przeciwnym wypadku podaj nowe hasło.</p>
                         <!--TOKEN-->
@@ -81,6 +84,7 @@
                             <a href="{{url('account')}}" class="btn btn-custom-2"><i class="fa-solid fa-xmark"></i> Anuluj</a>
                         </div>
                     </form>
+                    <!--END EDIT-->
                     @endif
                 </div>
             </div>

@@ -10,6 +10,7 @@ use Exception;
 
 class AdminController extends Controller
 {
+    //INDEX ADMIN
     public function admin()
     {
         return view('account.admin', [
@@ -19,6 +20,7 @@ class AdminController extends Controller
             'heros' => null,
         ]);
     }
+    //INDEX CATEGORIES
     public function categories()
     {
         return view('account.admin', [
@@ -28,6 +30,7 @@ class AdminController extends Controller
             'heros' => null,
         ]);
     }
+    //NEW CATEGORIES
     public function categories_new()
     {
         return view('account.admin', [
@@ -37,6 +40,7 @@ class AdminController extends Controller
             'heros' => null,
         ]);
     }
+    //NEW FORM CATEGORIES
     public function categories_new_form(Request $request)
     {
         $request->validate([
@@ -65,22 +69,7 @@ class AdminController extends Controller
             'heros' => null,
         ]);
     }
-    public function categories_delete($id)
-    {
-        $category = Category::where('id', '=', $id)->first();
-        try {
-            unlink(public_path() . '\photos\\' . $category->photo);
-        } catch (Exception $e) {
-        }
-        Category::where('id', '=', $id)->delete();
-
-        return view('account.admin', [
-            'panel' => 1,
-            'new' => 0,
-            'id' => null,
-            'heros' => null,
-        ]);
-    }
+    //EDIT CATEGORIES
     public function categories_edit($id)
     {
         return view('account.admin', [
@@ -90,6 +79,7 @@ class AdminController extends Controller
             'heros' => null,
         ]);
     }
+    //EDIT FORM CATEGORIES
     public function categories_edit_form(Request $request, $id)
     {
         $request->validate([
@@ -124,6 +114,24 @@ class AdminController extends Controller
             'heros' => null,
         ]);
     }
+    //DELETE CATEGORIES
+    public function categories_delete($id)
+    {
+        $category = Category::where('id', '=', $id)->first();
+        try {
+            unlink(public_path() . '\photos\\' . $category->photo);
+        } catch (Exception $e) {
+        }
+        Category::where('id', '=', $id)->delete();
+
+        return view('account.admin', [
+            'panel' => 1,
+            'new' => 0,
+            'id' => null,
+            'heros' => null,
+        ]);
+    }
+    //INDEX PRODUCTS
     public function products()
     {
         return view('account.admin', [
@@ -133,6 +141,7 @@ class AdminController extends Controller
             'heros' => null,
         ]);
     }
+    //INDEX HERO
     public function hero()
     {
         $heros = Hero::get();
@@ -143,6 +152,7 @@ class AdminController extends Controller
             'heros' => $heros,
         ]);
     }
+    //NEW HERO
     public function hero_new()
     {
         $heros = Hero::get();
@@ -153,6 +163,7 @@ class AdminController extends Controller
             'heros' => $heros,
         ]);
     }
+    //NEW FORM HERO
     public function hero_new_form(Request $request)
     {
         $request->validate([
@@ -184,23 +195,7 @@ class AdminController extends Controller
             'heros' => $heros,
         ]);
     }
-    public function hero_delete($id)
-    {
-        $hero = Hero::where('id', '=', $id)->first();
-        try {
-            unlink(public_path() . '\photos\\' . $hero->photo);
-        } catch (Exception $e) {
-        }
-        Hero::where('id', '=', $id)->delete();
-        $heros = Hero::get();
-
-        return view('account.admin', [
-            'panel' => 3,
-            'new' => 0,
-            'id' => null,
-            'heros' => $heros,
-        ]);
-    }
+    //EDIT HERO
     public function hero_edit($id)
     {
         $heros = Hero::get();
@@ -211,6 +206,7 @@ class AdminController extends Controller
             'heros' => $heros,
         ]);
     }
+    //EDIT FORM HERO
     public function hero_edit_form(Request $request, $id)
     {
         $request->validate([
@@ -239,6 +235,24 @@ class AdminController extends Controller
             'button' => $request->button,
             'href' => $request->href,
         ]);
+        $heros = Hero::get();
+
+        return view('account.admin', [
+            'panel' => 3,
+            'new' => 0,
+            'id' => null,
+            'heros' => $heros,
+        ]);
+    }
+    //DELETE HERO
+    public function hero_delete($id)
+    {
+        $hero = Hero::where('id', '=', $id)->first();
+        try {
+            unlink(public_path() . '\photos\\' . $hero->photo);
+        } catch (Exception $e) {
+        }
+        Hero::where('id', '=', $id)->delete();
         $heros = Hero::get();
 
         return view('account.admin', [

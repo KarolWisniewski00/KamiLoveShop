@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-<!--END NAV + HEADER-->
+<!--HERO-->
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
         @foreach($heros as $key => $hero)
@@ -49,6 +49,7 @@
         <span class="visually-hidden">Next</span>
     </button>
 </div>
+<!--END HERO-->
 <!--PRODUCTS GRID-->
 <section>
     <div class="container">
@@ -88,11 +89,14 @@
         @endif
     </div>
 </section>
+<!--END PRODUCTS GRID-->
+<!--PRODUCTS WITH CATEGORY-->
 <section>
     <div class="container">
         @foreach ($categories as $key => $category)
         <h2 class="text-start my-4" style="font-size: 3em;">{{$category->plural}}</h2>
         @if ($key % 2 == 0)
+        <!--DEFAULT-->
         <div class="row g-4">
             <div class="col-12 col-lg-6">
                 <div class="row">
@@ -137,7 +141,9 @@
                 </div>
             </div>
         </div>
+        <!--END DEFAULT-->
         @else
+        <!--REVERSED-->
         <div class="row g-4">
             <div class="col-12 col-lg-6">
                 <div class="d-flex flex-row justify-content-center align-items-center h-100">
@@ -182,8 +188,10 @@
                 </div>
             </div>
         </div>
+        <!--END REVERSED-->
         @endif
         @endforeach
     </div>
 </section>
+<!--END PRODUCTS WITH CATEGORY-->
 @endsection

@@ -114,6 +114,7 @@
     background-color: #FEA706;
 }
 
+/*BOOTSTRAP CUSTOM*/
 .list-group-item-action:active {
     background-color: #EA2F83
 }
@@ -123,32 +124,12 @@
     border: #be266b;
 }
 
-
 .list-group-item.active:hover {
     color: #fff !important;
 }
 
 .list-group-item:hover {
     color: #EA2F83 !important;
-}
-
-.no-link:link {
-    text-decoration: none !important;
-}
-
-
-.no-link:visited {
-    text-decoration: none !important;
-}
-
-
-.no-link:hover {
-    text-decoration: none !important;
-}
-
-
-.no-link:active {
-    text-decoration: none !important;
 }
 
 .slider {
@@ -182,4 +163,21 @@
     height: 1.4em;
     background: #EA2F83;
     cursor: pointer;
+}
+
+/*OTHERS*/
+.no-link:link {
+    text-decoration: none !important;
+}
+
+.no-link:visited {
+    text-decoration: none !important;
+}
+
+.no-link:hover {
+    text-decoration: none !important;
+}
+
+.no-link:active {
+    text-decoration: none !important;
 }

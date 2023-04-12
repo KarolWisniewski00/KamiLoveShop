@@ -9,6 +9,7 @@ use Exception;
 
 class PagesController extends Controller
 {
+    //INDEX PAGES
     public function pages($url)
     {
         $max = 0;

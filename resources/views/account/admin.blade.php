@@ -14,6 +14,7 @@
     </div>
     <div class="container-fluid">
         <div class="row">
+            <!--NAVIGATION SIDE-->
             <div class="col-3">
                 @if ($panel == 0)
                 <div class="list-group">
@@ -46,21 +47,29 @@
                 </div>
                 @endif
             </div>
+            <!--END NAVIGATION SIDE-->
+            <!--MAIN SIDE-->
             <div class="col-9">
+                <!--START-->
                 @if ($panel == 0)
                 <h1>Start</h1>
                 <hr>
                 <p>Pusta strona</p>
+                <!--END START-->
+                <!--CATEGORIES-->
                 @elseif ($panel == 1)
                 <h1>Kategorie</h1>
                 <hr>
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                         @if ($new == 0)
+                        <!--DEFAULT-->
                         <a href="{{ route('categories_new')}}" class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
                             <div class="bg-custom-1 p-4 rounded text-white fs-1"><i class="fa-solid fa-plus"></i></div>
                         </a>
+                        <!--END DEFAULT-->
                         @else
+                        <!--NEW-->
                         <form class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100 form text-center p-4" method="POST" action="{{route('categories_new_form')}}" enctype="multipart/form-data">
                             <p class="text-muted">Utwórz nową kategorię produktów</p>
                             <!--TOKEN-->
@@ -94,10 +103,12 @@
                                 <a href="{{route('categories')}}" class="btn btn-custom-2"><i class="fa-solid fa-xmark"></i> Anuluj</a>
                             </div>
                         </form>
+                        <!--END NEW-->
                         @endif
                     </div>
                     @foreach ($categories as $category)
                     @if ($category->id == $id)
+                    <!--EDIT-->
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                         <form class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100 form text-center p-4" method="POST" action="{{url ('/admin/categories/edit/'.$category->id)}}" enctype="multipart/form-data">
                             <p class="text-muted">Edytuj kategorię produktów</p>
@@ -133,7 +144,9 @@
                             </div>
                         </form>
                     </div>
+                    <!--END EDIT-->
                     @else
+                    <!--DEFAULT-->
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                         <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
                             <img alt="bag" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid">
@@ -145,9 +158,12 @@
                             </div>
                         </div>
                     </div>
+                    <!--END DEFAULT-->
                     @endif
                     @endforeach
                 </div>
+                <!--END CATEGORIES-->
+                <!--PRODUCTS-->
                 @elseif ($panel == 2)
                 <h1>Produkty</h1>
                 <hr>
@@ -158,16 +174,21 @@
                         </a>
                     </div>
                 </div>
+                <!--END PRODUCTS-->
+                <!--HERO-->
                 @elseif ($panel == 3)
                 <h1>Hero</h1>
                 <hr>
                 <div class="row">
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                         @if ($new == 0)
+                        <!--DEFAULT-->
                         <a href="{{ route('hero_new')}}" class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
                             <div class="bg-custom-1 p-4 rounded text-white fs-1"><i class="fa-solid fa-plus"></i></div>
                         </a>
+                        <!--END DEFAULT-->
                         @else
+                        <!--NEW-->
                         <form class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100 form text-center p-4" method="POST" action="{{route('hero_new_form')}}" enctype="multipart/form-data">
                             <p class="text-muted">Utwórz nowe hero</p>
                             <!--TOKEN-->
@@ -212,10 +233,12 @@
                                 <a href="{{route('categories')}}" class="btn btn-custom-2"><i class="fa-solid fa-xmark"></i> Anuluj</a>
                             </div>
                         </form>
+                        <!--END NEW-->
                         @endif
                     </div>
                     @foreach($heros as $hero)
                     @if ($hero->id == $id)
+                    <!--EDIT-->
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                         <form class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100 form text-center p-4" method="POST" action="{{url ('/admin/hero/edit/'.$hero->id)}}" enctype="multipart/form-data">
                             <p class="text-muted">Edytuj hero</p>
@@ -262,7 +285,9 @@
                             </div>
                         </form>
                     </div>
+                    <!--END EDIT-->
                     @else
+                    <!--DEFAULT-->
                     <div class="col-12 col-md-6 col-lg-3 mb-4">
                         <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
                             <img alt="bag" src="{{ asset('photos/'.$hero->photo)}}" class="img-fluid">
@@ -276,11 +301,14 @@
                             </div>
                         </div>
                     </div>
+                    <!--END DEFAULT-->
                     @endif
                     @endforeach
                 </div>
+                <!--END HERO-->
                 @endif
             </div>
+            <!--END MAIN SIDE-->
         </div>
     </div>
 </section>

@@ -9,6 +9,7 @@ use App\Models\Category;
 
 class IndexController extends Controller
 {
+    //INDEX INDEX
     public function index(){
         $products = Product::inRandomOrder()->take(8)->where('new', '=', 1)->get();
         $categories = Category::get();
