@@ -9,7 +9,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StartAdminController;
+use App\Http\Controllers\CategoriesAdminController;
+use App\Http\Controllers\ProductsAdminController;
+use App\Http\Controllers\HeroAdminController;
 use App\Http\Controllers\BusketController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
@@ -40,29 +43,29 @@ Route::get('/edit',[AccountController::class, 'edit'])->middleware('isLoggedIn')
 Route::post('/edit',[AccountController::class, 'edit_form'])->name('edit_form');
 Route::get('/busket',[BusketController::class, 'busket'])->middleware('isLoggedIn');
 Route::get('/history',[AccountController::class, 'history'])->middleware('isLoggedIn');
-Route::get('/admin',[AdminController::class, 'admin'])->name('admin')->middleware('AdminCheck');
+Route::get('/admin',[StartAdminController::class, 'admin'])->name('admin')->middleware('AdminCheck');
 
-Route::get('/admin/categories',[AdminController::class, 'categories'])->name('categories')->middleware('AdminCheck');
-Route::get('/admin/categories/new',[AdminController::class, 'categories_new'])->name('categories_new')->middleware('AdminCheck');
-Route::post('/admin/categories/new',[AdminController::class, 'categories_new_form'])->name('categories_new_form');
-Route::get('/admin/categories/delete/{id}',[AdminController::class, 'categories_delete']);
-Route::get('/admin/categories/edit/{id}',[AdminController::class, 'categories_edit'])->middleware('AdminCheck');
-Route::post('/admin/categories/edit/{id}',[AdminController::class, 'categories_edit_form'])->middleware('AdminCheck');
+Route::get('/admin/categories',[CategoriesAdminController::class, 'categories'])->name('categories')->middleware('AdminCheck');
+Route::get('/admin/categories/new',[CategoriesAdminController::class, 'categories_new'])->name('categories_new')->middleware('AdminCheck');
+Route::post('/admin/categories/new',[CategoriesAdminController::class, 'categories_new_form'])->name('categories_new_form');
+Route::get('/admin/categories/delete/{id}',[CategoriesAdminController::class, 'categories_delete']);
+Route::get('/admin/categories/edit/{id}',[CategoriesAdminController::class, 'categories_edit'])->middleware('AdminCheck');
+Route::post('/admin/categories/edit/{id}',[CategoriesAdminController::class, 'categories_edit_form'])->middleware('AdminCheck');
 
-Route::get('/admin/subcategories/new',[AdminController::class, 'subcategories_new'])->name('subcategories_new')->middleware('AdminCheck');
-Route::post('/admin/subcategories/new',[AdminController::class, 'subcategories_new_form'])->name('subcategories_new_form');
-Route::get('/admin/subcategories/delete/{id}',[AdminController::class, 'subcategories_delete']);
-Route::get('/admin/subcategories/edit/{id}',[AdminController::class, 'subcategories_edit'])->middleware('AdminCheck');
-Route::post('/admin/subcategories/edit/{id}',[AdminController::class, 'subcategories_edit_form'])->middleware('AdminCheck');
+Route::get('/admin/subcategories/new',[CategoriesAdminController::class, 'subcategories_new'])->name('subcategories_new')->middleware('AdminCheck');
+Route::post('/admin/subcategories/new',[CategoriesAdminController::class, 'subcategories_new_form'])->name('subcategories_new_form');
+Route::get('/admin/subcategories/delete/{id}',[CategoriesAdminController::class, 'subcategories_delete']);
+Route::get('/admin/subcategories/edit/{id}',[CategoriesAdminController::class, 'subcategories_edit'])->middleware('AdminCheck');
+Route::post('/admin/subcategories/edit/{id}',[CategoriesAdminController::class, 'subcategories_edit_form'])->middleware('AdminCheck');
 
-Route::get('/admin/products',[AdminController::class, 'products'])->name('products')->middleware('AdminCheck');
+Route::get('/admin/products',[ProductsAdminController::class, 'products'])->name('products')->middleware('AdminCheck');
 
-Route::get('/admin/hero',[AdminController::class, 'hero'])->name('hero')->middleware('AdminCheck');
-Route::get('/admin/hero/new',[AdminController::class, 'hero_new'])->name('hero_new')->middleware('AdminCheck');
-Route::post('/admin/hero/new',[AdminController::class, 'hero_new_form'])->name('hero_new_form');
-Route::get('/admin/hero/delete/{id}',[AdminController::class, 'hero_delete']);
-Route::get('/admin/hero/edit/{id}',[AdminController::class, 'hero_edit'])->middleware('AdminCheck');
-Route::post('/admin/hero/edit/{id}',[AdminController::class, 'hero_edit_form'])->middleware('AdminCheck');
+Route::get('/admin/hero',[HeroAdminController::class, 'hero'])->name('hero')->middleware('AdminCheck');
+Route::get('/admin/hero/new',[HeroAdminController::class, 'hero_new'])->name('hero_new')->middleware('AdminCheck');
+Route::post('/admin/hero/new',[HeroAdminController::class, 'hero_new_form'])->name('hero_new_form');
+Route::get('/admin/hero/delete/{id}',[HeroAdminController::class, 'hero_delete']);
+Route::get('/admin/hero/edit/{id}',[HeroAdminController::class, 'hero_edit'])->middleware('AdminCheck');
+Route::post('/admin/hero/edit/{id}',[HeroAdminController::class, 'hero_edit_form'])->middleware('AdminCheck');
 
 //PAGES DYNAMIC
 Route::get('/category/{url}',[PagesController::class, 'pages']);
