@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\Hero;
 use Illuminate\Validation\Rule;
 use Exception;
@@ -18,6 +19,9 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => null,
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
         ]);
     }
     //INDEX CATEGORIES
@@ -28,6 +32,9 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
         ]);
     }
     //NEW CATEGORIES
@@ -38,6 +45,10 @@ class AdminController extends Controller
             'new' => 1,
             'id' => null,
             'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //NEW FORM CATEGORIES
@@ -46,7 +57,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'plural' => 'required',
-            'url' => 'required|unique:categories',
+            'url' => ['required', Rule::unique('subcategories'),Rule::unique('categories')],
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
         ]);
 
@@ -67,6 +78,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //EDIT CATEGORIES
@@ -77,6 +92,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => $id,
             'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //EDIT FORM CATEGORIES
@@ -85,7 +104,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required',
             'plural' => 'required',
-            'url' =>  ['required', Rule::unique('categories')->ignore($id)],
+            'url' =>  ['required', Rule::unique('categories')->ignore($id),Rule::unique('subcategories')],
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
         ]);
 
@@ -112,6 +131,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //DELETE CATEGORIES
@@ -129,6 +152,115 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
+        ]);
+    }
+    //NEW CATEGORIES
+    public function subcategories_new()
+    {
+        return view('account.admin', [
+            'panel' => 1,
+            'new' => 0,
+            'id' => null,
+            'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>1,
+            'id_sub'=>null
+
+        ]);
+    }
+    //NEW FORM CATEGORIES
+    public function subcategories_new_form(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'plural' => 'required',
+            'url' => ['required', Rule::unique('subcategories'),Rule::unique('categories')],
+            'category_id'=>['required', Rule::notIn(['Wybierz'])],
+        ]);
+
+
+        $subcategory = new Subcategory();
+        $subcategory->name = $request->name;
+        $subcategory->plural = $request->plural;
+        $subcategory->url = $request->url;
+        $subcategory->photo = '';
+        $subcategory->category_id = $request->category_id;
+
+        $subcategory->save();
+
+        return view('account.admin', [
+            'panel' => 1,
+            'new' => 0,
+            'id' => null,
+            'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
+        ]);
+    }
+    //EDIT CATEGORIES
+    public function subcategories_edit($id)
+    {
+        return view('account.admin', [
+            'panel' => 1,
+            'new' => 0,
+            'id' => null,
+            'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>$id
+
+        ]);
+    }
+    //EDIT FORM CATEGORIES
+    public function subcategories_edit_form(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'plural' => 'required',
+            'url' =>  ['required', Rule::unique('subcategories')->ignore($id),Rule::unique('categories')],
+            'category_id'=>'nullable',
+        ]);
+        Subcategory::where('id', '=', $id)->update([
+            'name' => $request->name,
+            'plural' => $request->plural,
+            'url' => $request->url,
+        ]);
+        if ($request->category_id != "Wybierz"){
+            Subcategory::where('id', '=', $id)->update([
+                'category_id'=>$request->category_id
+            ]);
+        }
+        return view('account.admin', [
+            'panel' => 1,
+            'new' => 0,
+            'id' => null,
+            'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
+        ]);
+    }
+    //DELETE CATEGORIES
+    public function subcategories_delete($id)
+    {
+        Subcategory::where('id', '=', $id)->delete();
+
+        return view('account.admin', [
+            'panel' => 1,
+            'new' => 0,
+            'id' => null,
+            'heros' => null,
+            'subcategories'=>Subcategory::get(),
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //INDEX PRODUCTS
@@ -139,6 +271,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => null,
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //INDEX HERO
@@ -149,6 +285,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => Hero::get(),
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //NEW HERO
@@ -159,6 +299,10 @@ class AdminController extends Controller
             'new' => 1,
             'id' => null,
             'heros' => Hero::get(),
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //NEW FORM HERO
@@ -190,6 +334,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => Hero::get(),
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //EDIT HERO
@@ -200,6 +348,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => $id,
             'heros' => Hero::get(),
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //EDIT FORM HERO
@@ -237,6 +389,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => Hero::get(),
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
     //DELETE HERO
@@ -256,6 +412,10 @@ class AdminController extends Controller
             'new' => 0,
             'id' => null,
             'heros' => Hero::get(),
+            'subcategories'=>null,
+            'new_sub'=>0,
+            'id_sub'=>null
+
         ]);
     }
 }

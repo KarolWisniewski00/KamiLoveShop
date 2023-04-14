@@ -49,6 +49,12 @@ Route::get('/admin/categories/delete/{id}',[AdminController::class, 'categories_
 Route::get('/admin/categories/edit/{id}',[AdminController::class, 'categories_edit'])->middleware('AdminCheck');
 Route::post('/admin/categories/edit/{id}',[AdminController::class, 'categories_edit_form'])->middleware('AdminCheck');
 
+Route::get('/admin/subcategories/new',[AdminController::class, 'subcategories_new'])->name('subcategories_new')->middleware('AdminCheck');
+Route::post('/admin/subcategories/new',[AdminController::class, 'subcategories_new_form'])->name('subcategories_new_form');
+Route::get('/admin/subcategories/delete/{id}',[AdminController::class, 'subcategories_delete']);
+Route::get('/admin/subcategories/edit/{id}',[AdminController::class, 'subcategories_edit'])->middleware('AdminCheck');
+Route::post('/admin/subcategories/edit/{id}',[AdminController::class, 'subcategories_edit_form'])->middleware('AdminCheck');
+
 Route::get('/admin/products',[AdminController::class, 'products'])->name('products')->middleware('AdminCheck');
 
 Route::get('/admin/hero',[AdminController::class, 'hero'])->name('hero')->middleware('AdminCheck');

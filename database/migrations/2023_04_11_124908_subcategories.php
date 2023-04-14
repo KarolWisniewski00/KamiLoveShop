@@ -1,9 +1,9 @@
 <?php
 
-use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 return new class extends Migration
 {
     /**
@@ -11,21 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table){
+        Schema::create('subcategories', function (Blueprint $table){
             $table->id();
             $table->string('name');
-            $table->string('short_description');
-            $table->string('long_description');
-            $table->boolean('new');
-            $table->float('normal_price');
-            $table->float('sale_price');
-            $table->string('SKU')->unique();
+            $table->string('plural');
+            $table->string('url');
             $table->string('photo');
-            $table->string('photos');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
-            $table->unsignedBigInteger('subcategory_id')->nullable();
-            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -35,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('subcategories');
     }
 };

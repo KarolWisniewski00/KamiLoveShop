@@ -5,13 +5,9 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                @foreach($categories as $category)
-                @if ($url == $category->url)
                 <div class="text-center my-4">
-                    <h1>{{$category->plural}}</h1>
+                    <h1>{{$plural}}</h1>
                 </div>
-                @endif
-                @endforeach
             </div>
             <!--LINKS-->
             <section>
@@ -21,11 +17,7 @@
                         <div class="mx-1"><i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i></div>
                         <div class="mx-1">Kategorie</div>
                         <div class="mx-1"><i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i></div>
-                        @foreach($categories as $category)
-                        @if ($url == $category->url)
-                        <div class="mx-1">{{$category->plural}}</div>
-                        @endif
-                        @endforeach
+                        <div class="mx-1">{{$plural}}</div>
                     </div>
                 </div>
             </section>
@@ -33,8 +25,8 @@
         </div>
         <div class="row">
             <!--FILTERS-->
-            <div class="col-12 col-lg-3 col-xl-2 mb-4">
-                <form class="accordion shadow" id="accordionPanelsStayOpenExample" method="GET">
+            <div class="col-12 col-lg-3 mb-4">
+                <form class="accordion shadow" id="accordionPanelsStayOpenExample" method="GET" action="{{ url('category/'.$url)}}">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -46,11 +38,19 @@
                                 <div data-role="rangeslider" class="d-flex flex-column justify-content-center align-items-center">
                                     <div>
                                         <label for="price_min">Od:</label>
+                                        @if ($last_min != null)
+                                        <input type="range" name="price_min" id="price_min" class="slider my-2" value="{{$last_min}}" min="0" max="{{$max}}">
+                                        @else
                                         <input type="range" name="price_min" id="price_min" class="slider my-2" value="0" min="0" max="{{$max}}">
+                                        @endif
                                     </div>
                                     <div>
                                         <label for="price_max">Do:</label>
+                                        @if ($last_min != null)
+                                        <input type="range" name="price_max" id="price_max" class="slider my-2" value="{{$last_max}}" min="0" max="{{$max}}">
+                                        @else
                                         <input type="range" name="price_max" id="price_max" class="slider my-2" value="{{$max}}" min="0" max="{{$max}}">
+                                        @endif
                                     </div>
                                 </div>
                                 <div>
@@ -69,14 +69,22 @@
                         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                             <div class="accordion-body">
                                 @foreach($categories_count as $category)
-                                @if ($url != $category->url)
                                 <a href="{{ url('category/'.$category->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">{{$category->plural}}</div>
                                     </div>
                                     <span class="badge bg-custom-1 rounded-pill">{{$category->count}}</span>
                                 </a>
+                                @foreach($subcategories_count as $subcategory)
+                                @if ($subcategory->category_id == $category->id)
+                                <a href="{{ url('category/'.$subcategory->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
+                                    <div class="ms-2 me-auto">
+                                        <div class="fw-bold text-muted ps-2" style="inline-size: 100%;overflow-wrap: break-word;">{{$subcategory->plural}}</div>
+                                    </div>
+                                    <span class="badge bg-custom-2 rounded-pill">{{$subcategory->count}}</span>
+                                </a>
                                 @endif
+                                @endforeach
                                 @endforeach
                             </div>
                         </div>
@@ -90,7 +98,7 @@
             </div>
             <!--END FILTERS-->
             <!--PRODUCTS GRID-->
-            <div class="col-12 col-lg-9 col-xl-10">
+            <div class="col-12 col-lg-9">
                 <!--SORT-->
                 <div class="row mb-4">
                     <div class="col-6">
