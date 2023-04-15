@@ -9,7 +9,17 @@
                     <h1>Zwroty i reklamacje</h1>
                 </div>
                 <div class="col-12">
-
+                    @foreach($return as $ret)
+                    @if ($ret->type == true)
+                    <div class="d-flex justify-content-start align-items-center text-start my-4">
+                        <h1>{{$ret->content}}</h1>
+                    </div>
+                    @else
+                    <div class="d-flex justify-content-start align-items-center text-start my-4">
+                        <p class="text-muted">{{$ret->content}}</p>
+                    </div>
+                    @endif
+                    @endforeach
                 </div>
             </div>
         </div>

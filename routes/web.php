@@ -18,6 +18,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesAdminController;
 use App\Http\Controllers\PolicyAdminController;
+use App\Http\Controllers\ReturnAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -102,6 +103,14 @@ Route::middleware(['AdminCheck'])->group(function () {
             Route::get('/delete/{id}', [PolicyAdminController::class, 'policy_delete']);
             Route::get('/edit/{id}', [PolicyAdminController::class, 'policy_edit']);
             Route::post('/edit/{id}', [PolicyAdminController::class, 'policy_edit_form']);
+        });
+        Route::prefix('return')->group(function () {
+            Route::get('/', [ReturnAdminController::class, 'return'])->name('return_admin');
+            Route::get('/new', [ReturnAdminController::class, 'return_new'])->name('return_admin_new');
+            Route::post('/new', [ReturnAdminController::class, 'return_new_form'])->name('return_admin_new_form');
+            Route::get('/delete/{id}', [ReturnAdminController::class, 'return_delete']);
+            Route::get('/edit/{id}', [ReturnAdminController::class, 'return_edit']);
+            Route::post('/edit/{id}', [ReturnAdminController::class, 'return_edit_form']);
         });
     });
 });
