@@ -22,6 +22,7 @@
                     <a href="{{ route('products')}}" class="list-group-item d-flex justify-content-center align-items-center"><i class="fa-solid fa-cart-shopping me-2"></i>Produkty</a>
                     <a href="{{ route('hero')}}" class="list-group-item d-flex justify-content-center align-items-center"><i class="fa-solid fa-star me-2"></i></i>Hero</a>
                     <a href="{{ route('rules_admin')}}" class="list-group-item d-flex justify-content-center align-items-center"><i class="fa-solid fa-book me-2"></i></i>Regulamin</a>
+                    <a href="{{ route('policy_admin')}}" class="list-group-item d-flex justify-content-center align-items-center"><i class="fa-solid fa-lock me-2"></i></i>Regulamin</a>
                 </div>
             </div>
             <!--END NAVIGATION SIDE-->

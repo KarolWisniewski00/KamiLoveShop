@@ -17,6 +17,7 @@ use App\Http\Controllers\BusketController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesAdminController;
+use App\Http\Controllers\PolicyAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -94,6 +95,14 @@ Route::middleware(['AdminCheck'])->group(function () {
             Route::get('/edit/{id}', [RulesAdminController::class, 'rules_edit']);
             Route::post('/edit/{id}', [RulesAdminController::class, 'rules_edit_form']);
         });
+        Route::prefix('policy')->group(function () {
+            Route::get('/', [PolicyAdminController::class, 'policy'])->name('policy_admin');
+            Route::get('/new', [PolicyAdminController::class, 'policy_new'])->name('policy_admin_new');
+            Route::post('/new', [PolicyAdminController::class, 'policy_new_form'])->name('policy_admin_new_form');
+            Route::get('/delete/{id}', [PolicyAdminController::class, 'policy_delete']);
+            Route::get('/edit/{id}', [PolicyAdminController::class, 'policy_edit']);
+            Route::post('/edit/{id}', [PolicyAdminController::class, 'policy_edit_form']);
+        });
     });
 });
 
@@ -102,7 +111,6 @@ Route::get('/category/{url}', [PagesController::class, 'pages']);
 Route::get('/product/{id}', [ProductController::class, 'product']);
 
 //PAGES STATIC
-Route::get('/about', [AboutController::class, 'about'])->name('about');
 Route::get('/return', [ReturnController::class, 'return'])->name('return');
 Route::get('/rules', [RulesController::class, 'rules'])->name('rules');
 Route::get('/policy', [PolicyController::class, 'policy'])->name('policy');
