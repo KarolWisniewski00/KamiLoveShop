@@ -32,10 +32,10 @@ class HeroAdminController extends Controller
     public function hero_new_form(Request $request)
     {
         $request->validate([
-            'h1' => 'required',
-            'p' => 'required',
-            'button' => 'required',
-            'href' => ['required', Rule::notIn(['Wybierz'])],
+            'h1' => 'required|max:255',
+            'p' => 'required|max:255',
+            'button' => 'required|max:255',
+            'href' => ['required','max:255', Rule::notIn(['Wybierz'])],
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
         ]);
 
@@ -71,10 +71,10 @@ class HeroAdminController extends Controller
     public function hero_edit_form(Request $request, $id)
     {
         $request->validate([
-            'h1' => 'required',
-            'p' => 'required',
-            'button' => 'required',
-            'href' => ['required', Rule::notIn(['Wybierz'])],
+            'h1' => 'required|max:255',
+            'p' => 'required|max:255',
+            'button' => 'required|max:255',
+            'href' => ['required','max:255', Rule::notIn(['Wybierz'])],
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
         ]);
 

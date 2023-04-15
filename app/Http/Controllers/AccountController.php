@@ -36,11 +36,11 @@ class AccountController extends Controller
     public function edit_form(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'surname' => 'required',
-            'email' => 'required|email|unique:users,email,' . Session::get('login_id'),
-            'password' => 'nullable|min:8',
-            'password_confirm' => 'nullable|min:8|same:password'
+            'name' => 'required|max:255',
+            'surname' => 'required|max:255',
+            'email' => 'required|max:255|email|unique:users,email,' . Session::get('login_id'),
+            'password' => 'nullable|min:8|max:255',
+            'password_confirm' => 'nullable|min:8|max:255|same:password'
         ]);
 
         User::where('id', '=', Session::get('login_id'))->update([

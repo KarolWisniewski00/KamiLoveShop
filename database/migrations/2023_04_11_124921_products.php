@@ -26,6 +26,9 @@ return new class extends Migration
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
             $table->unsignedBigInteger('subcategory_id')->nullable();
             $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('set null');
+            $table->bigInteger('views');
+            $table->bigInteger('sells');
+            $table->bigInteger('order');
             $table->timestamps();
         });
     }

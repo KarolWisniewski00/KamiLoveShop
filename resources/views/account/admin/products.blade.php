@@ -73,7 +73,7 @@
                     </th>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div style="max-width:50px"><img alt="" src="{{ asset('photos/'.$product->photo)}}" class="img-fluid"></div>
+                            <div style="max-width:50px"><img alt="product_photo" src="{{ asset('photos/'.$product->photo)}}" class="img-fluid"></div>
                         </div>
                     </td>
                     <td>

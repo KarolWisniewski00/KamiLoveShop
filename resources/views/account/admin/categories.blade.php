@@ -92,7 +92,7 @@
     <!--DEFAULT-->
     <div class="col-12 col-md-6 col-lg-3 mb-4">
         <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
-            <img alt="bag" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid">
+            <img alt="category_photo" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid">
             <h1 class="mt-4 text-black">{{$category->plural}}</h1>
             <p class="text-muted"><i class="fa-solid fa-link"></i> {{$category->url}}</p>
             <div class="mt-4 d-flex flex-row justify-content-center align-items-center">
@@ -208,7 +208,7 @@
         <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
             @foreach($categories as $category)
             @if ($category->id == $subcategory->category_id)
-            <img alt="bag" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid">
+            <img alt="category_photo" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid">
             <h1 class="mt-4 text-black">{{$category->plural}}</h1>
             <p class="text-muted"><i class="fa-solid fa-link"></i> {{$category->url}}</p>
             <h1 class="text-custom-4"><i class="fa-solid fa-down-long"></i></h1>

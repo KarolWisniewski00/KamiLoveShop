@@ -132,7 +132,7 @@
                         <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{$product->normal_price}}" data-id="{{$product->id}}">
                             @endif
                             <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center">
-                                <img alt="bong" src="{{ asset('photos/'.$product->photo)}}" class="img-fluid">
+                                <img alt="product_photo" src="{{ asset('photos/'.$product->photo)}}" class="img-fluid">
                                 <h3>{{$product->name}}</h3>
                                 <p class="text-muted">{{$product->short_description}}</p>
                                 <div class="d-flex flex-row justify-content-center align-items-center mb-4">
@@ -152,7 +152,7 @@
                                     <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
                                     @endif
                                     @if ($product->sale_price != 0)
-                                    <div class="bg-custom-2 p-2 text-white shadow rounded">-{{100-(($product->sale_price*100)/$product->normal_price)}}%</div>
+                                    <div class="bg-custom-2 p-2 text-white shadow rounded">-{{round(100-(($product->sale_price*100)/$product->normal_price),2)}}%</div>
                                     @endif
                                 </div>
                             </div>

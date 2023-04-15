@@ -114,7 +114,7 @@
     <!--DEFAULT-->
     <div class="col-12 col-md-6 col-lg-3 mb-4">
         <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
-            <img alt="bag" src="{{ asset('photos/'.$hero->photo)}}" class="img-fluid">
+            <img alt="product_photo" src="{{ asset('photos/'.$hero->photo)}}" class="img-fluid">
             <h1 class="mt-4 text-black">{{$hero->h1}}</h1>
             <p class="text-muted">{{$hero->p}}</p>
             <p><a class="btn btn-lg btn-custom-1" href="#">{{$hero->button}}</a></p>

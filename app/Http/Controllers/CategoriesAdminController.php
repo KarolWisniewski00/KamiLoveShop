@@ -36,9 +36,9 @@ class CategoriesAdminController extends Controller
     public function categories_new_form(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'plural' => 'required',
-            'url' => ['required', Rule::unique('subcategories'),Rule::unique('categories')],
+            'name' => 'required|max:255',
+            'plural' => 'required|max:255',
+            'url' => ['required','max:255', Rule::unique('subcategories'),Rule::unique('categories')],
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
         ]);
 
@@ -78,9 +78,9 @@ class CategoriesAdminController extends Controller
     public function categories_edit_form(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'plural' => 'required',
-            'url' =>  ['required', Rule::unique('categories')->ignore($id),Rule::unique('subcategories')],
+            'name' => 'required|max:255',
+            'plural' => 'required|max:255',
+            'url' =>  ['required','max:255', Rule::unique('categories')->ignore($id),Rule::unique('subcategories')],
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
         ]);
 
@@ -128,7 +128,7 @@ class CategoriesAdminController extends Controller
             'id_sub'=>null
         ]);
     }
-    //NEW CATEGORIES
+    //NEW SUBCATEGORIES
     public function subcategories_new()
     {
         return view('account.admin.categories', [
@@ -139,13 +139,13 @@ class CategoriesAdminController extends Controller
             'id_sub'=>null
         ]);
     }
-    //NEW FORM CATEGORIES
+    //NEW FORM SUBCATEGORIES
     public function subcategories_new_form(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'plural' => 'required',
-            'url' => ['required', Rule::unique('subcategories'),Rule::unique('categories')],
+            'name' => 'required|max:255',
+            'plural' => 'required|max:255',
+            'url' => ['required','max:255', Rule::unique('subcategories'),Rule::unique('categories')],
             'category_id'=>['required', Rule::notIn(['Wybierz'])],
         ]);
 
@@ -168,7 +168,7 @@ class CategoriesAdminController extends Controller
 
         ]);
     }
-    //EDIT CATEGORIES
+    //EDIT SUBCATEGORIES
     public function subcategories_edit($id)
     {
         return view('account.admin.categories', [
@@ -180,13 +180,13 @@ class CategoriesAdminController extends Controller
 
         ]);
     }
-    //EDIT FORM CATEGORIES
+    //EDIT FORM SUBCATEGORIES
     public function subcategories_edit_form(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'plural' => 'required',
-            'url' =>  ['required', Rule::unique('subcategories')->ignore($id),Rule::unique('categories')],
+            'name' => 'required|max:255',
+            'plural' => 'required|max:255',
+            'url' =>  ['required','max:255', Rule::unique('subcategories')->ignore($id),Rule::unique('categories')],
             'category_id'=>'nullable',
         ]);
         Subcategory::where('id', '=', $id)->update([
@@ -208,7 +208,7 @@ class CategoriesAdminController extends Controller
 
         ]);
     }
-    //DELETE CATEGORIES
+    //DELETE SUBCATEGORIES
     public function subcategories_delete($id)
     {
         Subcategory::where('id', '=', $id)->delete();

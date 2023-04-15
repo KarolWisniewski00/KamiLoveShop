@@ -10,6 +10,15 @@ use Exception;
 
 class ProductsAdminController extends Controller
 {
+    //PREPARE VARIABLES TO SAVE
+    public function validate_to_database($what,$from,$to){
+        if ($what != $from) {
+            $value = $what;
+        } else {
+            $value = $to;
+        }
+        return $value;
+    }
     //INDEX PRODUCTS
     public function products()
     {
@@ -31,11 +40,11 @@ class ProductsAdminController extends Controller
     public function products_new_form(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'short_description' => 'nullable',
-            'long_description' => 'nullable',
-            'normal_price' => 'required',
-            'sale_price' => 'nullable',
+            'name' => 'required|max:255',
+            'short_description' => 'nullable|max:255',
+            'long_description' => 'nullable|max:255',
+            'normal_price' => 'required|numeric',
+            'sale_price' => 'nullable|numeric',
             'new' => 'nullable',
             'SKU' => ['required', Rule::unique('products')],
             'category_id' => 'nullable',
@@ -47,41 +56,25 @@ class ProductsAdminController extends Controller
         $photo_name = $photo->getClientOriginalName();
         $photo->move(public_path('/photos'), $photo_name);
 
+        $sale_price = $this->validate_to_database($request->sale_price,null,0);
+        $new = $this->validate_to_database($request->new,null,0);
+        $short_description = $this->validate_to_database($request->short_description,null,'');
+        $long_description = $this->validate_to_database($request->long_description,null,'');
+        $category_id = $this->validate_to_database($request->category_id,'Wybierz',null);
+        $subcategory_id = $this->validate_to_database($request->subcategory_id,'Wybierz',null);
+
         $product = new Product();
         $product->name = $request->name;
-        if ($request->short_description != null) {
-            $product->short_description = $request->short_description;
-        } else {
-            $product->short_description = '';
-        }
-        if ($request->long_description != null) {
-            $product->long_description = $request->long_description;
-        } else {
-            $product->long_description = '';
-        }
+
+        $product->sale_price = $sale_price;
+        $product->new = $new;
+        $product->short_description = $short_description;
+        $product->long_description = $long_description;
+        $product->category_id = $category_id;
+        $product->subcategory_id = $subcategory_id;
         $product->normal_price = $request->normal_price;
-        if ($request->sale_price != null) {
-            $product->sale_price = $request->sale_price;
-        } else {
-            $product->sale_price = 0;
-        }
         $product->SKU = $request->SKU;
-        if ($request->new != null) {
-            $product->new = $request->new;
-        } else {
-            $product->new = 0;
-        }
         $product->photos = '';
-        if ($request->category_id != 'Wybierz') {
-            $product->category_id = $request->category_id;
-        } else {
-            $product->category_id = null;
-        }
-        if ($request->subcategory_id != 'Wybierz') {
-            $product->subcategory_id = $request->subcategory_id;
-        } else {
-            $product->subcategory_id = null;
-        }
         $product->photo = $photo_name;
 
         $product->save();
@@ -104,11 +97,11 @@ class ProductsAdminController extends Controller
     public function products_edit_form(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
-            'short_description' => 'nullable',
-            'long_description' => 'nullable',
-            'normal_price' => 'required',
-            'sale_price' => 'nullable',
+            'name' => 'required|max:255',
+            'short_description' => 'nullable|max:255',
+            'long_description' => 'nullable|max:255',
+            'normal_price' => 'required|numeric',
+            'sale_price' => 'nullable|numeric',
             'new' => 'nullable',
             'SKU' => ['required', Rule::unique('products')->ignore($id)],
             'category_id' => 'nullable',
@@ -128,36 +121,12 @@ class ProductsAdminController extends Controller
             ]);
         }
 
-        if ($request->sale_price != null) {
-            $sale_price = $request->sale_price;
-        } else {
-            $sale_price = 0;
-        }
-        if ($request->short_description != null) {
-            $short_description = $request->short_description;
-        } else {
-            $short_description = '';
-        }
-        if ($request->long_description != null) {
-            $long_description = $request->long_description;
-        } else {
-            $long_description = '';
-        }
-        if ($request->category_id != 'Wybierz') {
-            $category_id = $request->category_id;
-        } else {
-            $category_id = null;
-        }
-        if ($request->subcategory_id != 'Wybierz') {
-            $subcategory_id = $request->subcategory_id;
-        } else {
-            $subcategory_id = null;
-        }
-        if ($request->new != null) {
-            $new = $request->new;
-        } else {
-            $new = 0;
-        }
+        $sale_price = $this->validate_to_database($request->sale_price,null,0);
+        $new = $this->validate_to_database($request->new,null,0);
+        $short_description = $this->validate_to_database($request->short_description,null,'');
+        $long_description = $this->validate_to_database($request->long_description,null,'');
+        $category_id = $this->validate_to_database($request->category_id,'Wybierz',null);
+        $subcategory_id = $this->validate_to_database($request->subcategory_id,'Wybierz',null);
 
         Product::where('id', '=', $id)->update([
             'name' => $request->name,
