@@ -69,8 +69,13 @@ Route::middleware(['AdminCheck'])->group(function () {
 
         Route::prefix('products')->group(function () {
             Route::get('/', [ProductsAdminController::class, 'products'])->name('products');
+            Route::get('/new', [ProductsAdminController::class, 'products_new'])->name('products_new');
+            Route::post('/new', [ProductsAdminController::class, 'products_new_form'])->name('products_new_form');
+            Route::get('/delete/{id}', [ProductsAdminController::class, 'products_delete']);
+            Route::get('/edit/{id}', [ProductsAdminController::class, 'products_edit']);
+            Route::post('/edit/{id}', [ProductsAdminController::class, 'products_edit_form']);
         });
-        
+
         Route::prefix('hero')->group(function () {
             Route::get('/', [HeroAdminController::class, 'hero'])->name('hero');
             Route::get('/new', [HeroAdminController::class, 'hero_new'])->name('hero_new');
