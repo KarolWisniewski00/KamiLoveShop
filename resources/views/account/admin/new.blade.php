@@ -116,6 +116,12 @@
         </div>
 
         <div class="form-floating my-3 w-100">
+            <input type="text" class="form-control" id="order" value="@if($edit != 0){{$product->order}}@else {{0}} @endif" name="order">
+            <label for="order">Kolejność</label>
+            <span class="text-danger">@error('order') {{$message}} @enderror</span>
+        </div>
+
+        <div class="form-floating my-3 w-100">
             <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg">
             <label for="photo">Zdjęcie główne</label>
             <span class="text-danger">@error('photo') {{$message}} @enderror</span>

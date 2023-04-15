@@ -36,6 +36,12 @@
             </div>
 
             <div class="form-floating my-3 w-100">
+                <input type="text" class="form-control" id="order" value="0" name="order" required>
+                <label for="order">Kolejność</label>
+                <span class="text-danger">@error('order') {{$message}} @enderror</span>
+            </div>
+
+            <div class="form-floating my-3 w-100">
                 <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg" required>
                 <label for="photo">Zdjęcie</label>
                 <span class="text-danger">@error('photo') {{$message}} @enderror</span>
@@ -73,6 +79,12 @@
                 <input type="text" class="form-control" id="url" value="{{$category->url}}" name="url" required>
                 <label for="url">URL</label>
                 <span class="text-danger">@error('url') {{$message}} @enderror</span>
+            </div>
+
+            <div class="form-floating my-3 w-100">
+                <input type="text" class="form-control" id="order" value="0" name="order" required>
+                <label for="order">Kolejność</label>
+                <span class="text-danger">@error('order') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3 w-100">
@@ -148,6 +160,11 @@
                 <span class="text-danger">@error('category_id') {{$message}} @enderror</span>
             </div>
 
+            <div class="form-floating my-3 w-100">
+                <input type="text" class="form-control" id="order" value="0" name="order">
+                <label for="order">Kolejność</label>
+                <span class="text-danger">@error('order') {{$message}} @enderror</span>
+            </div>
 
             <div class="d-flex justify-content-start align-items-center mt-4">
                 <button class="btn btn-custom-1 me-2" type="submit"><i class="fa-solid fa-floppy-disk"></i> Zapisz</button>
@@ -195,6 +212,12 @@
                 <span class="text-danger">@error('category_id') {{$message}} @enderror</span>
             </div>
 
+            <div class="form-floating my-3 w-100">
+                <input type="text" class="form-control" id="order" value="{{$category->order}}" name="order">
+                <label for="order">Kolejność</label>
+                <span class="text-danger">@error('order') {{$message}} @enderror</span>
+            </div>
+
             <div class="d-flex justify-content-start align-items-center mt-4">
                 <button class="btn btn-custom-1 me-2" type="submit"><i class="fa-solid fa-floppy-disk"></i> Zapisz</button>
                 <a href="{{route('categories')}}" class="btn btn-custom-2"><i class="fa-solid fa-xmark"></i> Anuluj</a>
@@ -218,7 +241,7 @@
             <p class="text-muted"><i class="fa-solid fa-link"></i> {{$subcategory->url}}</p>
             <div class="mt-4 d-flex flex-row justify-content-center align-items-center">
                 <a href="{{url ('/admin/subcategories/edit/'.$subcategory->id)}}" class="bg-custom-1 p-4 rounded text-white fs-1 me-2"><i class="fa-solid fa-pen-to-square"></i></a>
-                <a href="{{url ('/admin/subcategories/delete/'.$subcategory->id)}}" class="bg-custom-2 p-4 rounded text-white fs-1" onclick="return confirm('Czy na pewno chcesz usunąć tę kategorię?');"><i class="fa-solid fa-trash"></i></a>
+                <a href="{{url ('/admin/subcategories/delete/'.$subcategory->id)}}" class="bg-custom-2 p-4 rounded text-white fs-1" onclick="return confirm('Czy na pewno chcesz usunąć tę podkategorię?');"><i class="fa-solid fa-trash"></i></a>
             </div>
         </div>
     </div>

@@ -37,6 +37,7 @@ class HeroAdminController extends Controller
             'button' => 'required|max:255',
             'href' => ['required','max:255', Rule::notIn(['Wybierz'])],
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
+            'order' => 'nullable|integer',
         ]);
 
         $photo = request()->file('photo');
@@ -49,6 +50,7 @@ class HeroAdminController extends Controller
         $hero->button = $request->button;
         $hero->href = $request->href;
         $hero->photo = $photo_name;
+        $hero->order = $request->order;
 
         $hero->save();
 
@@ -76,6 +78,7 @@ class HeroAdminController extends Controller
             'button' => 'required|max:255',
             'href' => ['required','max:255', Rule::notIn(['Wybierz'])],
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
+            'order' => 'nullable|integer',
         ]);
 
         $photo = request()->file('photo');
@@ -95,6 +98,7 @@ class HeroAdminController extends Controller
             'p' => $request->p,
             'button' => $request->button,
             'href' => $request->href,
+            'order' => $request->order,
         ]);
 
         return view('account.admin.hero', [

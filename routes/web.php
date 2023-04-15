@@ -16,6 +16,7 @@ use App\Http\Controllers\HeroAdminController;
 use App\Http\Controllers\BusketController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RulesAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,7 @@ Route::middleware(['isLoggedIn'])->group(function () {
     Route::post('/edit', [AccountController::class, 'edit_form'])->name('edit_form');
     Route::get('/busket', [BusketController::class, 'busket']);
     Route::get('/history', [AccountController::class, 'history']);
+    Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware(['AdminCheck'])->group(function () {
@@ -83,6 +85,14 @@ Route::middleware(['AdminCheck'])->group(function () {
             Route::get('/delete/{id}', [HeroAdminController::class, 'hero_delete']);
             Route::get('/edit/{id}', [HeroAdminController::class, 'hero_edit']);
             Route::post('/edit/{id}', [HeroAdminController::class, 'hero_edit_form']);
+        });
+        Route::prefix('rules')->group(function () {
+            Route::get('/', [RulesAdminController::class, 'rules'])->name('rules_admin');
+            Route::get('/new', [RulesAdminController::class, 'rules_new'])->name('rules_admin_new');
+            Route::post('/new', [RulesAdminController::class, 'rules_new_form'])->name('rules_admin_new_form');
+            Route::get('/delete/{id}', [RulesAdminController::class, 'rules_delete']);
+            Route::get('/edit/{id}', [RulesAdminController::class, 'rules_edit']);
+            Route::post('/edit/{id}', [RulesAdminController::class, 'rules_edit_form']);
         });
     });
 });

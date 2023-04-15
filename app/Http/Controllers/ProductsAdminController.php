@@ -42,7 +42,7 @@ class ProductsAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'short_description' => 'nullable|max:255',
-            'long_description' => 'nullable|max:255',
+            'long_description' => 'nullable',
             'normal_price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
             'new' => 'nullable',
@@ -50,31 +50,31 @@ class ProductsAdminController extends Controller
             'category_id' => 'nullable',
             'subcategory_id' => 'nullable',
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
+            'order' => 'nullable|integer',
         ]);
 
         $photo = request()->file('photo');
         $photo_name = $photo->getClientOriginalName();
         $photo->move(public_path('/photos'), $photo_name);
 
-        $sale_price = $this->validate_to_database($request->sale_price,null,0);
-        $new = $this->validate_to_database($request->new,null,0);
-        $short_description = $this->validate_to_database($request->short_description,null,'');
-        $long_description = $this->validate_to_database($request->long_description,null,'');
         $category_id = $this->validate_to_database($request->category_id,'Wybierz',null);
         $subcategory_id = $this->validate_to_database($request->subcategory_id,'Wybierz',null);
 
         $product = new Product();
         $product->name = $request->name;
 
-        $product->sale_price = $sale_price;
-        $product->new = $new;
-        $product->short_description = $short_description;
-        $product->long_description = $long_description;
+        $product->sale_price = $request->sale_price;
+        $product->new = $request->new;
+        $product->short_description = $request->short_description;
+        $product->long_description = $request->long_description;
         $product->category_id = $category_id;
         $product->subcategory_id = $subcategory_id;
         $product->normal_price = $request->normal_price;
         $product->SKU = $request->SKU;
         $product->photos = '';
+        $product->views = 0;
+        $product->sells = 0;
+        $product->order = $request->order;
         $product->photo = $photo_name;
 
         $product->save();
@@ -99,7 +99,7 @@ class ProductsAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'short_description' => 'nullable|max:255',
-            'long_description' => 'nullable|max:255',
+            'long_description' => 'nullable',
             'normal_price' => 'required|numeric',
             'sale_price' => 'nullable|numeric',
             'new' => 'nullable',
@@ -121,23 +121,20 @@ class ProductsAdminController extends Controller
             ]);
         }
 
-        $sale_price = $this->validate_to_database($request->sale_price,null,0);
-        $new = $this->validate_to_database($request->new,null,0);
-        $short_description = $this->validate_to_database($request->short_description,null,'');
-        $long_description = $this->validate_to_database($request->long_description,null,'');
         $category_id = $this->validate_to_database($request->category_id,'Wybierz',null);
         $subcategory_id = $this->validate_to_database($request->subcategory_id,'Wybierz',null);
 
         Product::where('id', '=', $id)->update([
             'name' => $request->name,
-            'short_description' => $short_description,
-            'long_description' => $long_description,
+            'short_description' => $request->short_description,
+            'long_description' => $request->long_description,
             'normal_price' => $request->normal_price,
-            'sale_price' => $sale_price,
-            'new' => $new,
+            'sale_price' => $request->sale_price,
+            'new' => $request->new,
             'SKU' => $request->SKU,
             'category_id' => $category_id,
             'subcategory_id' => $subcategory_id,
+            'order' => $request->order,
         ]);
 
         return view('account.admin.products', [

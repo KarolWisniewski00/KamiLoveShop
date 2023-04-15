@@ -47,6 +47,12 @@
             </div>
 
             <div class="form-floating my-3 w-100">
+                <input type="text" class="form-control" id="order" value="0" name="order">
+                <label for="order">Kolejność</label>
+                <span class="text-danger">@error('order') {{$message}} @enderror</span>
+            </div>
+
+            <div class="form-floating my-3 w-100">
                 <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg" required>
                 <label for="photo">Zdjęcie</label>
                 <span class="text-danger">@error('photo') {{$message}} @enderror</span>
@@ -98,6 +104,12 @@
             </div>
 
             <div class="form-floating my-3 w-100">
+                <input type="text" class="form-control" id="order" value="{{$hero->order}}" name="order">
+                <label for="order">Kolejność</label>
+                <span class="text-danger">@error('order') {{$message}} @enderror</span>
+            </div>
+
+            <div class="form-floating my-3 w-100">
                 <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg">
                 <label for="photo">Zdjęcie</label>
                 <span class="text-danger">@error('photo') {{$message}} @enderror</span>
@@ -105,7 +117,7 @@
 
             <div class="d-flex justify-content-start align-items-center mt-4">
                 <button class="btn btn-custom-1 me-2" type="submit"><i class="fa-solid fa-floppy-disk"></i> Zapisz</button>
-                <a href="{{route('categories')}}" class="btn btn-custom-2"><i class="fa-solid fa-xmark"></i> Anuluj</a>
+                <a href="{{route('hero')}}" class="btn btn-custom-2"><i class="fa-solid fa-xmark"></i> Anuluj</a>
             </div>
         </form>
     </div>

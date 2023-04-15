@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('button');
             $table->string('href');
             $table->string('photo');
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }

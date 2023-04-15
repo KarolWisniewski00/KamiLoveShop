@@ -40,6 +40,7 @@ class CategoriesAdminController extends Controller
             'plural' => 'required|max:255',
             'url' => ['required','max:255', Rule::unique('subcategories'),Rule::unique('categories')],
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
+            'order' => 'nullable|integer',
         ]);
 
         $photo = request()->file('photo');
@@ -51,6 +52,7 @@ class CategoriesAdminController extends Controller
         $category->plural = $request->plural;
         $category->url = $request->url;
         $category->photo = $photo_name;
+        $category->order = $request->order;
 
         $category->save();
 
@@ -82,6 +84,7 @@ class CategoriesAdminController extends Controller
             'plural' => 'required|max:255',
             'url' =>  ['required','max:255', Rule::unique('categories')->ignore($id),Rule::unique('subcategories')],
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
+            'order' => 'nullable|integer',
         ]);
 
         $photo = request()->file('photo');
@@ -100,6 +103,7 @@ class CategoriesAdminController extends Controller
             'name' => $request->name,
             'plural' => $request->plural,
             'url' => $request->url,
+            'order' => $request->order,
         ]);
 
         return view('account.admin.categories', [
@@ -147,6 +151,7 @@ class CategoriesAdminController extends Controller
             'plural' => 'required|max:255',
             'url' => ['required','max:255', Rule::unique('subcategories'),Rule::unique('categories')],
             'category_id'=>['required', Rule::notIn(['Wybierz'])],
+            'order' => 'nullable|integer',
         ]);
 
 
@@ -154,8 +159,8 @@ class CategoriesAdminController extends Controller
         $subcategory->name = $request->name;
         $subcategory->plural = $request->plural;
         $subcategory->url = $request->url;
-        $subcategory->photo = '';
         $subcategory->category_id = $request->category_id;
+        $subcategory->order = $request->order;
 
         $subcategory->save();
 
@@ -188,11 +193,13 @@ class CategoriesAdminController extends Controller
             'plural' => 'required|max:255',
             'url' =>  ['required','max:255', Rule::unique('subcategories')->ignore($id),Rule::unique('categories')],
             'category_id'=>'nullable',
+            'order' => 'nullable|integer',
         ]);
         Subcategory::where('id', '=', $id)->update([
             'name' => $request->name,
             'plural' => $request->plural,
             'url' => $request->url,
+            'order' => $request->order,
         ]);
         if ($request->category_id != "Wybierz"){
             Subcategory::where('id', '=', $id)->update([
