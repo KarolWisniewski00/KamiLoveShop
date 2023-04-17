@@ -16,4 +16,8 @@ class Product extends Model
     {
         return $this->belongsTo(Subcategory::class);
     }
+    public function size()
+    {
+        return $this->hasOne(Size::class);
+    }
 }

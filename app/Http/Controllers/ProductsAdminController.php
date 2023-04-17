@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Size;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -11,7 +12,8 @@ use Exception;
 class ProductsAdminController extends Controller
 {
     //PREPARE VARIABLES TO SAVE
-    public function validate_to_database($what,$from,$to){
+    public function validate_to_database($what, $from, $to)
+    {
         if ($what != $from) {
             $value = $what;
         } else {
@@ -51,14 +53,15 @@ class ProductsAdminController extends Controller
             'subcategory_id' => 'nullable',
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
             'order' => 'nullable|integer',
+            'sizes' => 'nullable',
         ]);
 
         $photo = request()->file('photo');
         $photo_name = $photo->getClientOriginalName();
         $photo->move(public_path('/photos'), $photo_name);
 
-        $category_id = $this->validate_to_database($request->category_id,'Wybierz',null);
-        $subcategory_id = $this->validate_to_database($request->subcategory_id,'Wybierz',null);
+        $category_id = $this->validate_to_database($request->category_id, 'Wybierz', null);
+        $subcategory_id = $this->validate_to_database($request->subcategory_id, 'Wybierz', null);
 
         $product = new Product();
         $product->name = $request->name;
@@ -79,7 +82,15 @@ class ProductsAdminController extends Controller
 
         $product->save();
 
-        return view('account.admin.products',[
+        $sizes = explode(", ", $request->sizes);
+        foreach ($sizes as $size){
+            $siz = new Size();
+            $siz->product_id = $product->id;
+            $siz->value = $size;
+            $siz->save();
+        }
+
+        return view('account.admin.products', [
             'products' => Product::get(),
             'subcategories' => Subcategory::get()
         ]);
@@ -121,8 +132,8 @@ class ProductsAdminController extends Controller
             ]);
         }
 
-        $category_id = $this->validate_to_database($request->category_id,'Wybierz',null);
-        $subcategory_id = $this->validate_to_database($request->subcategory_id,'Wybierz',null);
+        $category_id = $this->validate_to_database($request->category_id, 'Wybierz', null);
+        $subcategory_id = $this->validate_to_database($request->subcategory_id, 'Wybierz', null);
 
         Product::where('id', '=', $id)->update([
             'name' => $request->name,

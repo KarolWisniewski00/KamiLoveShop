@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Product;
+use App\Models\Size;
 use Exception;
 
 class PagesController extends Controller
@@ -28,7 +29,7 @@ class PagesController extends Controller
 
         try {
             if ($request->has('price_min') || $request->has('price_max')) {
-                $products = Product::where(function ($query) use ($request, $category,$category_string) {
+                $products = Product::where(function ($query) use ($request, $category, $category_string) {
                     $query->where($category_string, '=', $category[0]->id)
                         ->where('sale_price', '=', 0)
                         ->where('normal_price', '>=', $request->price_min)
@@ -75,6 +76,13 @@ class PagesController extends Controller
             }
         }
 
+        $sizes = Size::get();
+        $sizes_good = [];
+        foreach ($sizes as $size){
+            if (!in_array($size->value,$sizes_good)){
+                array_push($sizes_good,$size->value);
+            }
+        }
         return view('dynamic.pages', [
             'url' => $url,
             'products' => $products,
@@ -83,7 +91,9 @@ class PagesController extends Controller
             'max' => $max,
             'last_min' => $last_min,
             'last_max' => $last_max,
-            'plural'=>$category[0]->plural
+            'plural' => $category[0]->plural,
+            'sizes' => $sizes_good,
+            'sizes_all' => $sizes,
         ]);
     }
 }

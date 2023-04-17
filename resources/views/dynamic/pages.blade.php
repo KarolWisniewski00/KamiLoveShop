@@ -89,6 +89,29 @@
                             </div>
                         </div>
                     </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="true" aria-controls="panelsStayOpen-collapseTwo">
+                                Rozmiary
+                            </button>
+                        </h2>
+                        <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
+                            <div class="accordion-body">
+                                @foreach ($sizes as $size)
+                                <div class="list-group-item d-flex justify-content-between align-items-start py-1">
+                                    <div class="ms-2 me-auto">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="{{$size}}" name="size" id="flexCheckDefault">
+                                            <label class="form-check-label fw-bold" for="flexCheckDefault">
+                                                {{$size}}
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
                     <div class="accordion-item py-4">
                         <div class="d-flex justify-content-center align-items-center">
                             <button class="btn btn-lg btn-custom-1" type="submit">Filtruj</button>

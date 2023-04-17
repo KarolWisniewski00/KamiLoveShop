@@ -3,8 +3,10 @@
 <!--NEW-->
 @if ($edit == 0)
 <form class="form text-center my-4" action="{{route('products_new_form')}}" method="POST" enctype="multipart/form-data">
+<p class="text-muted">Utwórz nową produkt</p>
     @else
     <form class="form text-center my-4" action="{{url ('/admin/products/edit/'.$product->id)}}" method="POST" enctype="multipart/form-data">
+    <p class="text-muted">Edytuj produkt</p>
         @endif
         <!--TOKEN-->
         @csrf
@@ -126,7 +128,12 @@
             <label for="photo">Zdjęcie główne</label>
             <span class="text-danger">@error('photo') {{$message}} @enderror</span>
         </div>
-
+        <p class="text-muted">Prawidłowy format rozmiarów: np. "S, M, L" lub "36, 36.5, 37" <span class="text-danger">UWAGA! koniecznie użyć separatora: ", " - przecinek i spacja</span></p>
+        <div class="form-floating my-3 w-100">
+            <input type="text" class="form-control" id="sizes" value="" name="sizes">
+            <label for="sizes">Rozmiary</label>
+            <span class="text-danger">@error('sizes') {{$message}} @enderror</span>
+        </div>
 
         <div class="d-flex justify-content-start align-items-center mt-4">
             <button class="btn btn-custom-1 me-2" type="submit"><i class="fa-solid fa-floppy-disk"></i> Zapisz</button>
