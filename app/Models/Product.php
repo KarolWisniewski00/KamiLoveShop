@@ -16,8 +16,8 @@ class Product extends Model
     {
         return $this->belongsTo(Subcategory::class);
     }
-    public function size()
+    public function broke()
     {
-        return $this->hasOne(Size::class);
+        return $this->hasOne(Broke::class);
     }
 }

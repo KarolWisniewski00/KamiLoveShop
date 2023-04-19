@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Size extends Model
 {
     use HasFactory;
-    public function product()
+    public function broker()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasOne(Broker::class);
     }
 }

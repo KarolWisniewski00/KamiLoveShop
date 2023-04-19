@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesAdminController;
 use App\Http\Controllers\PolicyAdminController;
 use App\Http\Controllers\ReturnAdminController;
+use App\Http\Controllers\SizesAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -111,6 +112,14 @@ Route::middleware(['AdminCheck'])->group(function () {
             Route::get('/delete/{id}', [ReturnAdminController::class, 'return_delete']);
             Route::get('/edit/{id}', [ReturnAdminController::class, 'return_edit']);
             Route::post('/edit/{id}', [ReturnAdminController::class, 'return_edit_form']);
+        });
+        Route::prefix('sizes')->group(function () {
+            Route::get('/', [SizesAdminController::class, 'sizes'])->name('sizes');
+            Route::get('/new', [SizesAdminController::class, 'sizes_new'])->name('sizes_new');
+            Route::post('/new', [SizesAdminController::class, 'sizes_new_form'])->name('sizes_new_form');
+            Route::get('/delete/{id}', [SizesAdminController::class, 'sizes_delete']);
+            Route::get('/edit/{id}', [SizesAdminController::class, 'sizes_edit']);
+            Route::post('/edit/{id}', [SizesAdminController::class, 'sizes_edit_form']);
         });
     });
 });

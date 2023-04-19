@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Broker;
 use App\Models\Size;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
@@ -26,7 +27,8 @@ class ProductsAdminController extends Controller
     {
         return view('account.admin.products', [
             'products' => Product::get(),
-            'subcategories' => Subcategory::get()
+            'subcategories' => Subcategory::get(),
+            'sizes' => Size::get()
         ]);
     }
     //NEW PRODUCTS
@@ -35,7 +37,8 @@ class ProductsAdminController extends Controller
         return view('account.admin.new', [
             'edit' => 0,
             'product' => null,
-            'subcategories' => Subcategory::get()
+            'subcategories' => Subcategory::get(),
+            'sizes' => Size::get()
         ]);
     }
     //NEW FORM PRODUCTS
@@ -53,7 +56,7 @@ class ProductsAdminController extends Controller
             'subcategory_id' => 'nullable',
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
             'order' => 'nullable|integer',
-            'sizes' => 'nullable',
+            'count' => 'nullable|integer'
         ]);
 
         $photo = request()->file('photo');
@@ -62,11 +65,12 @@ class ProductsAdminController extends Controller
 
         $category_id = $this->validate_to_database($request->category_id, 'Wybierz', null);
         $subcategory_id = $this->validate_to_database($request->subcategory_id, 'Wybierz', null);
+        $sale = $this->validate_to_database($request->sale_price, null, 0);
 
         $product = new Product();
         $product->name = $request->name;
 
-        $product->sale_price = $request->sale_price;
+        $product->sale_price = $sale;
         $product->new = $request->new;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
@@ -82,17 +86,24 @@ class ProductsAdminController extends Controller
 
         $product->save();
 
-        $sizes = explode(", ", $request->sizes);
-        foreach ($sizes as $size){
-            $siz = new Size();
-            $siz->product_id = $product->id;
-            $siz->value = $size;
-            $siz->save();
+        $count = intval($request->count);
+        $array_added = [];
+        for ($x = 1; $x <= $count; $x++) {
+            $bufor = 'size_' . $x;
+            if (($request->$bufor != 'Wybierz') && (!in_array($request->$bufor, $array_added))) {
+                $size = Size::where('value', '=', $request->$bufor)->get()->first();
+                $broke = new Broker();
+                $broke->product_id = intval($product->id);
+                $broke->size_id = intval($size->id);
+                $broke->save();
+                array_push($array_added, $request->$bufor);
+            }
         }
 
         return view('account.admin.products', [
             'products' => Product::get(),
-            'subcategories' => Subcategory::get()
+            'subcategories' => Subcategory::get(),
+            'sizes' => Size::get()
         ]);
     }
     //EDIT PRODUCTS
@@ -101,7 +112,8 @@ class ProductsAdminController extends Controller
         return view('account.admin.new', [
             'edit' => 1,
             'product' => Product::where('id', '=', $id)->get()->first(),
-            'subcategories' => Subcategory::get()
+            'subcategories' => Subcategory::get(),
+            'sizes' => Size::get()
         ]);
     }
     //EDIT FORM PRODUCTS
@@ -134,13 +146,14 @@ class ProductsAdminController extends Controller
 
         $category_id = $this->validate_to_database($request->category_id, 'Wybierz', null);
         $subcategory_id = $this->validate_to_database($request->subcategory_id, 'Wybierz', null);
+        $sale = $this->validate_to_database($request->sale_price, null, 0);
 
         Product::where('id', '=', $id)->update([
             'name' => $request->name,
             'short_description' => $request->short_description,
             'long_description' => $request->long_description,
             'normal_price' => $request->normal_price,
-            'sale_price' => $request->sale_price,
+            'sale_price' => $sale,
             'new' => $request->new,
             'SKU' => $request->SKU,
             'category_id' => $category_id,
@@ -150,7 +163,8 @@ class ProductsAdminController extends Controller
 
         return view('account.admin.products', [
             'products' => Product::get(),
-            'subcategories' => Subcategory::get()
+            'subcategories' => Subcategory::get(),
+            'sizes' => Size::get()
         ]);
     }
     //DELETE PRODUCTS
@@ -165,7 +179,8 @@ class ProductsAdminController extends Controller
 
         return view('account.admin.products', [
             'products' => Product::get(),
-            'subcategories' => Subcategory::get()
+            'subcategories' => Subcategory::get(),
+            'sizes' => Size::get()
         ]);
     }
 }

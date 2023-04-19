@@ -97,13 +97,13 @@
                         </h2>
                         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                             <div class="accordion-body">
-                                @foreach ($sizes as $size)
+                                @foreach ($brokers as $broker)
                                 <div class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{$size}}" name="size" id="flexCheckDefault">
+                                            <input class="form-check-input" type="checkbox" value="{{$broker}}" name="broker" id="flexCheckDefault">
                                             <label class="form-check-label fw-bold" for="flexCheckDefault">
-                                                {{$size}}
+                                                {{$broker}}
                                             </label>
                                         </div>
                                     </div>
@@ -166,9 +166,27 @@
                                     <div class="text-custom-1 fs-4"> {{$product->normal_price}} PLN</div>
                                     @endif
                                 </div>
+                                <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+                                    @if (in_array($product->id,$sizes_id))
+                                    @foreach($brokers_all as $broker)
+                                    @if($broker->product_id == $product->id)
+                                    @foreach($sizes as $size)
+                                    @if ($size->id == $broker->size_id)
+                                    <a href="" class="btn btn-sm btn-custom-1 m-2">{{$size->value}}</a>
+                                    @endif
+                                    @endforeach
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    @endif
+                                </div>
                                 <div class="d-flex flex-row justify-content-between align-items-center">
+                                    @if (in_array($product->id,$sizes_id))
+                                    <a href="{{ url('product/'.$product->id)}}" class="btn btn-custom-2 w-100 h-100"><i class="fa fa-search"></i> Wybierz opcję</a>
+                                    @else
                                     <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
                                     <a href="{{ url('product/'.$product->id)}}" class="btn btn-custom-2 w-25 h-100 text-white d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                                    @endif
                                 </div>
                                 <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
                                     @if ($product->new != 0)

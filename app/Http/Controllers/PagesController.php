@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Subcategory;
 use App\Models\Product;
+use App\Models\Broker;
 use App\Models\Size;
 use Exception;
 
@@ -76,13 +77,23 @@ class PagesController extends Controller
             }
         }
 
-        $sizes = Size::get();
-        $sizes_good = [];
-        foreach ($sizes as $size){
-            if (!in_array($size->value,$sizes_good)){
-                array_push($sizes_good,$size->value);
+        $brokers = Broker::get();
+        $brokers_good = [];
+        foreach ($brokers as $broker) {
+            $size = Size::where('id', '=', $broker->size_id)->get()->first();
+            if (!in_array($size->value, $brokers_good)) {
+                array_push($brokers_good, $size->value);
             }
         }
+
+        $sizes = Broker::get();
+        $sizes_id = [];
+        foreach ($sizes as $size) {
+            if (!in_array($size->product_id, $sizes_id)) {
+                array_push($sizes_id, $size->product_id);
+            }
+        }
+        
         return view('dynamic.pages', [
             'url' => $url,
             'products' => $products,
@@ -92,8 +103,10 @@ class PagesController extends Controller
             'last_min' => $last_min,
             'last_max' => $last_max,
             'plural' => $category[0]->plural,
-            'sizes' => $sizes_good,
-            'sizes_all' => $sizes,
+            'brokers' => $brokers_good,
+            'brokers_all' => $brokers,
+            'sizes_id' => $sizes_id,
+            'sizes'=>Size::get()
         ]);
     }
 }
