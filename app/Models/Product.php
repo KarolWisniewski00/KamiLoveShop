@@ -16,8 +16,8 @@ class Product extends Model
     {
         return $this->belongsTo(Subcategory::class);
     }
-    public function broke()
+    public function broker()
     {
-        return $this->hasOne(Broke::class);
+        return $this->hasOne(Broker::class);
     }
 }
