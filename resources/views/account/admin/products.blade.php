@@ -64,7 +64,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($products as $key => $product)
+                @foreach ($products as $key => $p)
                 <tr>
                     <th>
                         <div class="d-flex flex-column justify-content-center align-items-center">
@@ -73,24 +73,24 @@
                     </th>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div style="max-width:50px"><img alt="product_photo" src="{{ asset('photos/'.$product->photo)}}" class="img-fluid"></div>
+                            <div style="max-width:50px"><img alt="product_photo" src="{{ asset('photos/'.$p->photo)}}" class="img-fluid"></div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">{{$product->name}}</div>
-                            <div class="text-muted">{{$product->short_description}}</div>
+                            <div class="fw-bold">{{$p->name}}</div>
+                            <div class="text-muted">{{$p->short_description}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             @foreach ($categories as $category)
-                            @if($category->id == $product->category_id)
+                            @if($category->id == $p->category_id)
                             <div class="fw-bold">{{$category->name}}</div>
                             @endif
                             @endforeach
                             @foreach ($subcategories as $subcategory)
-                            @if($subcategory->id == $product->subcategory_id)
+                            @if($subcategory->id == $p->subcategory_id)
                             <div class="text-muted">{{$subcategory->name}}</div>
                             @endif
                             @endforeach
@@ -98,36 +98,36 @@
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">{{$product->SKU}}</div>
+                            <div class="fw-bold">{{$p->SKU}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            @if($product->new != 0)
+                            @if($p->new != 0)
                             <div class="fw-bold">Tak</div>
                             @endif
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">{{$product->normal_price}}</div>
+                            <div class="fw-bold">{{$p->normal_price}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            @if($product->sale_price !=0)
-                            <div class="fw-bold">{{$product->sale_price}}</div>
+                            @if($p->sale_price !=0)
+                            <div class="fw-bold">{{$p->sale_price}}</div>
                             @endif
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="{{url ('/admin/products/edit/'.$product->id)}}" class="btn btn-custom-1 rounded text-white fs-1"><i class="fa-solid fa-pen-to-square"></i></a></div>
+                            <div><a href="{{url ('/admin/products/edit/'.$p->id)}}" class="btn btn-custom-1 rounded text-white fs-1"><i class="fa-solid fa-pen-to-square"></i></a></div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="{{url ('/admin/products/delete/'.$product->id)}}" class="btn btn-custom-2 rounded text-white fs-1" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');"><i class="fa-solid fa-trash"></i></a></div>
+                            <div><a href="{{url ('/admin/products/delete/'.$p->id)}}" class="btn btn-custom-2 rounded text-white fs-1" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');"><i class="fa-solid fa-trash"></i></a></div>
                         </div>
                     </td>
                 </tr>

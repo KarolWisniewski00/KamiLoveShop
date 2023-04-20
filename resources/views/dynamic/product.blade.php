@@ -108,7 +108,7 @@
                 </div>
             </div>
             @endif
-            @foreach ($products as $product)
+            @foreach ($products as $p)
             <div class="col-12 col-md-6 col-lg-3 mb-4">
                 @include('layouts.card')
             </div>

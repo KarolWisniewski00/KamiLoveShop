@@ -156,11 +156,11 @@
                 </div>
                 <!--END SORT-->
                 <div class="row products">
-                    @foreach ($products as $product)
-                    @if ($product->sale_price != 0)
-                    <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{$product->sale_price}}" data-id="{{$product->id}}">
+                    @foreach ($products as $p)
+                    @if ($p->sale_price != 0)
+                    <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{$p->sale_price}}" data-id="{{$p->id}}">
                         @else
-                        <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{$product->normal_price}}" data-id="{{$product->id}}">
+                        <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{$p->normal_price}}" data-id="{{$p->id}}">
                             @endif
                             @include('layouts.card')
                         </div>

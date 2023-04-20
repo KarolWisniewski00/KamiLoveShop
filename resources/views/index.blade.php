@@ -56,7 +56,7 @@
         @if(count($products)>0)
         <h2 class="text-center my-4" style="font-size: 3em;">Nowości</h2>
         <div class="row g-4">
-            @foreach ($products as $product)
+            @foreach ($products as $p)
             <div class="col-12 col-md-6 col-lg-3 mb-4">
                 @include('layouts.card')
             </div>
@@ -78,7 +78,7 @@
                 <div class="row">
                     @foreach ($products_in_categories as $id)
                     @if ($id['id'] == $category->id)
-                    @foreach ($id['products'] as $product)
+                    @foreach ($id['products'] as $p)
                     <div class="col-12 col-md-6 mb-4">
                         @include('layouts.card')
                     </div>
@@ -106,7 +106,7 @@
                 <div class="row">
                     @foreach ($products_in_categories as $id)
                     @if ($id['id'] == $category->id)
-                    @foreach ($id['products'] as $product)
+                    @foreach ($id['products'] as $p)
                     <div class="col-12 col-md-6 mb-4">
                         @include('layouts.card')
                     </div>

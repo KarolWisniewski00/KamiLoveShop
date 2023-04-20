@@ -75,31 +75,31 @@
                                 </th>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                        @foreach($products as $product)
-                                        @if ($product->id == $busket->product_id)
-                                        <div style="max-width:50px"><img alt="product_photo" src="{{ asset('photos/'.$product->photo)}}" class="img-fluid"></div>
+                                        @foreach($products as $p)
+                                        @if ($p->id == $busket->product_id)
+                                        <div style="max-width:50px"><img alt="product_photo" src="{{ asset('photos/'.$p->photo)}}" class="img-fluid"></div>
                                         @endif
                                         @endforeach
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                        @foreach($products as $product)
-                                        @if ($product->id == $busket->product_id)
-                                        <div class="fw-bold">{{$product->name}} {{$busket->size_value}}</div>
+                                        @foreach($products as $p)
+                                        @if ($p->id == $busket->product_id)
+                                        <div class="fw-bold">{{$p->name}} {{$busket->size_value}}</div>
                                         @endif
                                         @endforeach
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex flex-row justify-content-center align-items-center">
-                                        @foreach($products as $product)
-                                        @if ($product->id == $busket->product_id)
-                                        @if ($product->sale_price != 0)
-                                        <div class="text-muted me-2" style="text-decoration: line-through;padding-top:1px;">{{$product->normal_price}} PLN</div>
-                                        <div class="fw-bold"> {{$product->sale_price}} PLN</div>
+                                        @foreach($products as $p)
+                                        @if ($p->id == $busket->product_id)
+                                        @if ($p->sale_price != 0)
+                                        <div class="text-muted me-2" style="text-decoration: line-through;padding-top:1px;">{{$p->normal_price}} PLN</div>
+                                        <div class="fw-bold"> {{$p->sale_price}} PLN</div>
                                         @else
-                                        <div class="fw-bold"> {{$product->normal_price}} PLN</div>
+                                        <div class="fw-bold"> {{$p->normal_price}} PLN</div>
                                         @endif
                                         @endif
                                         @endforeach
@@ -107,35 +107,39 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-row justify-content-center align-items-center">
+                                        @foreach($products as $p)
+                                        @if ($p->id == $busket->product_id)
                                         <form method="POST" action="{{route('busket_minus_form')}}">
                                             @csrf
-                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                            <input type="hidden" name="product_id" value="{{$p->id}}">
                                             <input type="hidden" name="quantity" value="-1">
                                             <input type="hidden" name="size_value" value="{{$busket->size_value}}">
                                             <button type="submit" class="btn btn-sm btn-custom-1 me-2">
-                                            <i class="fa-solid fa-minus"></i>
+                                                <i class="fa-solid fa-minus"></i>
                                             </button>
                                         </form>
                                         <div class="fw-bold">{{$busket->quantity}}</div>
                                         <form method="POST" action="{{route('busket_new_form')}}">
                                             @csrf
-                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                            <input type="hidden" name="product_id" value="{{$p->id}}">
                                             <input type="hidden" name="quantity" value="1">
                                             <input type="hidden" name="size_value" value="{{$busket->size_value}}">
                                             <button type="submit" class="btn btn-sm btn-custom-1 ms-2">
                                                 <i class="fa-solid fa-plus"></i>
                                             </button>
                                         </form>
+                                        @endif
+                                        @endforeach
                                     </div>
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                        @foreach($products as $product)
-                                        @if ($product->id == $busket->product_id)
-                                        @if ($product->sale_price != 0)
-                                        <div class="fw-bold"> {{$product->sale_price * $busket->quantity}} PLN</div>
+                                        @foreach($products as $p)
+                                        @if ($p->id == $busket->product_id)
+                                        @if ($p->sale_price != 0)
+                                        <div class="fw-bold"> {{$p->sale_price * $busket->quantity}} PLN</div>
                                         @else
-                                        <div class="fw-bold"> {{$product->normal_price * $busket->quantity}} PLN</div>
+                                        <div class="fw-bold"> {{$p->normal_price * $busket->quantity}} PLN</div>
                                         @endif
                                         @endif
                                         @endforeach
