@@ -28,7 +28,7 @@ class ProductsAdminController extends Controller
         return view('account.admin.products', [
             'products' => Product::get(),
             'subcategories' => Subcategory::get(),
-            'sizes' => Size::get()
+            'sizes' => Size::get(),
         ]);
     }
     //NEW PRODUCTS
@@ -38,7 +38,8 @@ class ProductsAdminController extends Controller
             'edit' => 0,
             'product' => null,
             'subcategories' => Subcategory::get(),
-            'sizes' => Size::get()
+            'sizes' => Size::get(),
+            'brokers'=>null
         ]);
     }
     //NEW FORM PRODUCTS
@@ -113,7 +114,8 @@ class ProductsAdminController extends Controller
             'edit' => 1,
             'product' => Product::where('id', '=', $id)->get()->first(),
             'subcategories' => Subcategory::get(),
-            'sizes' => Size::get()
+            'sizes' => Size::get(),
+            'brokers'=>Broker::where('product_id','=',$id)->get()
         ]);
     }
     //EDIT FORM PRODUCTS
@@ -130,6 +132,8 @@ class ProductsAdminController extends Controller
             'category_id' => 'nullable',
             'subcategory_id' => 'nullable',
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
+            'order' => 'nullable|integer',
+            'count' => 'nullable|integer'
         ]);
 
         $photo = request()->file('photo');
@@ -160,6 +164,22 @@ class ProductsAdminController extends Controller
             'subcategory_id' => $subcategory_id,
             'order' => $request->order,
         ]);
+
+        Broker::where('product_id','=',$id)->delete();
+
+        $count = intval($request->count);
+        $array_added = [];
+        for ($x = 1; $x <= $count; $x++) {
+            $bufor = 'size_' . $x;
+            if (($request->$bufor != 'Wybierz') && (!in_array($request->$bufor, $array_added))) {
+                $size = Size::where('value', '=', $request->$bufor)->get()->first();
+                $broke = new Broker();
+                $broke->product_id = intval($id);
+                $broke->size_id = intval($size->id);
+                $broke->save();
+                array_push($array_added, $request->$bufor);
+            }
+        }
 
         return view('account.admin.products', [
             'products' => Product::get(),

@@ -3,7 +3,7 @@
 <!--NEW-->
 @if ($edit == 0)
 <form class="form text-center my-4" id="form" action="{{route('products_new_form')}}" method="POST" enctype="multipart/form-data">
-    <p class="text-muted">Utwórz nową produkt</p>
+    <p class="text-muted">Utwórz nowy produkt</p>
     @else
     <form class="form text-center my-4" id="form" action="{{url ('/admin/products/edit/'.$product->id)}}" method="POST" enctype="multipart/form-data">
         <p class="text-muted">Edytuj produkt</p>
@@ -131,7 +131,7 @@
 
         <button class="btn btn-lg btn-custom-1 shadow my-3" type="button"><i class="fa-solid fa-plus"></i> Dodaj nowe zdjęcie</button>
 
-
+        @if ($edit == 0)
         <div class="input-group my-3 w-100">
             <label class="input-group-text" for="size_1">Rozmiar_1</label>
             <select class="form-select" name="size_1">
@@ -142,6 +142,47 @@
             </select>
             <span class="text-danger">@error('size_1') {{$message}} @enderror</span>
         </div>
+        <script>
+            var count = 2;
+        </script>
+        @else
+        @if (count($brokers) == 0)
+        <div class="input-group my-3 w-100">
+            <label class="input-group-text" for="size_1">Rozmiar_1</label>
+            <select class="form-select" name="size_1">
+                <option value="Wybierz">Wybierz</option>
+                @foreach ($sizes as $size)
+                <option value="{{$size->value}}">{{$size->value}}</option>
+                @endforeach
+            </select>
+            <span class="text-danger">@error('size_1') {{$message}} @enderror</span>
+        </div>
+        <script>
+            var count = 2;
+        </script>
+        @else
+        @foreach($brokers as $key => $broker)
+        <div class="input-group my-3 w-100">
+            <label class="input-group-text" for="size_{{$key+1}}">Rozmiar_{{$key+1}}</label>
+            <select class="form-select" name="size_{{$key+1}}">
+                @foreach ($sizes as $size)
+                @if ($broker->size_id == $size->id)
+                <option value="{{$size->value}}">{{$size->value}}</option>
+                @endif
+                @endforeach
+                <option value="Wybierz">Wybierz</option>
+                @foreach ($sizes as $size)
+                <option value="{{$size->value}}">{{$size->value}}</option>
+                @endforeach
+            </select>
+            <span class="text-danger">@error('size_{{$key}}') {{$message}} @enderror</span>
+        </div>
+        @endforeach
+        <script>
+            var count = {!! json_encode(count($brokers)+1) !!};
+        </script>
+        @endif
+        @endif
 
         <div class="sizes">
 
@@ -157,7 +198,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!--END NEW-->
     <script>
-        var count = 2;
         $('.add-size').click(function() {
             $('.sizes').append(`
             <div class="input-group my-3 w-100">

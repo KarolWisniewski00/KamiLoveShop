@@ -80,7 +80,42 @@ class PagesController extends Controller
         $brokers = Broker::get();
         $brokers_good = $this->prepare_brokers($brokers);
         $sizes_id = $this->prepare_sizes_id($brokers);
-        
+
+        $count = intval(count($request->all()));
+        $sizes_filter=[];
+        $sizes_filter_id=[];
+        $products_id=[];
+        $sizes = Size::get();
+
+        for ($x=0;$x<=$count;$x++){
+            $bufor = 'broker_'.$x;
+            if (($request->$bufor != null) && (!in_array($request->$bufor,$sizes_filter))){
+                array_push($sizes_filter,$request->$bufor);
+            }
+        }
+        foreach($sizes as $size){
+            foreach($sizes_filter as $size_filter){
+                if ($size->value == $size_filter){
+                    array_push($sizes_filter_id,$size->id);
+                }   
+            }
+        }
+        foreach($brokers as $broker){
+            foreach ($sizes_filter_id as $size_filter_id){
+                if($broker->size_id == $size_filter_id){
+                    array_push($products_id,$broker->product_id);
+                }
+            }
+        }
+        $products_good=[];
+        foreach ($products as $prod){
+            if (in_array($prod->id,$products_id)){
+                array_push($products_good,$prod);
+            }
+        }
+        if (count($request->all())>2){
+            $products = $products_good;
+        }
         return view('dynamic.pages', [
             'url' => $url,
             'products' => $products,
@@ -93,7 +128,8 @@ class PagesController extends Controller
             'brokers' => $brokers_good,
             'brokers_all' => $brokers,
             'sizes_id' => $sizes_id,
-            'sizes'=>Size::get()
+            'sizes'=>$sizes,
+            'sizes_filter'=>$sizes_filter
         ]);
     }
 }

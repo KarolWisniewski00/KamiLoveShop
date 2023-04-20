@@ -167,6 +167,12 @@
 
 .accordion-button:not(.collapsed) {
     color: #EA2F83 !important;
+    background-color: #fff !important;
+}
+
+.accordion-button {
+    background-color: #fff !important;
+
 }
 
 .accordion {

@@ -15,8 +15,7 @@
     <section>
         <header class="d-flex flex-wrap justify-content-center py-2 container align-items-center">
             <a href="{{route('index')}}" class="d-flex align-items-center mb-2 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img src="{{ asset('photos/logo-male-beztla.png')}}" alt="logo" class="img-fluid" style="max-height: 6em;">
-                <span class="fs-2">KamiLove</span>
+                <img src="{{ asset('photos/logo.png')}}" alt="logo" class="img-fluid" style="max-height: 6em;">
             </a>
 
             <ul class="nav nav-pills">
@@ -55,8 +54,7 @@
         <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
             <div class="col mb-3">
                 <a href="{{route('index')}}" class="d-flex align-items-center mb-2 mb-md-0 me-md-auto text-dark text-decoration-none">
-                    <img src="{{ asset('photos/logo-male-beztla.png')}}" alt="logo" class="img-fluid" style="max-height: 6em;">
-                    <span class="fs-2">KamiLove</span>
+                    <img src="{{ asset('photos/logo.png')}}" alt="logo" class="img-fluid" style="max-height: 6em;">
                 </a>
             </div>
 

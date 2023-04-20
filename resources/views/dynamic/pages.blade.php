@@ -98,12 +98,16 @@
                         </h2>
                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
                             <div class="accordion-body">
-                                @foreach ($brokers as $broker)
+                                @foreach ($brokers as $key => $broker)
                                 <div class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{$broker}}" name="broker" id="flexCheckDefault">
-                                            <label class="form-check-label fw-bold" for="flexCheckDefault">
+                                            @if (in_array($broker,$sizes_filter))
+                                            <input class="form-check-input" type="checkbox" value="{{$broker}}" name="broker_{{$key}}" checked id="flexCheck_{{$key}}">
+                                            @else
+                                            <input class="form-check-input" type="checkbox" value="{{$broker}}" name="broker_{{$key}}" id="flexCheck_{{$key}}">
+                                            @endif
+                                            <label class="form-check-label fw-bold" for="flexCheck_{{$key}}">
                                                 {{$broker}}
                                             </label>
                                         </div>
