@@ -57,7 +57,8 @@ class ProductsAdminController extends Controller
             'subcategory_id' => 'nullable',
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
             'order' => 'nullable|integer',
-            'count' => 'nullable|integer'
+            'count' => 'nullable|integer',
+            'count_photo' => 'nullable|integer',
         ]);
 
         $photo = request()->file('photo');
@@ -67,6 +68,20 @@ class ProductsAdminController extends Controller
         $category_id = $this->validate_to_database($request->category_id, 'Wybierz', null);
         $subcategory_id = $this->validate_to_database($request->subcategory_id, 'Wybierz', null);
         $sale = $this->validate_to_database($request->sale_price, null, 0);
+
+        $count_photo = intval($request->count_photo);
+        $array_added_photo = [];
+        for ($x = 1; $x <= $count_photo; $x++) {
+            $bufor = 'photo_' . $x;
+            if ((!in_array($request->$bufor, $array_added_photo))) {
+                $photo_bufor = request()->file($bufor);
+                if ($photo_bufor != null){
+                    $photo_name_bufor = $photo_bufor->getClientOriginalName();
+                    $photo_bufor->move(public_path('/photos'), $photo_name_bufor);
+                    array_push($array_added_photo, $photo_name_bufor);
+                }
+            }
+        }
 
         $product = new Product();
         $product->name = $request->name;
@@ -79,7 +94,7 @@ class ProductsAdminController extends Controller
         $product->subcategory_id = $subcategory_id;
         $product->normal_price = $request->normal_price;
         $product->SKU = $request->SKU;
-        $product->photos = '';
+        $product->photos = serialize($array_added_photo);
         $product->views = 0;
         $product->sells = 0;
         $product->order = $request->order;
@@ -115,7 +130,7 @@ class ProductsAdminController extends Controller
             'product' => Product::where('id', '=', $id)->get()->first(),
             'subcategories' => Subcategory::get(),
             'sizes' => Size::get(),
-            'brokers'=>Broker::where('product_id','=',$id)->get()
+            'brokers'=>Broker::where('product_id','=',$id)->get(),
         ]);
     }
     //EDIT FORM PRODUCTS
@@ -133,7 +148,8 @@ class ProductsAdminController extends Controller
             'subcategory_id' => 'nullable',
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
             'order' => 'nullable|integer',
-            'count' => 'nullable|integer'
+            'count' => 'nullable|integer',
+            'count_photo' => 'nullable|integer',
         ]);
 
         $photo = request()->file('photo');
@@ -147,6 +163,27 @@ class ProductsAdminController extends Controller
                 'photo' => $photo_name,
             ]);
         }
+
+        $count_photo = intval($request->count_photo);
+        $array_added_photo = [];
+        for ($x = 1; $x <= $count_photo; $x++) {
+            $bufor = 'photo_' . $x;
+            if ((!in_array($request->$bufor, $array_added_photo))) {
+                $photo_bufor = request()->file($bufor);
+                if ($photo_bufor != null){
+                    $photos = unserialize($product->photos);
+                    foreach($photos as $pho){
+                        unlink(public_path() . '\photos\\' . $pho);
+                    }
+                    $photo_name_bufor = $photo_bufor->getClientOriginalName();
+                    $photo_bufor->move(public_path('/photos'), $photo_name_bufor);
+                    array_push($array_added_photo, $photo_name_bufor);
+                }
+            }
+        }
+        Product::where('id', '=', $id)->update([
+            'photos' => serialize($array_added_photo),
+        ]);
 
         $category_id = $this->validate_to_database($request->category_id, 'Wybierz', null);
         $subcategory_id = $this->validate_to_database($request->subcategory_id, 'Wybierz', null);

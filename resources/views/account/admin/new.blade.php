@@ -123,13 +123,31 @@
             <span class="text-danger">@error('order') {{$message}} @enderror</span>
         </div>
 
+        @if ($edit == 0)
         <div class="form-floating my-3 w-100">
             <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg">
             <label for="photo">Zdjęcie główne</label>
             <span class="text-danger">@error('photo') {{$message}} @enderror</span>
         </div>
+        <script>
+            var count_photo = 2;
+        </script>
+        @else
+        <div class="form-floating my-3 w-100">
+            <input type="file" class="form-control" id="photo" name="photo" accept="image/png, image/jpeg, image/jpg">
+            <label for="photo">Zdjęcie główne</label>
+            <span class="text-danger">@error('photo') {{$message}} @enderror</span>
+        </div>
+        <script>
+            var count_photo = 2;
+        </script>
+        @endif
 
-        <button class="btn btn-lg btn-custom-1 shadow my-3" type="button"><i class="fa-solid fa-plus"></i> Dodaj nowe zdjęcie</button>
+        <div class="photos">
+
+        </div>
+
+        <button class="btn btn-lg btn-custom-1 shadow my-3 add-photo" type="button"><i class="fa-solid fa-plus"></i> Dodaj nowe zdjęcie</button>
 
         @if ($edit == 0)
         <div class="input-group my-3 w-100">
@@ -212,9 +230,19 @@
             </div>`)
             count++;
         })
+        $('.add-photo').click(function() {
+            $('.photos').append(`
+            <div class="form-floating my-3 w-100">
+                <input type="file" class="form-control" id="photo" name="photo_${count_photo}" accept="image/png, image/jpeg, image/jpg">
+                <label for="photo_${count_photo}">Zdjęcie ${count_photo}</label>
+                <span class="text-danger">@error('photo_${count_photo}') {{$message}} @enderror</span>
+            </div>`)
+            count_photo++;
+        })
         $('#form').on('submit', function() {
             $('#form').append(`
-            <input type="hidden" name="count" value="${count-1}">`)
+            <input type="hidden" name="count" value="${count-1}">
+            <input type="hidden" name="count_photo" value="${count_photo-1}">`)
             return true;
         });
     </script>

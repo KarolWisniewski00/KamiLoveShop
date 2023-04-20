@@ -37,10 +37,9 @@
                     </div>
                 </div>
                 <div class="row d-flex my-4">
-                    <div class="img rounded shadow col mx-2" style='background-image: url({{asset("photos/".$product->photo)}}); background-color: #cccccc; aspect-ratio: 1/1; max-width:100%;background-position: center; background-repeat: no-repeat; background-size: cover;'></div>
-                    <div class="img rounded shadow col mx-2" style='background-image: url({{asset("photos/".$product->photo)}}); background-color: #cccccc; aspect-ratio: 1/1; max-width:100%;background-position: center; background-repeat: no-repeat; background-size: cover;'></div>
-                    <div class="img rounded shadow col mx-2" style='background-image: url({{asset("photos/".$product->photo)}}); background-color: #cccccc; aspect-ratio: 1/1; max-width:100%;background-position: center; background-repeat: no-repeat; background-size: cover;'></div>
-                    <div class="img rounded shadow col mx-2" style='background-image: url({{asset("photos/".$product->photo)}}); background-color: #cccccc; aspect-ratio: 1/1; max-width:100%;background-position: center; background-repeat: no-repeat; background-size: cover;'></div>
+                    @foreach (unserialize($product->photos) as $pho)
+                    <div class="img rounded shadow col mx-2" style='background-image: url({{asset("photos/".$pho)}}); background-color: #cccccc; aspect-ratio: 1/1; max-width:100%;background-position: center; background-repeat: no-repeat; background-size: cover;'></div>
+                    @endforeach
                 </div>
             </div>
             <div class="col-12 col-md-6">
