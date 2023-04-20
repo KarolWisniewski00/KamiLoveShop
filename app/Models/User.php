@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class User extends Model
 {
     use HasFactory;
+    public function busket()
+    {
+        return $this->hasOne(Busket::class);
+    }
 }

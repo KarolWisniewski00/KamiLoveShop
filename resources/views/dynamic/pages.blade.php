@@ -90,6 +90,7 @@
                         </div>
                     </div>
                     @if (count($brokers)!=0)
+                    @if ($size_show == true)
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingThree">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="true" aria-controls="panelsStayOpen-collapseThree">
@@ -117,6 +118,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     @endif
                     <div class="accordion-item py-4">
                         <div class="d-flex justify-content-center align-items-center">

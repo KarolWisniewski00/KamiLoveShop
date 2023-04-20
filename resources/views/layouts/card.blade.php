@@ -26,9 +26,24 @@
     </div>
     <div class="d-flex flex-row justify-content-between align-items-center">
         @if (in_array($product->id,$sizes_id))
-        <a href="{{ url('product/'.$product->id)}}" class="btn btn-custom-2 w-100 h-100">Wybierz opcję</a>
+        <a href="{{ url('product/'.$product->id)}}" class="btn btn-custom-2 w-100 h-100">
+            <div class="d-flex justify-content-start align-items-center">
+                <div><i class="fa-solid fa-hand-point-up m-1"></i></div>
+                <div>Wybierz opcję</div>
+            </div>
+        </a>
         @else
-        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
+        <form method="POST" action="{{route('busket_new_form')}}" class="w-75 me-2">
+            @csrf
+            <input type="hidden" name="product_id" value="{{$product->id}}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="btn btn-custom-1 w-100 h-100">
+                <div class="d-flex justify-content-start align-items-center">
+                    <div><i class="fa-solid fa-cart-shopping m-1"></i></div>
+                    <div>Dodaj do koszyka</div>
+                </div>
+            </button>
+        </form>
         <a href="{{ url('product/'.$product->id)}}" class="btn btn-custom-2 w-25 h-100 text-white d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
         @endif
     </div>

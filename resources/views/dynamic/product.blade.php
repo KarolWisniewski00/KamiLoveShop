@@ -45,7 +45,7 @@
             </div>
             <div class="col-12 col-md-6">
                 <div class="d-flex flex-column justify-content-start align-items-start">
-                    <h3>{{$product->name}}</h3>
+                    <h3 style="font-size: 3em;">{{$product->name}}</h3>
                     <p class="text-muted">{{$product->long_description}}</p>
                     <div class="d-flex flex-column justify-content-start align-items-start my-4">
                         @if ($product->sale_price != 0)
@@ -58,14 +58,16 @@
                         <div class="text-custom-1 fs-1">{{$product->normal_price}} PLN</div>
                         @endif
                     </div>
-                    <p class="fw-bold">Wybierz rozmiar</p>
-                    <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
+                    @if (in_array($product->id,$sizes_id))
+                    <p class="fw-bold mt-4">Wybierz rozmiar</p>
+                    @endif
+                    <div class="d-flex flex-row justify-content-start align-items-center flex-wrap mb-2">
                         @if (in_array($product->id,$sizes_id))
                         @foreach($brokers_all as $broker)
                         @if($broker->product_id == $product->id)
                         @foreach($sizes as $size)
                         @if ($size->id == $broker->size_id)
-                        <a href="" class="btn btn-sm btn-custom-1 m-2">{{$size->value}}</a>
+                        <button type="button" class="btn btn-lg btn-custom-1 rounded-pill m-1 size">{{$size->value}}</button>
                         @endif
                         @endforeach
                         @endif
@@ -73,12 +75,23 @@
                         @else
                         @endif
                     </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center">
+                    <div class="d-flex flex-row justify-content-between align-items-center mb-4 mt-2">
                         @if (in_array($product->id,$sizes_id))
-                        <a href="{{ url('product/'.$product->id)}}" class="btn btn-lg btn-custom-2 w-100 h-100"><i class="fa fa-search"></i> Wybierz opcję</a>
+                        <div id="busket">
+
+                        </div>
                         @else
-                        <button class="btn btn-custom-1 w-75 h-100 me-2">Dodaj do koszyka</button>
-                        <a href="{{ url('product/'.$product->id)}}" class="btn btn-lg btn-custom-2 w-25 h-100 text-white d-flex justify-content-center align-items-center"><i class="fa fa-search"></i></a>
+                        <form method="POST" action="{{route('busket_new_form')}}">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                            <input type="hidden" name="quantity" value="1">
+                            <button type="submit" class="btn btn-lg btn-custom-1 w-100 h-100">
+                                <div class="d-flex justify-content-start align-items-center">
+                                    <div><i class="fa-solid fa-cart-shopping m-1"></i></div>
+                                    <div>Dodaj do koszyka</div>
+                                </div>
+                            </button>
+                        </form>
                         @endif
                     </div>
                     <p class="text-muted mt-2">SKU: {{$product->SKU}}</p>
@@ -112,5 +125,41 @@
             this.requestFullscreen()
         })
     });
+
+    var formAdded = false;
+    var form = '';
+
+    $('.size').click(function() {
+        var value = $(this).text();
+        if (!formAdded) {
+            form = `
+                <form method="POST" action="{{route('busket_new_form')}}">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                    <input type="hidden" name="quantity" value="1">
+                    <input type="hidden" id="size_value" name="size_value" value="${value}">
+                    <button type="submit" class="btn btn-lg btn-custom-1 w-100 h-100">
+                        <div class="d-flex justify-content-start align-items-center">
+                            <div><i class="fa-solid fa-cart-shopping m-1"></i></div>
+                            <div>Dodaj do koszyka</div>
+                        </div>
+                    </button>
+                </form>`;
+                    $('#busket').append(`
+                <div id="form-container">
+                    <p class="text-success" id="value-element">Wybrano: ${value}</p>
+                    ${form}
+                </div>
+            `);
+            valueElement = $('#value-element');
+            formAdded = true;
+        } else if (value !== valueElement.text().replace('Wybrano: ', '')) {
+            valueElement.text(`Wybrano: ${value}`);
+            $('#form-container form').replaceWith(form);
+            $('#size_value').val(value);
+        }
+
+        count++;
+    })
 </script>
 @endsection

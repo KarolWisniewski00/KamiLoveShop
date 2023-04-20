@@ -9,8 +9,174 @@
                     <h1>Koszyk</h1>
                 </div>
                 @include('layouts.account')
-                <div class="col-12">
-                    <div class="text-center fw-bold mt-4 pt-4" style="font-size: 1.4em;">Twój koszyk jest pusty!</div>
+                <div class="col-12 mb-4" style="overflow:auto;">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">#</div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">Zdjęcie</div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">Nazwa</div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">Cena</div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">Ilość</div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">Łącznie</div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">Usuń</div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (count($buskets)==0)
+                            <tr>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th>
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">Twój koszyk jest pusty!</div>
+                                    </div>
+                                </th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            @else
+                            @foreach($buskets as $busket)
+                            <tr>
+                                <th>
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">1</div>
+                                    </div>
+                                </th>
+                                <td>
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        @foreach($products as $product)
+                                        @if ($product->id == $busket->product_id)
+                                        <div style="max-width:50px"><img alt="product_photo" src="{{ asset('photos/'.$product->photo)}}" class="img-fluid"></div>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        @foreach($products as $product)
+                                        @if ($product->id == $busket->product_id)
+                                        <div class="fw-bold">{{$product->name}} {{$busket->size_value}}</div>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-row justify-content-center align-items-center">
+                                        @foreach($products as $product)
+                                        @if ($product->id == $busket->product_id)
+                                        @if ($product->sale_price != 0)
+                                        <div class="text-muted me-2" style="text-decoration: line-through;padding-top:1px;">{{$product->normal_price}} PLN</div>
+                                        <div class="fw-bold"> {{$product->sale_price}} PLN</div>
+                                        @else
+                                        <div class="fw-bold"> {{$product->normal_price}} PLN</div>
+                                        @endif
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-row justify-content-center align-items-center">
+                                        <form method="POST" action="{{route('busket_minus_form')}}">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                            <input type="hidden" name="quantity" value="-1">
+                                            <input type="hidden" name="size_value" value="{{$busket->size_value}}">
+                                            <button type="submit" class="btn btn-sm btn-custom-1 me-2">
+                                            <i class="fa-solid fa-minus"></i>
+                                            </button>
+                                        </form>
+                                        <div class="fw-bold">{{$busket->quantity}}</div>
+                                        <form method="POST" action="{{route('busket_new_form')}}">
+                                            @csrf
+                                            <input type="hidden" name="product_id" value="{{$product->id}}">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input type="hidden" name="size_value" value="{{$busket->size_value}}">
+                                            <button type="submit" class="btn btn-sm btn-custom-1 ms-2">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        @foreach($products as $product)
+                                        @if ($product->id == $busket->product_id)
+                                        @if ($product->sale_price != 0)
+                                        <div class="fw-bold"> {{$product->sale_price * $busket->quantity}} PLN</div>
+                                        @else
+                                        <div class="fw-bold"> {{$product->normal_price * $busket->quantity}} PLN</div>
+                                        @endif
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div><a href="{{url ('/busket/delete/'.$busket->id)}}" class="btn btn-custom-2 rounded text-white fs-1" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');"><i class="fa-solid fa-trash"></i></a></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                    <div>
+                        <h1>Podsumowanie koszyka</h1>
+                        <ul class="list-group shadow">
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Wysyłka PDP</div>
+                                </div>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-start">
+                                <div class="ms-2 me-auto">
+                                    <div class="fw-bold">Łącznie</div>
+                                    @if (count($buskets)==0)
+                                    0 PLN
+                                    @else
+                                    {{$sum}} PLN
+                                    @endif
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="d-flex justify-content-start align-items-center mt-4">
+                            @if (count($buskets)!=0)
+                            <a href="" class="me-2 btn btn-custom-1"><i class="fa-solid fa-tag"></i> Zapłać</a>
+                            @endif
+                            <a href="{{route('index')}}" class="btn btn-custom-2"><i class="fa-solid fa-cart-shopping"></i> Kontynuuj zakupy</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

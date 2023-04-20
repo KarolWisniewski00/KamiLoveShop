@@ -24,8 +24,7 @@
                 <li class="nav-item"><a href="{{ url('category/'.$category->url)}}" class="text-dark nav-link">{{$category->plural}}</a></li>
                 @endforeach
                 <li class="nav-item"><a href="{{ url('account')}}" class="btn btn-custom-1 mx-2"><i class="fa-solid fa-user"></i></a></li>
-                <li class="nav-item"><a href="#" class="btn btn-custom-2 mx-2"><i class="fa-solid fa-magnifying-glass"></i></a>
-                </li>
+                <li class="nav-item"><a href="{{ url('busket')}}" class="btn btn-custom-2 mx-2"><i class="fa-solid fa-cart-shopping"></i></a></li>
             </ul>
         </header>
     </section>

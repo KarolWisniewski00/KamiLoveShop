@@ -20,6 +20,7 @@ class PagesController extends Controller
         $last_max = null;
         $category_string = 'category_id';
         $category = Category::where('url', '=', $url)->get();
+        $size_show = false;
 
         try {
             $check = $category[0]->id;
@@ -63,7 +64,7 @@ class PagesController extends Controller
             $prod = Product::where('subcategory_id', '=', $cat->id)->get();
             $cat->count = count($prod);
         }
-
+        $brokers = Broker::get();
         $products_all = Product::where($category_string, '=', $category[0]->id)->get();
         foreach ($products_all as $product) {
             if ($product->sale_price != 0) {
@@ -75,45 +76,49 @@ class PagesController extends Controller
                     $max = $product->normal_price;
                 }
             }
+            foreach ($brokers as $broker) {
+                if ($broker->product_id == $product->id) {
+                    $size_show = true;
+                }
+            }
         }
 
-        $brokers = Broker::get();
         $brokers_good = $this->prepare_brokers($brokers);
         $sizes_id = $this->prepare_sizes_id($brokers);
 
         $count = intval(count($request->all()));
-        $sizes_filter=[];
-        $sizes_filter_id=[];
-        $products_id=[];
+        $sizes_filter = [];
+        $sizes_filter_id = [];
+        $products_id = [];
         $sizes = Size::get();
 
-        for ($x=0;$x<=$count;$x++){
-            $bufor = 'broker_'.$x;
-            if (($request->$bufor != null) && (!in_array($request->$bufor,$sizes_filter))){
-                array_push($sizes_filter,$request->$bufor);
+        for ($x = 0; $x <= $count; $x++) {
+            $bufor = 'broker_' . $x;
+            if (($request->$bufor != null) && (!in_array($request->$bufor, $sizes_filter))) {
+                array_push($sizes_filter, $request->$bufor);
             }
         }
-        foreach($sizes as $size){
-            foreach($sizes_filter as $size_filter){
-                if ($size->value == $size_filter){
-                    array_push($sizes_filter_id,$size->id);
-                }   
-            }
-        }
-        foreach($brokers as $broker){
-            foreach ($sizes_filter_id as $size_filter_id){
-                if($broker->size_id == $size_filter_id){
-                    array_push($products_id,$broker->product_id);
+        foreach ($sizes as $size) {
+            foreach ($sizes_filter as $size_filter) {
+                if ($size->value == $size_filter) {
+                    array_push($sizes_filter_id, $size->id);
                 }
             }
         }
-        $products_good=[];
-        foreach ($products as $prod){
-            if (in_array($prod->id,$products_id)){
-                array_push($products_good,$prod);
+        foreach ($brokers as $broker) {
+            foreach ($sizes_filter_id as $size_filter_id) {
+                if ($broker->size_id == $size_filter_id) {
+                    array_push($products_id, $broker->product_id);
+                }
             }
         }
-        if (count($request->all())>2){
+        $products_good = [];
+        foreach ($products as $prod) {
+            if (in_array($prod->id, $products_id)) {
+                array_push($products_good, $prod);
+            }
+        }
+        if (count($request->all()) > 2) {
             $products = $products_good;
         }
         return view('dynamic.pages', [
@@ -128,8 +133,9 @@ class PagesController extends Controller
             'brokers' => $brokers_good,
             'brokers_all' => $brokers,
             'sizes_id' => $sizes_id,
-            'sizes'=>$sizes,
-            'sizes_filter'=>$sizes_filter
+            'sizes' => $sizes,
+            'sizes_filter' => $sizes_filter,
+            'size_show' => $size_show
         ]);
     }
 }

@@ -46,9 +46,14 @@ Route::middleware(['isLoggedIn'])->group(function () {
     Route::get('/account', [AccountController::class, 'account']);
     Route::get('/edit', [AccountController::class, 'edit']);
     Route::post('/edit', [AccountController::class, 'edit_form'])->name('edit_form');
-    Route::get('/busket', [BusketController::class, 'busket']);
     Route::get('/history', [AccountController::class, 'history']);
-    Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::prefix('busket')->group(function () {
+        Route::get('/', [BusketController::class, 'busket']);
+        Route::post('/new', [BusketController::class, 'busket_new_form'])->name('busket_new_form');
+        Route::post('/minus', [BusketController::class, 'busket_minus_form'])->name('busket_minus_form');
+        Route::get('/delete/{id}', [BusketController::class, 'busket_delete']);
+    });
 });
 
 Route::middleware(['AdminCheck'])->group(function () {
