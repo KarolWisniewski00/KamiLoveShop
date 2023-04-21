@@ -1,6 +1,10 @@
 @extends('layouts.main')
+@section('title', 'Polityka prywatności')
+@section('description', 'Szanujemy prywatność naszych klientów i dbamy o ochronę ich danych osobowych. W naszej Polityce Prywatności opisujemy, jakie dane zbieramy od naszych klientów oraz w jaki sposób są one wykorzystywane. Dokładamy wszelkich starań, aby nasze działania były zgodne z obowiązującymi przepisami prawa oraz normami etycznymi. Zachęcamy do zapoznania się z naszą Polityką Prywatności i w razie jakichkolwiek pytań lub wątpliwości, nasi konsultanci są do Państwa dyspozycji.')
+@section('extra-meta')
+@endsection
 @section('content')
-<!--ABOUT-->
+<!--POLICY-->
 <section>
     <div class="container">
         <div class="row">
@@ -25,5 +29,5 @@
         </div>
     </div>
 </section>
-<!--END ABOUT-->
+<!--END POLICY-->
 @endsection

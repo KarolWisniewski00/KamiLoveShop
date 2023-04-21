@@ -1,4 +1,8 @@
 @extends('layouts.main')
+@section('title', 'Strona główna')
+@section('description', 'KamiLove Fashion to sklep dla kobiet, które cenią sobie styl i jakość. Oferujemy bogaty wybór torebek, plecaków, obuwia, odzieży, sukienek oraz biżuterii, które zaspokoją gusta najbardziej wymagających klientek. Nasze produkty charakteryzuje wysoka jakość materiałów oraz staranność wykonania, dzięki czemu będą Ci służyć przez wiele sezonów. Wybierz coś dla siebie i poczuj się wyjątkowo dzięki modnym dodatkom z KamiLove Fashion!')
+@section('extra-meta')
+@endsection
 @section('content')
 <!--HERO-->
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">

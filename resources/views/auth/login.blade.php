@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('title', 'Logowanie')
+@section('description', '')
+@section('extra-meta')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <!--LOGIN-->
 <section>
@@ -8,7 +13,9 @@
                 <form class="form text-center my-4" action="{{route('login_form')}}" method="POST">
                     <!--TOKEN-->
                     @csrf
-                    <h1 class="h3 mb-3 fw-normal">Logowanie</h1>
+                    <div class="d-flex flex-column justify-content-center align-items-center text-center my-4">
+                        <h1>Logowanie</h1>
+                    </div>
 
                     <div class="form-floating my-3">
                         <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email" required>
@@ -22,7 +29,7 @@
                         <span class="text-danger">@error('password') {{$message}} @enderror</span>
                     </div>
 
-                    <div><a href="">Zapomaniałeś hasła?</a></div>
+                    <!--<div><a href="">Zapomaniałeś hasła?</a></div>-->
                     <div><a href="{{ url('register')}}">Nie masz konta? Rejestracja</a></div>
 
                     <button class="btn btn-custom-1 my-4" type="submit">Zaloguj</button>

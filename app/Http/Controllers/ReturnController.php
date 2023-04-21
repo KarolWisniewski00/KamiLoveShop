@@ -7,9 +7,10 @@ use Illuminate\Http\Request;
 
 class ReturnController extends Controller
 {
-    public function return(){
-        return view('static.return',[
-            'return'=>Ret::get()
+    public function return()
+    {
+        return view('static.return', [
+            'return' => Ret::get()
         ]);
     }
 }

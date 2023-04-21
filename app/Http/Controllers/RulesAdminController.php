@@ -31,8 +31,8 @@ class RulesAdminController extends Controller
     {
         $request->validate([
             'type' => ['required', Rule_::notIn(['Wybierz'])],
-            'content' => 'required',
-            'order' => 'nullable|integer',
+            'content' => 'required|max:255',
+            'order' => 'nullable|integer|max:255',
         ]);
 
         $rule = new Rule();
@@ -62,8 +62,8 @@ class RulesAdminController extends Controller
     {
         $request->validate([
             'type' => ['required', Rule_::notIn(['Wybierz'])],
-            'content' => 'required',
-            'order' => 'nullable|integer',
+            'content' => 'required|max:255',
+            'order' => 'nullable|integer|max:255',
         ]);
 
         Rule::where('id', '=', $id)->update([

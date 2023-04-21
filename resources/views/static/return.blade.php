@@ -1,6 +1,10 @@
 @extends('layouts.main')
+@section('title', 'Zwroty i reklamacje')
+@section('description', 'Chcemy, aby zakupy w naszym sklepie internetowym były dla naszych klientów zawsze udane i satysfakcjonujące. W razie jakichkolwiek problemów z zakupionymi produktami, nasi klienci mogą skorzystać z naszej procedury zwrotów lub reklamacji. W naszej sekcji "Zwroty i reklamacje" opisujemy, jakie warunki należy spełnić, aby skorzystać z tych usług oraz jakie kroki należy podjąć. Zachęcamy do zapoznania się z tymi informacjami i w razie jakichkolwiek pytań lub wątpliwości, nasi konsultanci są do Państwa dyspozycji.')
+@section('extra-meta')
+@endsection
 @section('content')
-<!--ABOUT-->
+<!--RETURN-->
 <section>
     <div class="container">
         <div class="row">
@@ -25,5 +29,5 @@
         </div>
     </div>
 </section>
-<!--END ABOUT-->
+<!--END RETURN-->
 @endsection

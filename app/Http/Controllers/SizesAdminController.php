@@ -13,7 +13,7 @@ class SizesAdminController extends Controller
         return view('account.admin.sizes', [
             'new' => 0,
             'id' => null,
-            'sizes'=>Size::get()
+            'sizes' => Size::get()
         ]);
     }
     //NEW SIZES
@@ -22,7 +22,7 @@ class SizesAdminController extends Controller
         return view('account.admin.sizes', [
             'new' => 1,
             'id' => null,
-            'sizes'=>Size::get()
+            'sizes' => Size::get()
         ]);
     }
     //NEW FORM SIZES
@@ -40,7 +40,7 @@ class SizesAdminController extends Controller
         return view('account.admin.sizes', [
             'new' => 0,
             'id' => null,
-            'sizes'=>Size::get()
+            'sizes' => Size::get()
         ]);
     }
     //EDIT SIZES
@@ -49,7 +49,7 @@ class SizesAdminController extends Controller
         return view('account.admin.sizes', [
             'new' => 0,
             'id' => $id,
-            'sizes'=>Size::get()
+            'sizes' => Size::get()
         ]);
     }
     //EDIT FORM SIZES
@@ -66,7 +66,7 @@ class SizesAdminController extends Controller
         return view('account.admin.sizes', [
             'new' => 0,
             'id' => null,
-            'sizes'=>Size::get()
+            'sizes' => Size::get()
         ]);
     }
     //DELETE SIZES
@@ -77,7 +77,7 @@ class SizesAdminController extends Controller
         return view('account.admin.sizes', [
             'new' => 0,
             'id' => null,
-            'sizes'=>Size::get()
+            'sizes' => Size::get()
         ]);
     }
 }

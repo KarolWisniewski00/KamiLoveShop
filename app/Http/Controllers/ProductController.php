@@ -15,7 +15,7 @@ class ProductController extends Controller
         $product = Product::where('id', '=', $id)->get()->first();
         $views = $product->views;
         Product::where('id', '=', $id)->update([
-            'views'=> $views+1
+            'views' => $views + 1
         ]);
         $products = Product::inRandomOrder()->where('category_id', '=', $product->category_id)->whereNotIn('id', [$id])->take(4)->get();
 
@@ -30,7 +30,7 @@ class ProductController extends Controller
             'brokers' => $brokers_good,
             'brokers_all' => $brokers,
             'sizes_id' => $sizes_id,
-            'sizes'=>Size::get()
+            'sizes' => Size::get()
         ]);
     }
 }

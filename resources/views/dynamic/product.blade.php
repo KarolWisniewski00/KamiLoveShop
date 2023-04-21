@@ -1,4 +1,8 @@
 @extends('layouts.main')
+@section('title', $product->name)
+@section('description', $product->long_descriptions)
+@section('extra-meta')
+@endsection
 @section('content')
 <!--PRODUCT-->
 <section>
@@ -144,7 +148,7 @@
                         </div>
                     </button>
                 </form>`;
-                    $('#busket').append(`
+            $('#busket').append(`
                 <div id="form-container">
                     <p class="text-success" id="value-element">Wybrano: ${value}</p>
                     ${form}

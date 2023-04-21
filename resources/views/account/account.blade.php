@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('title', 'Konto')
+@section('description', '')
+@section('extra-meta')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <!--ACCOUNT-->
 <section>
@@ -40,7 +45,7 @@
                     </ul>
                     <div class="d-flex justify-content-start align-items-center mt-4">
                         <a href="{{url('edit')}}" class="me-2 btn btn-custom-1"><i class="fa-solid fa-pen-to-square"></i> Edytuj konto</a>
-                        <a href="" class="btn btn-custom-2" onclick="return confirm('Czy na pewno chcesz usunąć to konto?');"><i class="fa-solid fa-trash"></i> Usuń konto</a>
+                        <a href="{{route('delete')}}" class="btn btn-custom-2" onclick="return confirm('Czy na pewno chcesz usunąć to konto?');"><i class="fa-solid fa-trash"></i> Usuń konto</a>
                     </div>
                     <!--END VIEW-->
                     @else

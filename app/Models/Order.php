@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Order extends Model
 {
     use HasFactory;
-    public function busket()
+    public function user()
     {
-        return $this->hasOne(Busket::class);
+        return $this->belongsTo(User::class);
     }
-    public function order()
+    public function extra()
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Extra::class);
     }
 }

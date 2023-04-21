@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('title', '{{$plural}}')
+@section('description', '')
+@section('extra-meta')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <!--PAGES-->
 <section>

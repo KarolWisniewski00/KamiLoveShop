@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\RulesController;
 use App\Http\Controllers\PolicyController;
@@ -20,6 +19,7 @@ use App\Http\Controllers\RulesAdminController;
 use App\Http\Controllers\PolicyAdminController;
 use App\Http\Controllers\ReturnAdminController;
 use App\Http\Controllers\SizesAdminController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +46,14 @@ Route::middleware(['isLoggedIn'])->group(function () {
     Route::get('/account', [AccountController::class, 'account']);
     Route::get('/edit', [AccountController::class, 'edit']);
     Route::post('/edit', [AccountController::class, 'edit_form'])->name('edit_form');
-    Route::get('/history', [AccountController::class, 'history']);
+    Route::get('/history', [OrderController::class, 'history']);
+    Route::get('/order', [OrderController::class, 'order'])->name('order');
+    Route::get('/order/{id}', [OrderController::class, 'order_id']);
+    Route::post('/order', [OrderController::class, 'order_new_form'])->name('order_new_form');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::get('/delete', [AccountController::class, 'delete'])->name('delete');
     Route::prefix('busket')->group(function () {
-        Route::get('/', [BusketController::class, 'busket']);
+        Route::get('/', [BusketController::class, 'busket'])->name('busket');
         Route::post('/new', [BusketController::class, 'busket_new_form'])->name('busket_new_form');
         Route::post('/minus', [BusketController::class, 'busket_minus_form'])->name('busket_minus_form');
         Route::get('/delete/{id}', [BusketController::class, 'busket_delete']);
@@ -57,7 +61,7 @@ Route::middleware(['isLoggedIn'])->group(function () {
 });
 
 Route::middleware(['AdminCheck'])->group(function () {
-
+    Route::get('/status/{id}/{status}', [OrderController::class, 'status']);
     Route::prefix('admin')->group(function () {
         Route::get('/', [StartAdminController::class, 'admin'])->name('admin');
 

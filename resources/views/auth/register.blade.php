@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('title', 'Rejestracja')
+@section('description', '')
+@section('extra-meta')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <!--REGISTER-->
 <section>
@@ -8,7 +13,9 @@
                 <form class="form text-center my-4" action="{{route('register_form')}}" method="POST">
                     <!--TOKEN-->
                     @csrf
-                    <h1 class="h3 mb-2 fw-normal">Rejestracja</h1>
+                    <div class="d-flex flex-column justify-content-center align-items-center text-center my-4">
+                        <h1>Rejestracja</h1>
+                    </div>
 
                     <div class="form-floating my-3">
                         <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email" required>

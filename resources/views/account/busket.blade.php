@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('title', 'Koszyk')
+@section('description', '')
+@section('extra-meta')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <!--BUSKET-->
 <section>
@@ -30,6 +35,11 @@
                                 </th>
                                 <th scope="col">
                                     <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="fw-bold">SKU</div>
+                                    </div>
+                                </th>
+                                <th scope="col">
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
                                         <div class="fw-bold">Cena</div>
                                     </div>
                                 </th>
@@ -56,6 +66,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                                 <th>
                                     <div class="d-flex flex-column justify-content-center align-items-center">
                                         <div class="fw-bold">Twój koszyk jest pusty!</div>
@@ -66,11 +77,11 @@
                                 <th></th>
                             </tr>
                             @else
-                            @foreach($buskets as $busket)
+                            @foreach($buskets as $k => $busket)
                             <tr>
                                 <th>
                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                        <div class="fw-bold">1</div>
+                                        <div class="fw-bold">{{$k+1}}</div>
                                     </div>
                                 </th>
                                 <td>
@@ -87,6 +98,15 @@
                                         @foreach($products as $p)
                                         @if ($p->id == $busket->product_id)
                                         <div class="fw-bold">{{$p->name}} {{$busket->size_value}}</div>
+                                        @endif
+                                        @endforeach
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        @foreach($products as $p)
+                                        @if ($p->id == $busket->product_id)
+                                        <div class="fw-bold">{{$p->SKU}}</div>
                                         @endif
                                         @endforeach
                                     </div>
@@ -160,23 +180,23 @@
                         <ul class="list-group shadow">
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
-                                    <div class="fw-bold">Wysyłka PDP</div>
+                                    <div class="fw-bold">Wysyłka PDP + 16 PLN</div>
                                 </div>
                             </li>
                             <li class="list-group-item d-flex justify-content-between align-items-start">
                                 <div class="ms-2 me-auto">
                                     <div class="fw-bold">Łącznie</div>
                                     @if (count($buskets)==0)
-                                    0 PLN
+                                    16 PLN
                                     @else
-                                    {{$sum}} PLN
+                                    {{$sum+16}} PLN
                                     @endif
                                 </div>
                             </li>
                         </ul>
                         <div class="d-flex justify-content-start align-items-center mt-4">
                             @if (count($buskets)!=0)
-                            <a href="" class="me-2 btn btn-custom-1"><i class="fa-solid fa-tag"></i> Zapłać</a>
+                            <a href="{{route('order')}}" class="me-2 btn btn-custom-1"><i class="fa-solid fa-tag"></i> Przejdź do płatności</a>
                             @endif
                             <a href="{{route('index')}}" class="btn btn-custom-2"><i class="fa-solid fa-cart-shopping"></i> Kontynuuj zakupy</a>
                         </div>

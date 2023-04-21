@@ -1,6 +1,10 @@
 @extends('layouts.main')
+@section('title', 'Regulamin')
+@section('description', 'Nasz regulamin to ważny dokument, który określa zasady funkcjonowania naszego sklepu internetowego. Zawiera on najważniejsze informacje dotyczące zamówień, płatności, dostaw, reklamacji oraz zwrotów. Dokument ten reguluje prawa i obowiązki zarówno sklepu, jak i klientów. Zachęcamy do zapoznania się z naszym regulaminem przed dokonaniem zakupów w naszym sklepie internetowym. W razie jakichkolwiek pytań lub wątpliwości, nasi konsultanci są do Państwa dyspozycji.')
+@section('extra-meta')
+@endsection
 @section('content')
-<!--ABOUT-->
+<!--RULES-->
 <section>
     <div class="container">
         <div class="row">
@@ -25,5 +29,5 @@
         </div>
     </div>
 </section>
-<!--END ABOUT-->
+<!--END RULES-->
 @endsection

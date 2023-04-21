@@ -18,11 +18,6 @@ class AccountController extends Controller
             'edit' => 0
         ]);
     }
-    //INDEX HISTORY
-    public function history()
-    {
-        return view('account.history');
-    }
     //INDEX EDIT
     public function edit()
     {
@@ -56,5 +51,16 @@ class AccountController extends Controller
         }
 
         return redirect('account')->with('success', 'Edycja konta zakońcona powodzeniem!');
+    }
+    //DELETE ACCOUNT
+    public function delete()
+    {
+        if (Session::has('login_id')) {
+            $id = Session::get('login_id');
+            Session::pull('login_id');
+            Session::pull('admin');
+            User::where('id', '=', $id)->delete();
+            return redirect('/');
+        }
     }
 }

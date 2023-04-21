@@ -20,4 +20,8 @@ class Product extends Model
     {
         return $this->hasOne(Broker::class);
     }
+    public function extra()
+    {
+        return $this->hasOne(Extra::class);
+    }
 }

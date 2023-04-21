@@ -66,7 +66,7 @@
     <!--END DEFAULT-->
     @endif
     @endforeach
-    
+
 </div>
 <!--END CATEGORIES-->
 @endsection

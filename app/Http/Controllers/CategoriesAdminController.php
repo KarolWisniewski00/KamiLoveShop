@@ -16,9 +16,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
         ]);
     }
     //NEW CATEGORIES
@@ -27,9 +27,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 1,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
         ]);
     }
     //NEW FORM CATEGORIES
@@ -38,7 +38,7 @@ class CategoriesAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'plural' => 'required|max:255',
-            'url' => ['required','max:255', Rule::unique('subcategories'),Rule::unique('categories')],
+            'url' => ['required', 'max:255', Rule::unique('subcategories'), Rule::unique('categories')],
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
             'order' => 'nullable|integer',
         ]);
@@ -59,9 +59,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
         ]);
     }
     //EDIT CATEGORIES
@@ -70,9 +70,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => $id,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
 
         ]);
     }
@@ -82,7 +82,7 @@ class CategoriesAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'plural' => 'required|max:255',
-            'url' =>  ['required','max:255', Rule::unique('categories')->ignore($id),Rule::unique('subcategories')],
+            'url' =>  ['required', 'max:255', Rule::unique('categories')->ignore($id), Rule::unique('subcategories')],
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
             'order' => 'nullable|integer',
         ]);
@@ -109,9 +109,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
         ]);
     }
     //DELETE CATEGORIES
@@ -127,9 +127,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
         ]);
     }
     //NEW SUBCATEGORIES
@@ -138,9 +138,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>1,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 1,
+            'id_sub' => null
         ]);
     }
     //NEW FORM SUBCATEGORIES
@@ -149,8 +149,8 @@ class CategoriesAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'plural' => 'required|max:255',
-            'url' => ['required','max:255', Rule::unique('subcategories'),Rule::unique('categories')],
-            'category_id'=>['required', Rule::notIn(['Wybierz'])],
+            'url' => ['required', 'max:255', Rule::unique('subcategories'), Rule::unique('categories')],
+            'category_id' => ['required', Rule::notIn(['Wybierz'])],
             'order' => 'nullable|integer',
         ]);
 
@@ -167,9 +167,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
 
         ]);
     }
@@ -179,9 +179,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>$id
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => $id
 
         ]);
     }
@@ -191,8 +191,8 @@ class CategoriesAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'plural' => 'required|max:255',
-            'url' =>  ['required','max:255', Rule::unique('subcategories')->ignore($id),Rule::unique('categories')],
-            'category_id'=>'nullable',
+            'url' =>  ['required', 'max:255', Rule::unique('subcategories')->ignore($id), Rule::unique('categories')],
+            'category_id' => 'nullable',
             'order' => 'nullable|integer',
         ]);
         Subcategory::where('id', '=', $id)->update([
@@ -201,17 +201,17 @@ class CategoriesAdminController extends Controller
             'url' => $request->url,
             'order' => $request->order,
         ]);
-        if ($request->category_id != "Wybierz"){
+        if ($request->category_id != "Wybierz") {
             Subcategory::where('id', '=', $id)->update([
-                'category_id'=>$request->category_id
+                'category_id' => $request->category_id
             ]);
         }
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
 
         ]);
     }
@@ -223,9 +223,9 @@ class CategoriesAdminController extends Controller
         return view('account.admin.categories', [
             'new' => 0,
             'id' => null,
-            'subcategories'=>Subcategory::get(),
-            'new_sub'=>0,
-            'id_sub'=>null
+            'subcategories' => Subcategory::get(),
+            'new_sub' => 0,
+            'id_sub' => null
         ]);
     }
 }

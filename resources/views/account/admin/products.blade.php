@@ -5,7 +5,7 @@
 <a href="{{route('products_new')}}" class="btn btn-lg btn-custom-1 shadow my-3"><i class="fa-solid fa-plus"></i> Dodaj nowy</a>
 <hr>
 <div class="row">
-    <div class="col-12 mb-4"style="overflow:auto;">
+    <div class="col-12 mb-4" style="overflow:auto;">
         <table class="table">
             <thead>
                 <tr>

@@ -39,7 +39,7 @@ class ProductsAdminController extends Controller
             'product' => null,
             'subcategories' => Subcategory::get(),
             'sizes' => Size::get(),
-            'brokers'=>null
+            'brokers' => null
         ]);
     }
     //NEW FORM PRODUCTS
@@ -48,19 +48,26 @@ class ProductsAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'short_description' => 'nullable|max:255',
-            'long_description' => 'nullable',
-            'normal_price' => 'required|numeric',
-            'sale_price' => 'nullable|numeric',
+            'long_description' => 'nullable|max:255',
+            'normal_price' => 'required|numeric|max:255',
+            'sale_price' => 'nullable|numeric|max:255',
             'new' => 'nullable',
-            'SKU' => ['required', Rule::unique('products')],
+            'SKU' => ['required', 'max:255', Rule::unique('products')],
             'category_id' => 'nullable',
             'subcategory_id' => 'nullable',
             'photo' => 'required|image|mimes:jpg,png,jpeg|max:12288',
-            'order' => 'nullable|integer',
+            'order' => 'nullable|integer|max:255',
             'count' => 'nullable|integer',
             'count_photo' => 'nullable|integer',
         ]);
-
+        if ($request->sale_price == 0 || $request->sale_price == null){}
+        elseif ($request->normal_price<=$request->sale_price){
+            return view('account.admin.products', [
+                'products' => Product::get(),
+                'subcategories' => Subcategory::get(),
+                'sizes' => Size::get()
+            ]);
+        }
         $photo = request()->file('photo');
         $photo_name = $photo->getClientOriginalName();
         $photo->move(public_path('/photos'), $photo_name);
@@ -75,7 +82,7 @@ class ProductsAdminController extends Controller
             $bufor = 'photo_' . $x;
             if ((!in_array($request->$bufor, $array_added_photo))) {
                 $photo_bufor = request()->file($bufor);
-                if ($photo_bufor != null){
+                if ($photo_bufor != null) {
                     $photo_name_bufor = $photo_bufor->getClientOriginalName();
                     $photo_bufor->move(public_path('/photos'), $photo_name_bufor);
                     array_push($array_added_photo, $photo_name_bufor);
@@ -130,7 +137,7 @@ class ProductsAdminController extends Controller
             'product' => Product::where('id', '=', $id)->get()->first(),
             'subcategories' => Subcategory::get(),
             'sizes' => Size::get(),
-            'brokers'=>Broker::where('product_id','=',$id)->get(),
+            'brokers' => Broker::where('product_id', '=', $id)->get(),
         ]);
     }
     //EDIT FORM PRODUCTS
@@ -139,19 +146,26 @@ class ProductsAdminController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'short_description' => 'nullable|max:255',
-            'long_description' => 'nullable',
-            'normal_price' => 'required|numeric',
-            'sale_price' => 'nullable|numeric',
+            'long_description' => 'nullable|max:255',
+            'normal_price' => 'required|numeric|max:255',
+            'sale_price' => 'nullable|numeric|max:255',
             'new' => 'nullable',
-            'SKU' => ['required', Rule::unique('products')->ignore($id)],
+            'SKU' => ['required', 'max:255', Rule::unique('products')->ignore($id)],
             'category_id' => 'nullable',
             'subcategory_id' => 'nullable',
             'photo' => 'nullable|image|mimes:jpg,png,jpeg|max:12288',
-            'order' => 'nullable|integer',
+            'order' => 'nullable|integer|max:255',
             'count' => 'nullable|integer',
             'count_photo' => 'nullable|integer',
         ]);
-
+        if ($request->sale_price == 0 || $request->sale_price == null){}
+        elseif ($request->normal_price<=$request->sale_price){
+            return view('account.admin.products', [
+                'products' => Product::get(),
+                'subcategories' => Subcategory::get(),
+                'sizes' => Size::get()
+            ]);
+        }
         $photo = request()->file('photo');
 
         if ($photo != null) {
@@ -170,9 +184,9 @@ class ProductsAdminController extends Controller
             $bufor = 'photo_' . $x;
             if ((!in_array($request->$bufor, $array_added_photo))) {
                 $photo_bufor = request()->file($bufor);
-                if ($photo_bufor != null){
+                if ($photo_bufor != null) {
                     $photos = unserialize($product->photos);
-                    foreach($photos as $pho){
+                    foreach ($photos as $pho) {
                         unlink(public_path() . '\photos\\' . $pho);
                     }
                     $photo_name_bufor = $photo_bufor->getClientOriginalName();
@@ -202,7 +216,7 @@ class ProductsAdminController extends Controller
             'order' => $request->order,
         ]);
 
-        Broker::where('product_id','=',$id)->delete();
+        Broker::where('product_id', '=', $id)->delete();
 
         $count = intval($request->count);
         $array_added = [];
@@ -227,10 +241,14 @@ class ProductsAdminController extends Controller
     //DELETE PRODUCTS
     public function products_delete($id)
     {
-        $category = Product::where('id', '=', $id)->first();
+        $product = Product::where('id', '=', $id)->first();
         try {
-            unlink(public_path() . '\photos\\' . $category->photo);
+            unlink(public_path() . '\photos\\' . $product->photo);
         } catch (Exception $e) {
+        }
+        $photos = unserialize($product->photos);
+        foreach ($photos as $pho) {
+            unlink(public_path() . '\photos\\' . $pho);
         }
         Product::where('id', '=', $id)->delete();
 

@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class RulesController extends Controller
 {
-    public function rules(){
+    public function rules()
+    {
         $rules = Rule::get();
-        return view('static.rules',[
-            'rules'=>$rules
+        return view('static.rules', [
+            'rules' => $rules
         ]);
     }
 }

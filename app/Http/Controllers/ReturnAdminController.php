@@ -31,8 +31,8 @@ class ReturnAdminController extends Controller
     {
         $request->validate([
             'type' => ['required', Rule::notIn(['Wybierz'])],
-            'content' => 'required',
-            'order' => 'nullable|integer',
+            'content' => 'required|max:255',
+            'order' => 'nullable|integer|max:255',
         ]);
 
         $return = new Ret();
@@ -62,8 +62,8 @@ class ReturnAdminController extends Controller
     {
         $request->validate([
             'type' => ['required', Rule::notIn(['Wybierz'])],
-            'content' => 'required',
-            'order' => 'nullable|integer',
+            'content' => 'required|max:255',
+            'order' => 'nullable|integer|max:255',
         ]);
 
         Ret::where('id', '=', $id)->update([

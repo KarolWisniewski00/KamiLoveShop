@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rets', function (Blueprint $table){
+        Schema::create('rets', function (Blueprint $table) {
             $table->id();
             $table->boolean('type');
             $table->longText('content');

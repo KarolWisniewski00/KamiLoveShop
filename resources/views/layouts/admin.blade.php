@@ -1,4 +1,9 @@
 @extends('layouts.main')
+@section('title', 'Panel admina')
+@section('description', '')
+@section('extra-meta')
+<meta name="robots" content="noindex, nofollow">
+@endsection
 @section('content')
 <!--HISTORY-->
 <section>

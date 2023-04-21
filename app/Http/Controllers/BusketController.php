@@ -14,18 +14,7 @@ class BusketController extends Controller
     {
         $buskets = Busket::where('user_id', '=', Session::get('login_id'))->get();
         $products = Product::get();
-        $sum = 0;
-        foreach ($buskets as $busket) {
-            foreach ($products as $product) {
-                if ($product->id == $busket->product_id) {
-                    if ($product->sale_price != 0) {
-                        $sum += $product->sale_price * $busket->quantity;
-                    } else {
-                        $sum += $product->normal_price * $busket->quantity;
-                    }
-                }
-            }
-        }
+        $sum = $this->prepare_sum($buskets, $products);
         return view('account.busket', [
             'buskets' => $buskets,
             'products' => $products,
@@ -44,8 +33,8 @@ class BusketController extends Controller
         $buskets = Busket::where('user_id', '=', Session::get('login_id'))->get();
         foreach ($buskets as $busket) {
             if ($request->product_id == $busket->product_id && $request->size_value == $busket->size_value) {
-                Busket::where('user_id', '=', Session::get('login_id'))->where('product_id','=',$request->product_id)->where('size_value','=',$request->size_value)->update([
-                    'quantity' => $busket->quantity+1,
+                Busket::where('user_id', '=', Session::get('login_id'))->where('product_id', '=', $request->product_id)->where('size_value', '=', $request->size_value)->update([
+                    'quantity' => $busket->quantity + 1,
                 ]);
                 return back()->with('success', 'Dodano kolejną sztukę!');
             }
@@ -76,12 +65,12 @@ class BusketController extends Controller
         $buskets = Busket::where('user_id', '=', Session::get('login_id'))->get();
         foreach ($buskets as $busket) {
             if ($request->product_id == $busket->product_id && $request->size_value == $busket->size_value) {
-                if ($busket->quantity-1<=0){
-                    Busket::where('user_id', '=', Session::get('login_id'))->where('product_id','=',$request->product_id)->where('size_value','=',$request->size_value)->delete();
+                if ($busket->quantity - 1 <= 0) {
+                    Busket::where('user_id', '=', Session::get('login_id'))->where('product_id', '=', $request->product_id)->where('size_value', '=', $request->size_value)->delete();
                     return back()->with('success', 'Odjęto kolejną sztukę!');
                 }
-                Busket::where('user_id', '=', Session::get('login_id'))->where('product_id','=',$request->product_id)->where('size_value','=',$request->size_value)->update([
-                    'quantity' => $busket->quantity-1,
+                Busket::where('user_id', '=', Session::get('login_id'))->where('product_id', '=', $request->product_id)->where('size_value', '=', $request->size_value)->update([
+                    'quantity' => $busket->quantity - 1,
                 ]);
                 return back()->with('success', 'Odjęto kolejną sztukę!');
             }
