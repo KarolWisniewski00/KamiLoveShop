@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Hero;
 use Illuminate\Validation\Rule;
 use Exception;
-
+use Illuminate\Support\Str;
 class HeroAdminController extends Controller
 {
 
@@ -41,7 +41,7 @@ class HeroAdminController extends Controller
         ]);
 
         $photo = request()->file('photo');
-        $photo_name = $photo->getClientOriginalName();
+        $photo_name = Str::random(10) .'.'. $photo->getClientOriginalExtension();
         $photo->move(public_path('/photos'), $photo_name);
 
         $hero = new Hero();
@@ -85,8 +85,11 @@ class HeroAdminController extends Controller
 
         if ($photo != null) {
             $hero = Hero::where('id', '=', $id)->first();
-            unlink(public_path() . '\photos\\' . $hero->photo);
-            $photo_name = $photo->getClientOriginalName();
+            try {
+                unlink(public_path() . '\photos\\' . $hero->photo);
+            } catch (Exception $e) {
+            }
+            $photo_name = Str::random(10) .'.'. $photo->getClientOriginalExtension();
             $photo->move(public_path('/photos'), $photo_name);
             Hero::where('id', '=', $id)->update([
                 'photo' => $photo_name,

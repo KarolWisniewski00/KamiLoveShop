@@ -1,7 +1,11 @@
 @extends('layouts.main')
-@section('title', 'Zwroty i reklamacje')
-@section('description', 'Chcemy, aby zakupy w naszym sklepie internetowym były dla naszych klientów zawsze udane i satysfakcjonujące. W razie jakichkolwiek problemów z zakupionymi produktami, nasi klienci mogą skorzystać z naszej procedury zwrotów lub reklamacji. W naszej sekcji "Zwroty i reklamacje" opisujemy, jakie warunki należy spełnić, aby skorzystać z tych usług oraz jakie kroki należy podjąć. Zachęcamy do zapoznania się z tymi informacjami i w razie jakichkolwiek pytań lub wątpliwości, nasi konsultanci są do Państwa dyspozycji.')
-@section('extra-meta')
+@section('meta')
+<title>Zwroty i reklamacje | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="Zwroty i reklamacje | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="Zwroty i reklamacje | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Zwroty i reklamacje">
+<meta property="og:description" content="Zwroty i reklamacje" />
+<meta name="twitter:description" content="Zwroty i reklamacje" />
 @endsection
 @section('content')
 <!--RETURN-->

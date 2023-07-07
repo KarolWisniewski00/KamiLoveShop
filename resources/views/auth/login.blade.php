@@ -1,8 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Logowanie')
-@section('description', '')
-@section('extra-meta')
-<meta name="robots" content="noindex, nofollow">
+@section('meta')
+<title>Login | KamiLove Fashion sklep online</title>
 @endsection
 @section('content')
 <!--LOGIN-->

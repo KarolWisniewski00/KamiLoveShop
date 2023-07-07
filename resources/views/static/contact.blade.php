@@ -1,7 +1,11 @@
 @extends('layouts.main')
-@section('title', 'Kontakt')
-@section('description', 'Jesteśmy dostępni dla naszych klientów przez wiele kanałów komunikacji. W naszej sekcji "Kontakt" znajdą Państwo wszelkie informacje dotyczące naszych adresów e-mail, numerów telefonów oraz formularzy kontaktowych. Zachęcamy do skorzystania z tych kanałów w razie jakichkolwiek pytań, sugestii lub wątpliwości. Nasz zespół konsultantów stara się odpowiedzieć na wszystkie pytania w jak najkrótszym czasie i zapewnić pomoc w każdej sytuacji.')
-@section('extra-meta')
+@section('meta')
+<title>Kontakt | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="Kontakt | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="Kontakt | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Kontakt">
+<meta property="og:description" content="Kontakt" />
+<meta name="twitter:description" content="Kontakt" />
 @endsection
 @section('content')
 <!--CONTACT-->

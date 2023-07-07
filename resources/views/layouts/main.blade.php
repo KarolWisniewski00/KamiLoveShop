@@ -4,13 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title')</title>
-    <link rel="icon" href="photos/logo_.png" type="image/png">
-    <meta name="description" content="@yield('description')">
-    <meta name="keywords" content="moda damska, torebki, plecaki, obuwie, odzież, sukienki, biżuteria, sklep internetowy, trendy modowe, styl i elegancja">
+    <link rel="icon" href="{{asset('photos/logo_.png')}}" type="image/png">
     <meta name="author" content="Karol Wiśniewski">
-    <meta http-equiv="X-Ua-Compatible" content="IE=edge">
-    @yield('extra-meta')
+    <meta name="robots" content="max-image-preview:large" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="KamiLove Fashion sukienki damskie - Kupuj lokalnie przez internet" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary" />
+    @yield('meta')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
     <script src="https://kit.fontawesome.com/e37acf9c2e.js" crossorigin="anonymous"></script>
@@ -21,10 +22,10 @@
     <section>
         <header class="d-flex flex-wrap justify-content-center py-2 container align-items-center">
             <a href="{{route('index')}}" class="d-flex align-items-center mb-2 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <img src="{{ asset('photos/logo.png')}}" alt="logo" class="img-fluid mt-4" style="max-height: 6em;">
+                <img src="{{ asset('photos/logo.png')}}" alt="logo" class="img-fluid my-4" style="max-height: 6em;">
             </a>
 
-            <ul class="nav nav-pills">
+            <ul class="nav nav-pills d-flex flex-row flex-wrap justify-content-center align-items-center">
                 <li class="nav-item"><a href="{{route('index')}}" class="text-dark nav-link">Start</a></li>
                 @foreach ($categories as $category)
                 <li class="nav-item"><a href="{{ url('category/'.$category->url)}}" class="text-dark nav-link">{{$category->plural}}</a></li>

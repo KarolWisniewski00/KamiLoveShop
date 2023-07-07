@@ -1,8 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Konto')
-@section('description', '')
-@section('extra-meta')
-<meta name="robots" content="noindex, nofollow">
+@section('meta')
+<title>Konto | KamiLove Fashion sklep online</title>
 @endsection
 @section('content')
 <!--ACCOUNT-->

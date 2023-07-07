@@ -1,8 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Koszyk')
-@section('description', '')
-@section('extra-meta')
-<meta name="robots" content="noindex, nofollow">
+@section('meta')
+<title>Koszyk | KamiLove Fashion sklep online</title>
 @endsection
 @section('content')
 <!--BUSKET-->

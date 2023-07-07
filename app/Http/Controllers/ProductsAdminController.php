@@ -9,7 +9,7 @@ use App\Models\Subcategory;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Exception;
-
+use Illuminate\Support\Str;
 class ProductsAdminController extends Controller
 {
     //PREPARE VARIABLES TO SAVE
@@ -49,8 +49,8 @@ class ProductsAdminController extends Controller
             'name' => 'required|max:255',
             'short_description' => 'nullable|max:255',
             'long_description' => 'nullable|max:255',
-            'normal_price' => 'required|numeric|max:255',
-            'sale_price' => 'nullable|numeric|max:255',
+            'normal_price' => 'required|numeric',
+            'sale_price' => 'nullable|numeric',
             'new' => 'nullable',
             'SKU' => ['required', 'max:255', Rule::unique('products')],
             'category_id' => 'nullable',
@@ -60,8 +60,8 @@ class ProductsAdminController extends Controller
             'count' => 'nullable|integer',
             'count_photo' => 'nullable|integer',
         ]);
-        if ($request->sale_price == 0 || $request->sale_price == null){}
-        elseif ($request->normal_price<=$request->sale_price){
+        if ($request->sale_price == 0 || $request->sale_price == null) {
+        } elseif ($request->normal_price <= $request->sale_price) {
             return view('account.admin.products', [
                 'products' => Product::get(),
                 'subcategories' => Subcategory::get(),
@@ -69,7 +69,7 @@ class ProductsAdminController extends Controller
             ]);
         }
         $photo = request()->file('photo');
-        $photo_name = $photo->getClientOriginalName();
+        $photo_name = Str::random(10) .'.'. $photo->getClientOriginalExtension();
         $photo->move(public_path('/photos'), $photo_name);
 
         $category_id = $this->validate_to_database($request->category_id, 'Wybierz', null);
@@ -83,7 +83,7 @@ class ProductsAdminController extends Controller
             if ((!in_array($request->$bufor, $array_added_photo))) {
                 $photo_bufor = request()->file($bufor);
                 if ($photo_bufor != null) {
-                    $photo_name_bufor = $photo_bufor->getClientOriginalName();
+                    $photo_name_bufor = Str::random(10) .'.'. $photo->getClientOriginalExtension();
                     $photo_bufor->move(public_path('/photos'), $photo_name_bufor);
                     array_push($array_added_photo, $photo_name_bufor);
                 }
@@ -147,8 +147,8 @@ class ProductsAdminController extends Controller
             'name' => 'required|max:255',
             'short_description' => 'nullable|max:255',
             'long_description' => 'nullable|max:255',
-            'normal_price' => 'required|numeric|max:255',
-            'sale_price' => 'nullable|numeric|max:255',
+            'normal_price' => 'required|numeric',
+            'sale_price' => 'nullable|numeric',
             'new' => 'nullable',
             'SKU' => ['required', 'max:255', Rule::unique('products')->ignore($id)],
             'category_id' => 'nullable',
@@ -158,8 +158,8 @@ class ProductsAdminController extends Controller
             'count' => 'nullable|integer',
             'count_photo' => 'nullable|integer',
         ]);
-        if ($request->sale_price == 0 || $request->sale_price == null){}
-        elseif ($request->normal_price<=$request->sale_price){
+        if ($request->sale_price == 0 || $request->sale_price == null) {
+        } elseif ($request->normal_price <= $request->sale_price) {
             return view('account.admin.products', [
                 'products' => Product::get(),
                 'subcategories' => Subcategory::get(),
@@ -170,8 +170,11 @@ class ProductsAdminController extends Controller
 
         if ($photo != null) {
             $product = Product::where('id', '=', $id)->first();
-            unlink(public_path() . '\photos\\' . $product->photo);
-            $photo_name = $photo->getClientOriginalName();
+            try {
+                unlink(public_path() . '\photos\\' . $product->photo);
+            } catch (Exception $e) {
+            }
+            $photo_name = Str::random(10) .'.'. $photo->getClientOriginalExtension();
             $photo->move(public_path('/photos'), $photo_name);
             Product::where('id', '=', $id)->update([
                 'photo' => $photo_name,
@@ -187,9 +190,12 @@ class ProductsAdminController extends Controller
                 if ($photo_bufor != null) {
                     $photos = unserialize($product->photos);
                     foreach ($photos as $pho) {
-                        unlink(public_path() . '\photos\\' . $pho);
+                        try {
+                            unlink(public_path() . '\photos\\' . $pho);
+                        } catch (Exception $e) {
+                        }
                     }
-                    $photo_name_bufor = $photo_bufor->getClientOriginalName();
+                    $photo_name_bufor = Str::random(10) .'.'. $photo->getClientOriginalExtension();
                     $photo_bufor->move(public_path('/photos'), $photo_name_bufor);
                     array_push($array_added_photo, $photo_name_bufor);
                 }
@@ -248,7 +254,10 @@ class ProductsAdminController extends Controller
         }
         $photos = unserialize($product->photos);
         foreach ($photos as $pho) {
-            unlink(public_path() . '\photos\\' . $pho);
+            try {
+                unlink(public_path() . '\photos\\' . $pho);
+            } catch (Exception $e) {
+            }
         }
         Product::where('id', '=', $id)->delete();
 

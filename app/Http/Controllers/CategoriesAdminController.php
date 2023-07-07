@@ -7,7 +7,7 @@ use App\Models\Category;
 use App\Models\Subcategory;
 use Illuminate\Validation\Rule;
 use Exception;
-
+use Illuminate\Support\Str;
 class CategoriesAdminController extends Controller
 {
     //INDEX CATEGORIES
@@ -44,7 +44,7 @@ class CategoriesAdminController extends Controller
         ]);
 
         $photo = request()->file('photo');
-        $photo_name = $photo->getClientOriginalName();
+        $photo_name = Str::random(10) .'.'. $photo->getClientOriginalExtension();
         $photo->move(public_path('/photos'), $photo_name);
 
         $category = new Category();
@@ -91,8 +91,11 @@ class CategoriesAdminController extends Controller
 
         if ($photo != null) {
             $category = Category::where('id', '=', $id)->first();
-            unlink(public_path() . '\photos\\' . $category->photo);
-            $photo_name = $photo->getClientOriginalName();
+            try {
+                unlink(public_path() . '\photos\\' . $category->photo);
+            } catch (Exception $e) {
+            }
+            $photo_name = Str::random(10) .'.'. $photo->getClientOriginalExtension();
             $photo->move(public_path('/photos'), $photo_name);
             Category::where('id', '=', $id)->update([
                 'photo' => $photo_name,

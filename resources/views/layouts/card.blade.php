@@ -1,5 +1,7 @@
 <div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center">
-    <img alt="product_photo" src="{{ asset('photos/'.$p->photo)}}" class="img-fluid">
+    <a href="{{ url('product/'.$p->id)}}" class="">
+        <img alt="product_photo" src="{{ asset('photos/'.$p->photo)}}" class="img-fluid">
+    </a>
     <h3>{{$p->name}}</h3>
     <p class="text-muted">{{$p->short_description}}</p>
     <div class="d-flex flex-row justify-content-center align-items-center mb-4">

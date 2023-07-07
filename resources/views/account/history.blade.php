@@ -1,8 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Twoje zamówienia')
-@section('description', '')
-@section('extra-meta')
-<meta name="robots" content="noindex, nofollow">
+@section('meta')
+<title>Zamówienia | KamiLove Fashion sklep online</title>
 @endsection
 @section('content')
 <!--HISTORY-->

@@ -1,15 +1,13 @@
 @extends('layouts.main')
-@section('title', 'Kasa')
-@section('description', '')
-@section('extra-meta')
-<meta name="robots" content="noindex, nofollow">
+@section('meta')
+<title>Kasa | KamiLove Fashion sklep online</title>
 @endsection
 @section('content')
 <!--ORDER-->
 <section>
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-8">
+            <div class="col-12 col-md-7">
                 <form class="form text-center my-4" action="{{route('order_new_form')}}" method="POST">
                     <!--TOKEN-->
                     @csrf
@@ -88,7 +86,7 @@
                     <a href="{{route('busket')}}" class="btn btn-custom-2 my-4" type="button">Anuluj</a>
                 </form>
             </div>
-            <div class="col-12 col-md-4" style="overflow:auto;">
+            <div class="col-12 col-md-5" style="overflow:auto;">
                 <div class="d-flex flex-column justify-content-center align-items-center text-center my-4">
                     <h1>Twoje zamówienie</h1>
                 </div>

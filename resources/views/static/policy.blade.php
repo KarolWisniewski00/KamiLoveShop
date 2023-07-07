@@ -1,7 +1,11 @@
 @extends('layouts.main')
-@section('title', 'Polityka prywatności')
-@section('description', 'Szanujemy prywatność naszych klientów i dbamy o ochronę ich danych osobowych. W naszej Polityce Prywatności opisujemy, jakie dane zbieramy od naszych klientów oraz w jaki sposób są one wykorzystywane. Dokładamy wszelkich starań, aby nasze działania były zgodne z obowiązującymi przepisami prawa oraz normami etycznymi. Zachęcamy do zapoznania się z naszą Polityką Prywatności i w razie jakichkolwiek pytań lub wątpliwości, nasi konsultanci są do Państwa dyspozycji.')
-@section('extra-meta')
+@section('meta')
+<title>Polityka prywatności | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="Polityka prywatności | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="Polityka prywatności | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Polityka prywatności">
+<meta property="og:description" content="Polityka prywatności" />
+<meta name="twitter:description" content="Polityka prywatności" />
 @endsection
 @section('content')
 <!--POLICY-->

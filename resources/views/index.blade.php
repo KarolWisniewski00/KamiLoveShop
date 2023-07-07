@@ -1,7 +1,12 @@
 @extends('layouts.main')
-@section('title', 'Strona główna')
-@section('description', 'KamiLove Fashion to sklep dla kobiet, które cenią sobie styl i jakość. Oferujemy bogaty wybór torebek, plecaków, obuwia, odzieży, sukienek oraz biżuterii, które zaspokoją gusta najbardziej wymagających klientek. Nasze produkty charakteryzuje wysoka jakość materiałów oraz staranność wykonania, dzięki czemu będą Ci służyć przez wiele sezonów. Wybierz coś dla siebie i poczuj się wyjątkowo dzięki modnym dodatkom z KamiLove Fashion!')
-@section('extra-meta')
+@section('meta')
+<title>KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria</title>
+<meta property="og:title" content="KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Odkryj KamiLove Fashion to zestawienie modnych ubrań, biżuterii i dodatków dla każdej kobiety. Bezpieczne płatności.">
+<meta property="og:description" content="Odkryj KamiLove Fashion to zestawienie modnych ubrań, biżuterii i dodatków dla każdej kobiety. Bezpieczne płatności." />
+<meta name="twitter:description" content="Odkryj KamiLove Fashion to zestawienie modnych ubrań, biżuterii i dodatków dla każdej kobiety. Bezpieczne płatności." />
+<meta name="keywords" content="KamiLove, KamiLove Fashion, Fashion, sklep, sklep damski,moda, moda damska, sukienki, sukienki damskie, ubrania, ubrania damskie">
 @endsection
 @section('content')
 <!--HERO-->

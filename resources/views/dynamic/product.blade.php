@@ -1,7 +1,8 @@
 @extends('layouts.main')
-@section('title', $product->name)
-@section('description', $product->long_descriptions)
-@section('extra-meta')
+@section('meta')
+<title>{{$product->name}} | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="{{$product->name}} | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="{{$product->name}} | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
 @endsection
 @section('content')
 <!--PRODUCT-->
@@ -33,16 +34,38 @@
             </div>
             <!--END LINKS-->
             <div class="col-12 col-md-6">
-                <div class="img position-relative rounded shadow" style='background-image: url({{asset("photos/".$product->photo)}}); background-color: #cccccc; height: 40em; background-position: center; background-repeat: no-repeat; background-size: cover;'>
-                    <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
-                        @if ($product->new != 0)
-                        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
-                        @endif
+                <button type="button" class="p-0 m-0 mb-3 border-0 d-flex align-items-center justify-content-center bg-transparent overflow-hidden" id="button-studio-photo-main" data-bs-toggle="modal" data-bs-target="#studio-photo-main">
+                    <img src="{{asset('photos/'.$product->photo)}}" alt="studio-photo-main" id="img-studio-photo-main" class="img-fluid shadow">
+                </button>
+                <div class="modal fade" id="studio-photo-main" tabindex="-1" aria-labelledby="studio-photo-main-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content border-0 rounded-0">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <img src="{{asset('photos/'.$product->photo)}}" alt="studio-photo-main" class="img-fluid">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row d-flex my-4">
-                    @foreach (unserialize($product->photos) as $pho)
-                    <div class="img rounded shadow col mx-2" style='background-image: url({{asset("photos/".$pho)}}); background-color: #cccccc; aspect-ratio: 1/1; max-width:100%;background-position: center; background-repeat: no-repeat; background-size: cover;'></div>
+                    @foreach (unserialize($product->photos) as $k => $pho)
+                    <button type="button" class="col p-3 m-0 mb-3 border-0 d-flex align-items-center justify-content-center bg-transparent overflow-hidden" id="button-studio-photo-{{$k}}" data-bs-toggle="modal" data-bs-target="#studio-photo-{{$k}}">
+                        <img src="{{asset('photos/'.$pho)}}" alt="studio-photo-{{$k}}" id="img-studio-photo-{{$k}}" class="img-fluid shadow">
+                    </button>
+                    <div class="modal fade" id="studio-photo-{{$k}}" tabindex="-1" aria-labelledby="studio-photo-{{$k}}-label" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content border-0 rounded-0">
+                                <div class="modal-header">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{asset('photos/'.$pho)}}" alt="studio-photo-{{$k}}" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -123,12 +146,6 @@
 <!--END PRODUCT-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $(".img").click(function() {
-            this.requestFullscreen()
-        })
-    });
-
     var formAdded = false;
     var form = '';
 
