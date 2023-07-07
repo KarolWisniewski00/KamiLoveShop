@@ -8,11 +8,13 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StartAdminController;
 use App\Http\Controllers\CategoriesAdminController;
 use App\Http\Controllers\ProductsAdminController;
 use App\Http\Controllers\HeroAdminController;
 use App\Http\Controllers\BusketController;
+use App\Http\Controllers\CategoryAdminController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesAdminController;
@@ -20,6 +22,14 @@ use App\Http\Controllers\PolicyAdminController;
 use App\Http\Controllers\ReturnAdminController;
 use App\Http\Controllers\SizesAdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageHeroAdminController;
+use App\Http\Controllers\PagePolicyAdminController;
+use App\Http\Controllers\PageReturnAdminController;
+use App\Http\Controllers\PageRuleAdminController;
+use App\Http\Controllers\PhotoAdminController;
+use App\Http\Controllers\ProductAdminController;
+use App\Http\Controllers\SizeAdminController;
+use App\Http\Controllers\SubcategoryAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,11 +70,11 @@ Route::middleware(['isLoggedIn'])->group(function () {
     });
 });
 
+//ADMIN OLD
 Route::middleware(['AdminCheck'])->group(function () {
     Route::get('/status/{id}/{status}', [OrderController::class, 'status']);
     Route::prefix('admin')->group(function () {
-        Route::get('/', [StartAdminController::class, 'admin'])->name('admin');
-
+        //Route::get('/', [StartAdminController::class, 'admin'])->name('admin');
         Route::prefix('categories')->group(function () {
             Route::get('/', [CategoriesAdminController::class, 'categories'])->name('categories');
             Route::get('/new', [CategoriesAdminController::class, 'categories_new'])->name('categories_new');
@@ -129,6 +139,65 @@ Route::middleware(['AdminCheck'])->group(function () {
             Route::get('/delete/{id}', [SizesAdminController::class, 'sizes_delete']);
             Route::get('/edit/{id}', [SizesAdminController::class, 'sizes_edit']);
             Route::post('/edit/{id}', [SizesAdminController::class, 'sizes_edit_form']);
+        });
+    });
+});
+//ADMIN NEW
+Route::middleware(['AdminCheck'])->group(function () {
+    Route::prefix('admin')->group(function () {
+
+        Route::get('/', [AdminController::class, 'index'])->name('admin');
+
+        Route::prefix('category')->group(function () {
+            Route::get('/', [CategoryAdminController::class, 'index'])->name('admin.category');
+            Route::get('/create', [CategoryAdminController::class, 'create'])->name('admin.category.create');
+            Route::post('/store', [CategoryAdminController::class, 'store'])->name('admin.category.store');
+            Route::get('/edit/{id}', [CategoryAdminController::class, 'edit'])->name('admin.category.edit');
+            Route::put('/update/{id}', [CategoryAdminController::class, 'update'])->name('admin.category.update');
+            Route::get('/delete/{id}', [CategoryAdminController::class, 'delete'])->name('admin.category.delete');
+        });
+        Route::prefix('subcategory')->group(function () {
+            Route::get('/create', [SubcategoryAdminController::class, 'create'])->name('admin.subcategory.create');
+            Route::post('/store', [SubcategoryAdminController::class, 'store'])->name('admin.subcategory.store');
+            Route::get('/edit/{id}', [SubcategoryAdminController::class, 'edit'])->name('admin.subcategory.edit');
+            Route::put('/update/{id}', [SubcategoryAdminController::class, 'update'])->name('admin.subcategory.update');
+            Route::get('/delete/{id}', [SubcategoryAdminController::class, 'delete'])->name('admin.subcategory.delete');
+        });
+        Route::prefix('photo')->group(function () {
+            Route::get('/', [PhotoAdminController::class, 'index'])->name('admin.photo');
+            Route::get('/create', [PhotoAdminController::class, 'create'])->name('admin.photo.create');
+            Route::post('/store', [PhotoAdminController::class, 'store'])->name('admin.photo.store');
+            Route::get('/edit/{filename}', [PhotoAdminController::class, 'edit'])->name('admin.photo.edit');
+            Route::put('/update/{filename}', [PhotoAdminController::class, 'update'])->name('admin.photo.update');
+            Route::get('/delete/{filename}', [PhotoAdminController::class, 'delete'])->name('admin.photo.delete');
+        });
+        Route::prefix('size')->group(function () {
+            Route::get('/', [SizeAdminController::class, 'index'])->name('admin.size');
+            Route::get('/create', [SizeAdminController::class, 'create'])->name('admin.size.create');
+            Route::post('/store', [SizeAdminController::class, 'store'])->name('admin.size.store');
+            Route::get('/edit/{id}', [SizeAdminController::class, 'edit'])->name('admin.size.edit');
+            Route::put('/update/{id}', [SizeAdminController::class, 'update'])->name('admin.size.update');
+            Route::get('/delete/{id}', [SizeAdminController::class, 'delete'])->name('admin.size.delete');
+        });
+        Route::prefix('product')->group(function () {
+            Route::get('/', [ProductAdminController::class, 'index'])->name('admin.product');
+            Route::get('/create', [ProductAdminController::class, 'create'])->name('admin.product.create');
+            Route::post('/store', [ProductAdminController::class, 'store'])->name('admin.product.store');
+            Route::get('/edit/{id}', [ProductAdminController::class, 'edit'])->name('admin.product.edit');
+            Route::put('/update/{id}', [ProductAdminController::class, 'update'])->name('admin.product.update');
+            Route::get('/delete/{id}', [ProductAdminController::class, 'delete'])->name('admin.product.delete');
+        });
+        Route::prefix('page-hero')->group(function () {
+            Route::get('/', [PageHeroAdminController::class, 'index'])->name('admin.page-hero');
+        });
+        Route::prefix('page-rule')->group(function () {
+            Route::get('/', [PageRuleAdminController::class, 'index'])->name('admin.page-rule');
+        });
+        Route::prefix('page-policy')->group(function () {
+            Route::get('/', [PagePolicyAdminController::class, 'index'])->name('admin.page-policy');
+        });
+        Route::prefix('page-return')->group(function () {
+            Route::get('/', [PageReturnAdminController::class, 'index'])->name('admin.page-return');
         });
     });
 });
