@@ -98,7 +98,7 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="d-flex flex-row justify-content-center align-items-center h-100">
-                    <a href="{{ url('category/'.$category->url)}}"><img alt="category_photo" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid shadow rounded"></a>
+                    <a href="{{ url('category/'.$category->url)}}"><img alt="category_photo" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid  rounded"></a>
                 </div>
             </div>
         </div>
@@ -108,7 +108,7 @@
         <div class="row g-4">
             <div class="col-12 col-lg-6">
                 <div class="d-flex flex-row justify-content-center align-items-center h-100">
-                    <a href="{{ url('category/'.$category->url)}}"><img alt="category_photo" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid shadow rounded"></a>
+                    <a href="{{ url('category/'.$category->url)}}"><img alt="category_photo" src="{{ asset('photos/'.$category->photo)}}" class="img-fluid  rounded"></a>
                 </div>
             </div>
             <div class="col-12 col-lg-6">

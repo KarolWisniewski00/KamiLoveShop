@@ -1,4 +1,4 @@
-<div class="border text-center p-4 shadow position-relative h-100 d-flex flex-column justify-content-between align-items-center">
+<div class="border text-center p-4  position-relative h-100 d-flex flex-column justify-content-between align-items-center">
     <a href="{{ url('product/'.$p->id)}}" class="">
         <img alt="product_photo" src="{{ asset('photos/'.$p->photo)}}" class="img-fluid">
     </a>
@@ -51,10 +51,10 @@
     </div>
     <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
         @if ($p->new != 0)
-        <div class="bg-custom-1 p-2 text-white mb-2 shadow rounded">Nowość!</div>
+        <div class="bg-custom-1 p-2 text-white mb-2  rounded">Nowość!</div>
         @endif
         @if ($p->sale_price != 0)
-        <div class="bg-custom-2 p-2 text-white shadow rounded">-{{round(100-(($p->sale_price*100)/$p->normal_price),2)}}%</div>
+        <div class="bg-custom-2 p-2 text-white  rounded">-{{round(100-(($p->sale_price*100)/$p->normal_price),2)}}%</div>
         @endif
     </div>
 </div>

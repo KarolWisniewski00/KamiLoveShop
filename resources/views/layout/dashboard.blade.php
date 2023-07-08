@@ -19,10 +19,10 @@
 
 <body>
 
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 ">
         <div class="my-2">
-            <a href="{{route('index')}}" class="my-2 btn btn-primary mx-2 shadow"><i class="fa-solid fa-house me-2"></i>Strona główna</a>
-            <a href="{{route('logout')}}" class="my-2 btn btn-outline-light mx-2 shadow"><i class="fa-solid fa-right-from-bracket me-2"></i>Wyloguj się</a>
+            <a href="{{route('index')}}" class="my-2 btn btn-primary mx-2 "><i class="fa-solid fa-house me-2"></i>Strona główna</a>
+            <a href="{{route('logout')}}" class="my-2 btn btn-outline-light mx-2 "><i class="fa-solid fa-right-from-bracket me-2"></i>Wyloguj się</a>
         </div>
     </header>
 

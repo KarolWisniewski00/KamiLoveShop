@@ -151,7 +151,7 @@
                     </tbody>
                 </table>
                 <div>
-                    <ul class="list-group shadow">
+                    <ul class="list-group ">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
                                 <div class="fw-bold">Wysyłka PDP + 16 PLN</div>

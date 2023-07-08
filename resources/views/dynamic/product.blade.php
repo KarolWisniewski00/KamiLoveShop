@@ -35,7 +35,7 @@
             <!--END LINKS-->
             <div class="col-12 col-md-6">
                 <button type="button" class="p-0 m-0 mb-3 border-0 d-flex align-items-center justify-content-center bg-transparent overflow-hidden" id="button-studio-photo-main" data-bs-toggle="modal" data-bs-target="#studio-photo-main">
-                    <img src="{{asset('photos/'.$product->photo)}}" alt="studio-photo-main" id="img-studio-photo-main" class="img-fluid shadow">
+                    <img src="{{asset('photos/'.$product->photo)}}" alt="studio-photo-main" id="img-studio-photo-main" class="img-fluid ">
                 </button>
                 <div class="modal fade" id="studio-photo-main" tabindex="-1" aria-labelledby="studio-photo-main-label" aria-hidden="true">
                     <div class="modal-dialog">
@@ -52,7 +52,7 @@
                 <div class="row d-flex my-4">
                     @foreach (unserialize($product->photos) as $k => $pho)
                     <button type="button" class="col p-3 m-0 mb-3 border-0 d-flex align-items-center justify-content-center bg-transparent overflow-hidden" id="button-studio-photo-{{$k}}" data-bs-toggle="modal" data-bs-target="#studio-photo-{{$k}}">
-                        <img src="{{asset('photos/'.$pho)}}" alt="studio-photo-{{$k}}" id="img-studio-photo-{{$k}}" class="img-fluid shadow">
+                        <img src="{{asset('photos/'.$pho)}}" alt="studio-photo-{{$k}}" id="img-studio-photo-{{$k}}" class="img-fluid ">
                     </button>
                     <div class="modal fade" id="studio-photo-{{$k}}" tabindex="-1" aria-labelledby="studio-photo-{{$k}}-label" aria-hidden="true">
                         <div class="modal-dialog">
@@ -77,7 +77,7 @@
                         @if ($product->sale_price != 0)
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="text-muted" style="text-decoration: line-through;padding-top:1px;">{{$product->normal_price}} PLN</div>
-                            <div class="bg-custom-2 p-2 text-white shadow ms-2 rounded">-{{round(100-(($product->sale_price*100)/$product->normal_price),2)}}%</div>
+                            <div class="bg-custom-2 p-2 text-white  ms-2 rounded">-{{round(100-(($product->sale_price*100)/$product->normal_price),2)}}%</div>
                         </div>
                         <div class="text-custom-1 fs-2">{{$product->sale_price}} PLN</div>
                         @else

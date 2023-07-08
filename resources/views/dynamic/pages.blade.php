@@ -29,7 +29,7 @@
         <div class="row">
             <!--FILTERS-->
             <div class="col-12 col-lg-3 mb-4">
-                <form class="accordion shadow" id="accordionPanelsStayOpenExample" method="GET" action="{{ url('category/'.$url)}}">
+                <form class="accordion " id="accordionPanelsStayOpenExample" method="GET" action="{{ url('category/'.$url)}}">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
