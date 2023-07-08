@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-lg btn-primary me-2"><i class="fa-solid fa-floppy-disk me-2"></i>Zapisz</button>
-                                    <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-secondary"><i class="fa-solid fa-x me-2"></i>Anuluj</button>
+                                    <button type="button" data-bs-dismiss="modal" class="btn btn-lg btn-danger"><i class="fa-solid fa-x me-2"></i>Anuluj</button>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
             <input type="hidden" name="photo" value="{{$cat->photo}}" id="photo" required>
             <div class="d-flex justify-content-start align-items-center mt-4">
                 <button type="submit" class="btn btn-lg btn-primary me-2"><i class="fa-solid fa-floppy-disk me-2"></i>Zapisz</button>
-                <a href="{{route('admin.category')}}" class="btn btn-lg btn-secondary"><i class="fa-solid fa-x me-2"></i>Anuluj</a>
+                <a href="{{route('admin.category')}}" class="btn btn-lg btn-danger"><i class="fa-solid fa-x me-2"></i>Anuluj</a>
             </div>
         </form>
     </div>

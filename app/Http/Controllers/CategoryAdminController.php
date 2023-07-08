@@ -44,16 +44,8 @@ class CategoryAdminController extends Controller
             'cat' => Category::where('id', $id)->first(),
         ]);
     }
-    public function update(Request $request, $id)
+    public function update(CategoryRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'plural' => 'required|max:255',
-            'url' =>  ['required', 'max:255', Rule::unique('categories')->ignore($id), Rule::unique('subcategories')],
-            'photo' => 'required|max:255',
-            'order' => 'required|integer',
-        ]);
-
         $res = Category::where('id', '=', $id)->update([
             'name' => $request->name,
             'plural' => $request->plural,

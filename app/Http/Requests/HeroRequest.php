@@ -6,16 +6,17 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Session;
 
-class CategoryRequest extends FormRequest
+class HeroRequest extends FormRequest
 {
     public function rules()
     {
         $id = $this->route('id');
         return [
-            'name' => 'required|max:255',
-            'plural' => 'required|max:255',
-            'url' => ['required', 'max:255', Rule::unique('subcategories')->ignore($id), Rule::unique('categories')],
-            'photo' => 'required|max:255',
+            'h1' => 'required|max:255',
+            'p' => 'required|max:255',
+            'button' => 'required|max:255',
+            'href' => ['required', 'max:255', Rule::notIn(['Wybierz'])],
+            'photo' => 'required',
             'order' => 'required|integer',
         ];
     }

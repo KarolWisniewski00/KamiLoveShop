@@ -4,7 +4,7 @@
 <div class="row mb-3">
     <div class="col-12">
         <div class="d-flex flex-row justify-content-start align-items-center">
-            <h1 class="my-4 font-display me-2">Start</h1>
+            <h1 class="my-4 font-display me-2">Zamówienia</h1>
         </div>
     </div>
     <hr>
@@ -120,7 +120,7 @@
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="{{url('/order/'.$order->id)}}" class="btn btn-sm btn-custom-2 rounded text-white fs-1"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+                            <div><a href="{{url('/order/'.$order->id)}}" class="btn btn-lg btn-primary"><i class="fa-solid fa-magnifying-glass"></i></a></div>
                         </div>
                     </td>
                 </tr>

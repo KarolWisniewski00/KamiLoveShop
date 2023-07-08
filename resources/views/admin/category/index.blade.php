@@ -10,7 +10,7 @@
     <hr>
     @foreach($cat as $c)
     <div class="col-12 col-md-6 col-lg-3 mb-4">
-        <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
+        <div class="border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100">
             <img alt="category_photo" src="{{ asset('photos/'.$c->photo)}}" class="img-fluid" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
             <h1 class="mt-4 text-black">{{$c->plural}}</h1>
             <p class="text-muted"><i class="fa-solid fa-link"></i>{{$c->url}}</p>
@@ -30,7 +30,7 @@
     <hr>
     @foreach($subcat as $sc)
     <div class="col-12 col-md-6 col-lg-3 mb-4">
-        <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
+        <div class="border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100">
             <img alt="category_photo" src="{{ asset('photos/'.$sc->category->photo)}}" class="img-fluid" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
             <h1 class="mt-4 text-black">{{$sc->category->plural}}</h1>
             <p class="text-muted"><i class="fa-solid fa-link"></i>{{$sc->category->url}}</p>

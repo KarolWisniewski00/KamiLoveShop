@@ -25,7 +25,6 @@
                     <th scope="col">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <div class="fw-bold">Nazwa</div>
-                            <div class="text-muted">opis</div>
                         </div>
                     </th>
                     <th scope="col">
@@ -36,22 +35,22 @@
                     </th>
                     <th scope="col">
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">SKU</div>
+                            <div class="fw-bold">Wyświetlenia</div>
                         </div>
                     </th>
                     <th scope="col">
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">Nowość</div>
+                            <div class="fw-bold">W Koszyku</div>
                         </div>
                     </th>
                     <th scope="col">
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">Cena regularna</div>
+                            <div class="fw-bold">Sprzedanych</div>
                         </div>
                     </th>
                     <th scope="col">
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">Cena promocyjna</div>
+                            <div class="fw-bold">Cena</div>
                         </div>
                     </th>
                     <th scope="col">
@@ -67,59 +66,66 @@
                 </tr>
             </thead>
             <tbody>
+                @foreach($prod as $k => $p)
                 <tr>
                     <th>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">$key</div>
+                            <div class="fw-bold">{{$k+1}}</div>
                         </div>
                     </th>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div style="max-width:50px"><img alt="product_photo" src="" class="img-fluid" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;"></div>
+                            <div style="max-width:50px"><img alt="product_photo" src="{{asset('photos/'.$p->photo)}}" class="img-fluid" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;"></div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">name</div>
-                            <div class="text-muted">short_description</div>
+                            <div class="fw-bold">{{$p->name}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="text-muted">subcategory->name</div>
+                            <div class="fw-bold">{{$p->category->plural}}</div>
+                            @if($p->subcategory_id != null)
+                            <div class="text-muted">{{$p->subcategory->plural}}</div>
+                            @endif
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">SKU</div>
+                            <div class="fw-bold">{{$p->views}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">Tak</div>
+                            <div class="fw-bold">{{$p->order}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">normal_price</div>
+                            <div class="fw-bold">{{$p->sells}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">sale_price</div>
+                            <div class="fw-bold">{{$p->normal_price}}</div>
+                            @if($p->sale_price != 0)
+                            <div class="text-muted">{{$p->sale_price}}</div>
+                            @endif
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="" class="btn btn-primary btn-lg me-2"><i class="fa-solid fa-pen-to-square"></i></a></div>
+                            <div><a href="{{route('admin.product.edit',$p->id)}}" class="btn btn-primary btn-lg me-2"><i class="fa-solid fa-pen-to-square"></i></a></div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="" class="btn btn-secondary btn-lg" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');"><i class="fa-solid fa-trash"></i></a></div>
+                            <div><a href="{{route('admin.product.delete',$p->id)}}" class="btn btn-danger btn-lg" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');"><i class="fa-solid fa-trash"></i></a></div>
                         </div>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

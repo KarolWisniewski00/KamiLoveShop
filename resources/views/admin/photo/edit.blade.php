@@ -38,7 +38,7 @@
 
             <div class="d-flex flex-row justify-content-center align-items-center my-4">
                 <button type="submit" class="btn btn-lg btn-primary me-2"><i class="fa-solid fa-floppy-disk me-2"></i>Zapisz</button>
-                <a href="{{route('admin.photo')}}" class="btn btn-lg btn-secondary"><i class="fa-solid fa-x me-2"></i>Anuluj</a>
+                <a href="{{route('admin.photo')}}" class="btn btn-lg btn-danger"><i class="fa-solid fa-x me-2"></i>Anuluj</a>
             </div>
         </form>
     </div>

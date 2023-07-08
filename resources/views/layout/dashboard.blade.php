@@ -30,13 +30,27 @@
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>Kokpit</span>
+                    </h6>
+
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a href="{{ route('admin')}}" class="nav-link text-black"><i class="fa-solid fa-house me-2"></i>Start</a>
+                            <a href="{{ route('admin')}}" class="nav-link text-black"><i class="fa-solid fa-house me-2"></i>Zamówienia</a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.user')}}" class="nav-link text-black"><i class="fa-solid fa-user me-2"></i>Użytkownicy<span class="badge rounded-pill bg-primary ms-2">Wkrótce dostępne</span></a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.photo')}}" class="nav-link text-black"><i class="fa-solid fa-photo-film me-2"></i>Zdjęcia</a>
                         </li>
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>Sklep</span>
+                    </h6>
+
+                    <ul class="nav flex-column mb-2">
                         <li class="nav-item">
                             <a href="{{ route('admin.category')}}" class="nav-link text-black"><i class="fa-solid fa-file me-2"></i>Kategorie</a>
                         </li>
@@ -64,6 +78,16 @@
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.page-return')}}" class="nav-link text-black"><i class="fa-solid fa-right-left me-2"></i>Zwroty i reklamacje</a>
+                        </li>
+                    </ul>
+
+                    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+                        <span>Inne</span>
+                    </h6>
+
+                    <ul class="nav flex-column mb-2">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.old')}}" class="nav-link text-black"><i class="fa-solid fa-unlock me-2"></i>Panel admina - poprzednia wersja</a>
                         </li>
                     </ul>
                 </div>

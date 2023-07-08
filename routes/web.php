@@ -30,6 +30,7 @@ use App\Http\Controllers\PhotoAdminController;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\SizeAdminController;
 use App\Http\Controllers\SubcategoryAdminController;
+use App\Http\Controllers\UserAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -74,7 +75,6 @@ Route::middleware(['isLoggedIn'])->group(function () {
 Route::middleware(['AdminCheck'])->group(function () {
     Route::get('/status/{id}/{status}', [OrderController::class, 'status']);
     Route::prefix('admin')->group(function () {
-        //Route::get('/', [StartAdminController::class, 'admin'])->name('admin');
         Route::prefix('categories')->group(function () {
             Route::get('/', [CategoriesAdminController::class, 'categories'])->name('categories');
             Route::get('/new', [CategoriesAdminController::class, 'categories_new'])->name('categories_new');
@@ -147,6 +147,7 @@ Route::middleware(['AdminCheck'])->group(function () {
     Route::prefix('admin')->group(function () {
 
         Route::get('/', [AdminController::class, 'index'])->name('admin');
+        Route::get('/old', [StartAdminController::class, 'admin'])->name('admin.old');
 
         Route::prefix('category')->group(function () {
             Route::get('/', [CategoryAdminController::class, 'index'])->name('admin.category');
@@ -189,15 +190,38 @@ Route::middleware(['AdminCheck'])->group(function () {
         });
         Route::prefix('page-hero')->group(function () {
             Route::get('/', [PageHeroAdminController::class, 'index'])->name('admin.page-hero');
+            Route::get('/create', [PageHeroAdminController::class, 'create'])->name('admin.page-hero.create');
+            Route::post('/store', [PageHeroAdminController::class, 'store'])->name('admin.page-hero.store');
+            Route::get('/edit/{id}', [PageHeroAdminController::class, 'edit'])->name('admin.page-hero.edit');
+            Route::put('/update/{id}', [PageHeroAdminController::class, 'update'])->name('admin.page-hero.update');
+            Route::get('/delete/{id}', [PageHeroAdminController::class, 'delete'])->name('admin.page-hero.delete');
         });
         Route::prefix('page-rule')->group(function () {
             Route::get('/', [PageRuleAdminController::class, 'index'])->name('admin.page-rule');
+            Route::get('/create', [PageRuleAdminController::class, 'create'])->name('admin.page-rule.create');
+            Route::post('/store', [PageRuleAdminController::class, 'store'])->name('admin.page-rule.store');
+            Route::get('/edit/{id}', [PageRuleAdminController::class, 'edit'])->name('admin.page-rule.edit');
+            Route::put('/update/{id}', [PageRuleAdminController::class, 'update'])->name('admin.page-rule.update');
+            Route::get('/delete/{id}', [PageRuleAdminController::class, 'delete'])->name('admin.page-rule.delete');
         });
         Route::prefix('page-policy')->group(function () {
             Route::get('/', [PagePolicyAdminController::class, 'index'])->name('admin.page-policy');
+            Route::get('/create', [PagePolicyAdminController::class, 'create'])->name('admin.page-policy.create');
+            Route::post('/store', [PagePolicyAdminController::class, 'store'])->name('admin.page-policy.store');
+            Route::get('/edit/{id}', [PagePolicyAdminController::class, 'edit'])->name('admin.page-policy.edit');
+            Route::put('/update/{id}', [PagePolicyAdminController::class, 'update'])->name('admin.page-policy.update');
+            Route::get('/delete/{id}', [PagePolicyAdminController::class, 'delete'])->name('admin.page-policy.delete');
         });
         Route::prefix('page-return')->group(function () {
             Route::get('/', [PageReturnAdminController::class, 'index'])->name('admin.page-return');
+            Route::get('/create', [PageReturnAdminController::class, 'create'])->name('admin.page-return.create');
+            Route::post('/store', [PageReturnAdminController::class, 'store'])->name('admin.page-return.store');
+            Route::get('/edit/{id}', [PageReturnAdminController::class, 'edit'])->name('admin.page-return.edit');
+            Route::put('/update/{id}', [PageReturnAdminController::class, 'update'])->name('admin.page-return.update');
+            Route::get('/delete/{id}', [PageReturnAdminController::class, 'delete'])->name('admin.page-return.delete');
+        });
+        Route::prefix('user')->group(function () {
+            Route::get('/', [UserAdminController::class, 'index'])->name('admin.user');
         });
     });
 });

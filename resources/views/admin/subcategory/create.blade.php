@@ -14,19 +14,19 @@
             <!--TOKEN-->
             @csrf
             <div class="form-floating my-3 w-100">
-                <input type="text" class="form-control" id="name" value="" name="name" required>
+                <input type="text" class="form-control" id="name" value="{{ old('name') }}" name="name" required>
                 <label for="name">Nazwa</label>
                 <span class="text-danger">@error('name') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3 w-100">
-                <input type="text" class="form-control" id="plural" value="" name="plural" required>
+                <input type="text" class="form-control" id="plural" value="{{ old('plural') }}" name="plural" required>
                 <label for="plural">L.mnoga</label>
                 <span class="text-danger">@error('plural') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3 w-100">
-                <input type="text" class="form-control" id="url" value="" name="url" required>
+                <input type="text" class="form-control" id="url" value="{{ old('url') }}" name="url" required>
                 <label for="url">URL</label>
                 <span class="text-danger">@error('url') {{$message}} @enderror</span>
             </div>
@@ -50,7 +50,7 @@
 
             <div class="d-flex justify-content-start align-items-center mt-4">
                 <button type="submit" class="btn btn-lg btn-primary me-2"><i class="fa-solid fa-floppy-disk me-2"></i>Zapisz</button>
-                <a href="{{route('admin.category')}}" class="btn btn-lg btn-secondary"><i class="fa-solid fa-x me-2"></i>Anuluj</a>
+                <a href="{{route('admin.category')}}" class="btn btn-lg btn-danger"><i class="fa-solid fa-x me-2"></i>Anuluj</a>
             </div>
         </form>
     </div>

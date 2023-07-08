@@ -37,20 +37,12 @@ class SubcategoryAdminController extends Controller
     public function edit($id)
     {
         return view('admin.subcategory.edit', [
-            'cat' => Category::get(),
+            'cat' => Category::orderBy('order')->get(),
             'subcat' => Subcategory::where('id', $id)->first(),
         ]);
     }
-    public function update(Request $request, $id)
+    public function update(SubcategoryRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|max:255',
-            'plural' => 'required|max:255',
-            'url' =>  ['required', 'max:255', Rule::unique('subcategories')->ignore($id), Rule::unique('categories')],
-            'category_id' => ['required', Rule::notIn(['Wybierz'])],
-            'order' => 'required|integer',
-        ]);
-
         $res = Subcategory::where('id', '=', $id)->update([
             'name' => $request->name,
             'plural' => $request->plural,

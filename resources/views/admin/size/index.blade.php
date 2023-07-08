@@ -10,7 +10,7 @@
     <hr>
     @foreach($siz as $s)
     <div class="col-12 col-md-6 col-lg-3 mb-4">
-        <div class="border p-4 shadow d-flex flex-column justify-content-center align-items-center rounded h-100">
+        <div class="border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100">
             <h1 class="mt-4 text-black">{{$s->value}}</h1>
             <div class="mt-4 d-flex flex-row justify-content-center align-items-center">
                 <a href="{{route('admin.size.edit', $s->id)}}" class="btn btn-primary btn-lg me-2"><i class="fa-solid fa-pen-to-square"></i></a>

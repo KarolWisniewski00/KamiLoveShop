@@ -22,6 +22,8 @@ class PhotoAdminController extends Controller
         $photoName = str_replace(' ', '_', $photoName);
         $photoName = str_replace('.', '_', $photoName);
         $photoName = str_replace(',', '_', $photoName);
+        $photoName = str_replace('(', '_', $photoName);
+        $photoName = str_replace(')', '_', $photoName);
 
         $timestamp = time();
         $extension = $photo->getClientOriginalExtension();
@@ -42,6 +44,8 @@ class PhotoAdminController extends Controller
         $photoName = str_replace(' ', '_', $photoName);
         $photoName = str_replace('.', '_', $photoName);
         $photoName = str_replace(',', '_', $photoName);
+        $photoName = str_replace('(', '_', $photoName);
+        $photoName = str_replace(')', '_', $photoName);
 
         $timestamp = time();
         $extension = $photo->getClientOriginalExtension();
