@@ -35,12 +35,20 @@ class PageRuleAdminController extends Controller
     }
     public function edit($id)
     {
+        $section = Rule::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-rule')->with('fail', 'Sekcja nie istnieje.');
+        }
         return view('admin.page-rule.edit', [
             'section' => Rule::where('id', $id)->first()
         ]);
     }
     public function update(SectionRequest $request, $id)
     {
+        $section = Rule::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-rule')->with('fail', 'Sekcja nie istnieje.');
+        }
         $res = Rule::where('id', $id)->update([
             'type' => $request->type,
             'content' => $request->content,
@@ -54,6 +62,10 @@ class PageRuleAdminController extends Controller
     }
     public function delete($id)
     {
+        $section = Rule::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-rule')->with('fail', 'Sekcja nie istnieje.');
+        }
         $res = Rule::where('id', $id)->delete();
         if ($res) {
             return redirect()->route('admin.page-rule')->with('success', 'Sekcja została pomyślnie usunięta.');

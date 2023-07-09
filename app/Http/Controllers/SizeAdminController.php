@@ -33,12 +33,20 @@ class SizeAdminController extends Controller
     }
     public function edit($id)
     {
+        $size = Size::find($id);
+        if (!$size) {
+            return redirect()->route('admin.size')->with('fail', 'Rozmiar nie istnieje.');
+        }
         return view('admin.size.edit', [
             'siz' => Size::where('id', $id)->first(),
         ]);
     }
     public function update(SizeRequest $request, $id)
     {
+        $size = Size::find($id);
+        if (!$size) {
+            return redirect()->route('admin.size')->with('fail', 'Rozmiar nie istnieje.');
+        }
         $res = Size::where('id', '=', $id)->update([
             'value' => $request->value,
         ]);
@@ -50,6 +58,10 @@ class SizeAdminController extends Controller
     }
     public function delete($id)
     {
+        $size = Size::find($id);
+        if (!$size) {
+            return redirect()->route('admin.size')->with('fail', 'Rozmiar nie istnieje.');
+        }
         $res = Size::where('id', '=', $id)->delete();
         if ($res) {
             return redirect()->route('admin.size')->with('success', 'Rozmiar został pomyślnie usunięty.');

@@ -34,12 +34,20 @@ class PageReturnAdminController extends Controller
     }
     public function edit($id)
     {
+        $section = Ret::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-return')->with('fail', 'Sekcja nie istnieje.');
+        }
         return view('admin.page-return.edit', [
             'section' => Ret::where('id', $id)->first()
         ]);
     }
     public function update(SectionRequest $request, $id)
     {
+        $section = Ret::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-return')->with('fail', 'Sekcja nie istnieje.');
+        }
         $res = Ret::where('id', '=', $id)->update([
             'type' => $request->type,
             'content' => $request->content,
@@ -53,6 +61,10 @@ class PageReturnAdminController extends Controller
     }
     public function delete($id)
     {
+        $section = Ret::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-return')->with('fail', 'Sekcja nie istnieje.');
+        }
         $res = Ret::where('id', '=', $id)->delete();
         if ($res) {
             return redirect()->route('admin.page-return')->with('success', 'Sekcja została pomyślnie usunięta.');

@@ -24,21 +24,34 @@ class PhotoAdminController extends Controller
         $photoName = str_replace(',', '_', $photoName);
         $photoName = str_replace('(', '_', $photoName);
         $photoName = str_replace(')', '_', $photoName);
+        $photoName = str_replace('-', '_', $photoName);
 
         $timestamp = time();
         $extension = $photo->getClientOriginalExtension();
         $fileName = $photoName . '_' . $timestamp . '.' . $extension;
 
-        $photo->move(public_path('/photos'), $fileName);
-
-        return redirect()->route('admin.photo')->with('success', 'Zdjęcie zostało pomyślnie zapisane.');
+        $res = $photo->move(public_path('/photos'), $fileName);
+        if ($res) {
+            return redirect()->route('admin.photo')->with('success', 'Zdjęcie zostało pomyślnie zapisane.');
+        } else {
+            return redirect()->route('admin.photo')->with('fail', 'Zdjęcie nie zostało zapisane.');
+        }
     }
     public function edit($filename)
     {
+        $filePath = public_path('photos/' . $filename);
+        if (!file_exists($filePath)) {
+            return redirect()->route('admin.photo')->with('fail', 'Zdjęcie nie istnieje.');
+        }
         return view('admin.photo.edit', ['filename' => $filename]);
     }
     public function update(PhotoRequest $request, $filename)
     {
+        $filePath = public_path('photos/' . $filename);
+        if (!file_exists($filePath)) {
+            return redirect()->route('admin.photo')->with('fail', 'Zdjęcie nie istnieje.');
+        }
+
         $photo = $request->file('photo');
         $photoName = $request->input('photo_name');
         $photoName = str_replace(' ', '_', $photoName);
@@ -46,6 +59,7 @@ class PhotoAdminController extends Controller
         $photoName = str_replace(',', '_', $photoName);
         $photoName = str_replace('(', '_', $photoName);
         $photoName = str_replace(')', '_', $photoName);
+        $photoName = str_replace('-', '_', $photoName);
 
         $timestamp = time();
         $extension = $photo->getClientOriginalExtension();
@@ -56,17 +70,24 @@ class PhotoAdminController extends Controller
             unlink($existingFilePath);
         }
 
-        $photo->move(public_path('/photos'), $newFileName);
+        $res = $photo->move(public_path('/photos'), $newFileName);
 
-        return redirect()->route('admin.photo')->with('success', 'Zdjęcie zostało pomyślnie zaktualizowane.');
+        if ($res) {
+            return redirect()->route('admin.photo')->with('success', 'Zdjęcie zostało pomyślnie zapisane.');
+        } else {
+            return redirect()->route('admin.photo')->with('fail', 'Zdjęcie nie zostało zapisane.');
+        }
     }
 
     public function delete($filename)
     {
         $filePath = public_path('photos/' . $filename);
-    
+        if (!file_exists($filePath)) {
+            return redirect()->route('admin.photo')->with('fail', 'Zdjęcie nie istnieje.');
+        }
+
         if (file_exists($filePath)) {
-            unlink($filePath);
+            $res = unlink($filePath);
 
             $photos = session('photos', []);
             $index = array_search($filename, $photos);
@@ -74,11 +95,12 @@ class PhotoAdminController extends Controller
                 unset($photos[$index]);
                 session()->put('photos', $photos);
             }
-    
-            return redirect()->route('admin.photo')->with('success', 'Zdjęcie zostało pomyślnie usunięte.');
         }
-    
-        return redirect()->route('admin.photo')->with('fail', 'Nie można odnaleźć zdjęcia o podanej nazwie.');
+
+        if ($res) {
+            return redirect()->route('admin.photo')->with('success', 'Zdjęcie zostało pomyślnie usunięte.');
+        } else {
+            return redirect()->route('admin.photo')->with('fail', 'Zdjęcie nie zostało usunięte.');
+        }
     }
-    
 }

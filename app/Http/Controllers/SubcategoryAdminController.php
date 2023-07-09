@@ -36,6 +36,10 @@ class SubcategoryAdminController extends Controller
     }
     public function edit($id)
     {
+        $subcategory = Subcategory::find($id);
+        if (!$subcategory) {
+            return redirect()->route('admin.subcategory')->with('fail', 'Podkategoria nie istnieje.');
+        }
         return view('admin.subcategory.edit', [
             'cat' => Category::orderBy('order')->get(),
             'subcat' => Subcategory::where('id', $id)->first(),
@@ -43,6 +47,10 @@ class SubcategoryAdminController extends Controller
     }
     public function update(SubcategoryRequest $request, $id)
     {
+        $subcategory = Subcategory::find($id);
+        if (!$subcategory) {
+            return redirect()->route('admin.subcategory')->with('fail', 'Podkategoria nie istnieje.');
+        }
         $res = Subcategory::where('id', '=', $id)->update([
             'name' => $request->name,
             'plural' => $request->plural,
@@ -58,6 +66,10 @@ class SubcategoryAdminController extends Controller
     }
     public function delete($id)
     {
+        $subcategory = Subcategory::find($id);
+        if (!$subcategory) {
+            return redirect()->route('admin.subcategory')->with('fail', 'Podkategoria nie istnieje.');
+        }
         $res = Subcategory::where('id', '=', $id)->delete();
         if ($res) {
             return redirect()->route('admin.category')->with('success', 'Kategoria została pomyślnie usunięta.');

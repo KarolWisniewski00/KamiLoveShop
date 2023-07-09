@@ -38,12 +38,20 @@ class PageHeroAdminController extends Controller
     }
     public function edit($id)
     {
+        $hero = Hero::find($id);
+        if (!$hero) {
+            return redirect()->route('admin.page-hero')->with('fail', 'Hero nie istnieje.');
+        }
         return view('admin.page-hero.edit', [
             'her' => Hero::where('id', $id)->first()
         ]);
     }
     public function update(HeroRequest $request, $id)
     {
+        $hero = Hero::find($id);
+        if (!$hero) {
+            return redirect()->route('admin.page-hero')->with('fail', 'Hero nie istnieje.');
+        }
         $res = Hero::where('id', '=', $id)->update([
             'h1' => $request->h1,
             'p' => $request->p,
@@ -60,6 +68,10 @@ class PageHeroAdminController extends Controller
     }
     public function delete($id)
     {
+        $hero = Hero::find($id);
+        if (!$hero) {
+            return redirect()->route('admin.page-hero')->with('fail', 'Hero nie istnieje.');
+        }
         $res = Hero::where('id', '=', $id)->delete();
         if ($res) {
             return redirect()->route('admin.page-hero')->with('success', 'Hero został pomyślnie usunięty.');

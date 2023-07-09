@@ -40,12 +40,20 @@ class CategoryAdminController extends Controller
     }
     public function edit($id)
     {
+        $category = Category::find($id);
+        if (!$category) {
+            return redirect()->route('admin.category')->with('fail', 'Kategoria nie istnieje.');
+        }
         return view('admin.category.edit', [
             'cat' => Category::where('id', $id)->first(),
         ]);
     }
     public function update(CategoryRequest $request, $id)
     {
+        $category = Category::find($id);
+        if (!$category) {
+            return redirect()->route('admin.category')->with('fail', 'Kategoria nie istnieje.');
+        }
         $res = Category::where('id', '=', $id)->update([
             'name' => $request->name,
             'plural' => $request->plural,
@@ -61,6 +69,10 @@ class CategoryAdminController extends Controller
         }
     }
     public function delete($id){
+        $category = Category::find($id);
+        if (!$category) {
+            return redirect()->route('admin.category')->with('fail', 'Kategoria nie istnieje.');
+        }
         $res = Category::where('id', '=', $id)->delete();
         if ($res) {
             return redirect()->route('admin.category')->with('success', 'Kategoria została pomyślnie usunięta.');

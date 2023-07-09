@@ -35,12 +35,20 @@ class PagePolicyAdminController extends Controller
     }
     public function edit($id)
     {
+        $section = Policy::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-policy')->with('fail', 'Sekcja nie istnieje.');
+        }
         return view('admin.page-policy.edit', [
             'section' => Policy::where('id', $id)->first()
         ]);
     }
     public function update(SectionRequest $request, $id)
     {
+        $section = Policy::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-policy')->with('fail', 'Sekcja nie istnieje.');
+        }
         $res = Policy::where('id', $id)->update([
             'type' => $request->type,
             'content' => $request->content,
@@ -54,6 +62,10 @@ class PagePolicyAdminController extends Controller
     }
     public function delete($id)
     {
+        $section = Policy::find($id);
+        if (!$section) {
+            return redirect()->route('admin.page-policy')->with('fail', 'Sekcja nie istnieje.');
+        }
         $res = Policy::where('id', $id)->delete();
         if ($res) {
             return redirect()->route('admin.page-policy')->with('success', 'Sekcja została pomyślnie usunięta.');
