@@ -8,7 +8,7 @@
         </div>
     </div>
     <hr>
-    @foreach(File::files(public_path('photos')) as $file)
+    @foreach($paginatedFiles as $file)
     <div class="col-12 col-md-4 col-xl-2 p-2">
         <div class="d-flex flex-column justify-content-between align-items-center h-100 border">
             <div class="d-flex flex-column justify-content-center align-items-center h-75 overflow-hidden">
@@ -21,5 +21,7 @@
         </div>
     </div>
     @endforeach
+    {{ $paginatedFiles->links() }}
+
 </div>
 @endsection

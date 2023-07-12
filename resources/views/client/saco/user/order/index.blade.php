@@ -55,7 +55,7 @@
                                             <div class="col-12 offset-md-3 col-md-6">
                                                 <div class="d-flex flex-column justify-content-center align-items-center">
                                                     <img class="img-fluid" alt="" src="{{asset('svg/saco-order.svg')}}">
-                                                    <div class="h4 m-0 p-0 my-3">Brak zamówień!</div>
+                                                    <div class="h4 m-0 p-0 my-3">Nie znaleziono zamówień!</div>
                                                     <a href="{{route('category.show','default')}}" class="btn btn-custom-2 my-3 btn-lg"><i class="fa-solid fa-cart-shopping me-2"></i>Zrób zakupy</a>
                                                 </div>
                                             </div>

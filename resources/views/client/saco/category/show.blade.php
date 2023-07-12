@@ -35,7 +35,7 @@
         <div class="row">
             <!--FILTERS-->
             <div class="col-12 col-lg-3 mb-4">
-                <form class="accordion " id="accordionPanelsStayOpenExample" method="GET" action="">
+                <form class="accordion " id="accordionPanelsStayOpenExample" method="GET" action="{{ route('category.show', $slug) }}">
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="panelsStayOpen-headingOne">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
@@ -47,16 +47,16 @@
                                 <div data-role="rangeslider" class="d-flex flex-column justify-content-center align-items-center">
                                     <div>
                                         <label for="price_min">Od:</label>
-                                        <input type="range" name="price_min" id="price_min" class="slider my-2" value="$last_min" min="0" max="$max">
+                                        <input type="range" name="price_min" id="price_min" class="slider my-2" value="{{ $request->input('price_min', 0) }}" min="0" max="{{ $max }}">
                                     </div>
                                     <div>
                                         <label for="price_max">Do:</label>
-                                        <input type="range" name="price_max" id="price_max" class="slider my-2" value="$last_max" min="0" max="$max">
+                                        <input type="range" name="price_max" id="price_max" class="slider my-2" value="{{ $request->input('price_max', $max) }}" min="0" max="{{ $max }}">
                                     </div>
                                 </div>
                                 <div>
-                                    <span id="price_min_value"></span> PLN -
-                                    <span id="price_max_value"></span> PLN
+                                    <span id="price_min_value">{{ $request->input('price_min', 0) }}</span> PLN -
+                                    <span id="price_max_value">{{ $request->input('price_max', $max) }}</span> PLN
                                 </div>
                             </div>
                         </div>
@@ -70,41 +70,27 @@
                         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                             <div class="accordion-body">
                                 @foreach($pro_cat as $c)
-                                <a href="{{route('category.show',$c->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
+                                <a href="{{route('category.show', $c->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">{{$c->plural}}</div>
                                     </div>
                                     <span class="badge bg-custom rounded-pill">
                                         @php
-                                        $count = 0;
+                                        $count = $prod->where('category_id', $c->id)->count();
                                         @endphp
-                                        @foreach($pro_prod as $p)
-                                        @if($p->category_id == $c->id)
-                                        @php
-                                        $count++;
-                                        @endphp
-                                        @endif
-                                        @endforeach
                                         {{$count}}
                                     </span>
                                 </a>
                                 @foreach($pro_subcat as $sc)
                                 @if ($sc->category_id == $c->id)
-                                <a href="{{route('category.show',$c->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
+                                <a href="{{route('category.show', $c->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold text-muted ps-2" style="inline-size: 100%;overflow-wrap: break-word;">{{$sc->plural}}</div>
                                     </div>
                                     <span class="badge bg-custom-1 rounded-pill">
                                         @php
-                                        $count = 0;
+                                        $count = $prod->where('subcategory_id', $sc->id)->count();
                                         @endphp
-                                        @foreach($pro_prod as $p)
-                                        @if($p->subcategory_id == $sc->id)
-                                        @php
-                                        $count++;
-                                        @endphp
-                                        @endif
-                                        @endforeach
                                         {{$count}}
                                     </span>
                                 </a>
@@ -122,22 +108,24 @@
                         </h2>
                         <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingThree">
                             <div class="accordion-body">
+                                @foreach($sizes as $size)
                                 <div class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="$b" name="broker_$key" id="flexCheck_$key">
-                                            <label class="form-check-label fw-bold" for="flexCheck_$key">
-                                                $b
+                                            <input class="form-check-input" type="checkbox" value="{{ $size->size->id }}" name="sizes[]" id="flexCheck_{{ $size->size->id }}">
+                                            <label class="form-check-label fw-bold" for="flexCheck_{{ $size->size->id }}">
+                                                {{ $size->size->value }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
                     <div class="accordion-item py-4">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-lg btn-custom rounded-0" type="submit">Filtruj</button>
+                            <button class="btn btn btn-lg btn-custom rounded-0" type="submit">Filtruj</button>
                         </div>
                     </div>
                 </form>
@@ -148,12 +136,12 @@
                 <!--SORT-->
                 <div class="row mb-4">
                     <div class="col-6">
-                        <div class="text-muted">Pokazano {{count($prod)}}
-                            @if(count($prod) == 1)
+                        <div class="text-muted">Pokazano {{ $prod->total() }}
+                            @if($prod->total() == 1)
                             produkt
-                            @elseif(count($prod) > 1 && count($prod) <= 4) produkty @elseif(count($prod)> 4 || count($prod) == 0)
-                                produktów
-                                @endif
+                            @else
+                            produktów
+                            @endif
                         </div>
                     </div>
                     <div class="col-6">
@@ -173,13 +161,22 @@
                 <div class="row products">
                     @foreach ($prod as $p)
                     @if ($p->sale_price != 0)
-                    <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{$p->sale_price}}" data-id="{{$p->id}}">
+                    <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{ $p->sale_price }}" data-id="{{ $p->id }}">
                         @else
-                        <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{$p->normal_price}}" data-id="{{$p->id}}">
+                        <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{ $p->normal_price }}" data-id="{{ $p->id }}">
                             @endif
                             @include('client.saco.module.product-card')
                         </div>
                         @endforeach
+                        @if ($prod->total() == 0)
+                        <div class="col-12">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img alt="" src="{{asset('svg/saco-product.svg')}}" class="img-fluid">
+                                <div class="h4 m-0 p-0 my-3">Nie znaleziono produktów!</div>
+                            </div>
+                        </div>
+                        @endif
+                        {{ $prod->links('client.saco.module.pagination') }}
                     </div>
                 </div>
                 <!--END PRODUCTS GRID-->
@@ -189,4 +186,23 @@
 </section>
 <!--END PAGES-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- ... Twój istniejący kod HTML ... -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Obsługa zmiany wartości na pasku suwakowym price_min
+        $('#price_min').on('input', function() {
+            var minPrice = $(this).val();
+            $('#price_min_value').text(minPrice);
+        });
+
+        // Obsługa zmiany wartości na pasku suwakowym price_max
+        $('#price_max').on('input', function() {
+            var maxPrice = $(this).val();
+            $('#price_max_value').text(maxPrice);
+        });
+    });
+</script>
+
 @endsection

@@ -4,12 +4,30 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PhotoRequest;
 use Illuminate\Http\Request;
-
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Collection;
 class PhotoAdminController extends Controller
 {
     public function index()
     {
-        return view('admin.photo.index');
+        $files = collect(File::files(public_path('photos')));
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 6;
+        
+        $currentPageItems = $files->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        
+        $paginatedFiles = new LengthAwarePaginator(
+            $currentPageItems,
+            $files->count(),
+            $perPage,
+            $currentPage,
+            ['path' => Paginator::resolveCurrentPath()]
+        );
+        return view('admin.photo.index',[
+            'paginatedFiles'=>$paginatedFiles
+        ]);
     }
     public function create()
     {

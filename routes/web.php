@@ -69,9 +69,6 @@ Route::prefix('/')->group(function () {
     Route::prefix('contact')->group(function () {
         Route::get('/', [IndexController::class, 'index'])->name('contact');
     });
-    Route::prefix('about')->group(function () {
-        Route::get('/', [IndexController::class, 'index'])->name('about');
-    });
 });
 
 //AUTH

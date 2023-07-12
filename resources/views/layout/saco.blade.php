@@ -109,7 +109,6 @@
                     <div class="col">
                         <h5 class="fw-bold fs-4 text-uppercase text-custom">Informacje</h5>
                         <ul class="nav flex-column">
-                            <li class="nav-item mb-2"><a href="{{ route('about') }}" class="nav-link p-0 text-custom-1">O nas</a></li>
                             <li class="nav-item mb-2"><a href="{{ route('return') }}" class="nav-link p-0 text-custom-1">Zwroty i reklamacje</a></li>
                             <li class="nav-item mb-2"><a href="{{ route('rule') }}" class="nav-link p-0 text-custom-1">Regulamin</a></li>
                             <li class="nav-item mb-2"><a href="{{ route('policy') }}" class="nav-link p-0 text-custom-1">Polityka prywatności</a></li>

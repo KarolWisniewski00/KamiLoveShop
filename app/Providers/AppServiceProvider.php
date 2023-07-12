@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Subcategory;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
@@ -39,5 +40,6 @@ class AppServiceProvider extends ServiceProvider
             $subcat = Subcategory::orderBy('order')->get();
             $view->with('pro_subcat', $subcat);
         });
+        Paginator::useBootstrapFive();
     }
 }
