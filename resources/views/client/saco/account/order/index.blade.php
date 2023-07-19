@@ -97,7 +97,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                        <div><a href="" class="btn btn-sm btn-custom rounded text-white"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+                                        <div><a href="{{route('user.order.show', $order->id )}}" class="btn btn-sm btn-custom rounded text-white"><i class="fa-solid fa-magnifying-glass"></i></a></div>
                                     </div>
                                 </td>
                             </tr>

@@ -15,7 +15,7 @@ class BusketController2 extends Controller
         $buskets = Busket::where('user_id', '=', Session::get('login_id'))->get();
         $products = Product::get();
         $sum = $this->prepare_sum($buskets, $products);
-        return view('client.saco.user.busket.index', [
+        return view('client.saco.account.busket.index', [
             'buskets' => $buskets,
             'sum' => $sum
         ]);

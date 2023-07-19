@@ -81,12 +81,16 @@ Route::middleware(['AlreadyLoggedIn'])->group(function () {
 Route::middleware(['isLoggedIn'])->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
+        Route::get('/edit/{slug}', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('/update/{slug}', [UserController::class, 'update'])->name('user.update');
+        Route::put('/delete', [UserController::class, 'delete'])->name('user.delete');
 
         Route::prefix('busket')->group(function () {
             Route::get('/', [BusketController2::class, 'index'])->name('user.busket');
         });
         Route::prefix('order')->group(function () {
             Route::get('/', [OrderController2::class, 'index'])->name('user.order');
+            Route::get('{slug}', [OrderController2::class, 'show'])->name('user.order.show');
         });
     });
 });

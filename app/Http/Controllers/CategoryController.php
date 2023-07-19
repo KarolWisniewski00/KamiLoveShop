@@ -95,10 +95,16 @@ class CategoryController extends Controller
         //SAFETY ROUTE
         //Default 
         if ($slug == 'default') {
-            $prod = Product::orderBy('order')->paginate(10);
+            $prod = Product::orderBy('order');
+            $max = $prod->max('normal_price');
+            $prod = $this->filter_by_price($prod, $request);
+            $prod = $prod->paginate(15);
             return view('client.saco.category.show', [
                 'slug' => $slug,
                 'prod' => $prod,
+                'request' => $request,
+                'max' => $max,
+                'sizes' => null
             ]);
         }
         //No exist

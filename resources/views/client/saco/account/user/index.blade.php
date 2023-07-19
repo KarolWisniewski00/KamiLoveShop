@@ -38,9 +38,9 @@
                         </li>
                     </ul>
                     <div class="d-flex justify-content-start align-items-center mt-4">
-                        <a href="" class="me-2 btn btn-custom"><i class="fa-solid fa-pen-to-square me-2"></i>Edytuj konto</a>
-                        <a href="" class="me-2 btn btn-custom-2"><i class="fa-solid fa-key me-2"></i>Edytuj hasło</a>
-                        <a href="" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć to konto?');"><i class="fa-solid fa-trash me-2"></i>Usuń konto</a>
+                        <a href="{{route('user.edit', 'account')}}" class="me-2 btn btn-custom"><i class="fa-solid fa-pen-to-square me-2"></i>Edytuj konto</a>
+                        <a href="{{route('user.edit', 'password')}}" class="me-2 btn btn-custom-2"><i class="fa-solid fa-key me-2"></i>Edytuj hasło</a>
+                        <a href="{{route('user.delete')}}" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć to konto?');"><i class="fa-solid fa-trash me-2"></i>Usuń konto</a>
                     </div>
                     <!--END VIEW-->
                 </div>
