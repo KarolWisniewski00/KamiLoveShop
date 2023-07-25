@@ -87,9 +87,15 @@ Route::middleware(['isLoggedIn'])->group(function () {
 
         Route::prefix('busket')->group(function () {
             Route::get('/', [BusketController2::class, 'index'])->name('user.busket');
+            Route::post('/store', [BusketController2::class, 'store'])->name('user.busket.store');
+            Route::put('/minus', [BusketController2::class, 'minus'])->name('user.busket.minus');
+            Route::put('/plus', [BusketController2::class, 'plus'])->name('user.busket.plus');
+            Route::get('/delete/{id}', [BusketController2::class, 'delete'])->name('user.busket.delete');
         });
         Route::prefix('order')->group(function () {
             Route::get('/', [OrderController2::class, 'index'])->name('user.order');
+            Route::get('/create', [OrderController2::class, 'create'])->name('user.order.create');
+            Route::post('/store', [OrderController2::class, 'store'])->name('user.order.store');
             Route::get('{slug}', [OrderController2::class, 'show'])->name('user.order.show');
         });
     });

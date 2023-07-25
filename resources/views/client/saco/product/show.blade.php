@@ -90,7 +90,7 @@
                         @if($broker->product_id == $prod->id)
                         @foreach($sizes as $size)
                         @if ($size->id == $broker->size_id)
-                        <button type="button" class="btn btn-lg btn-custom rounded-pill m-1 size">{{$size->value}}</button>
+                        <button type="button" class="btn btn-lg btn-custom rounded-pill m-1 size mb-3">{{$size->value}}</button>
                         @endif
                         @endforeach
                         @endif
@@ -99,23 +99,18 @@
                         @endif
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center mb-4 mt-2">
-                        @if (in_array($prod->id,$sizes_id))
-                        <div id="busket">
-
-                        </div>
-                        @else
-                        <form method="POST" action="{{route('busket_new_form')}}">
+                        <form method="POST" action="{{route('user.busket.store')}}">
                             @csrf
                             <input type="hidden" name="product_id" value="{{$prod->id}}">
                             <input type="hidden" name="quantity" value="1">
-                            <button type="submit" class="btn btn-lg btn-custom w-100 h-100">
+                            <input type="hidden" name="size" value="0">
+                            <button type="submit" class="btn btn-lg btn-custom w-100 h-100" {{in_array($prod->id,$sizes_id) ? 'disabled' : ''}}>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div><i class="fa-solid fa-cart-shopping me-2"></i></div>
                                     <div>Dodaj do koszyka</div>
                                 </div>
                             </button>
                         </form>
-                        @endif
                     </div>
                     <p class="text-muted mt-2">SKU: {{$prod->SKU}}</p>
                 </div>
@@ -141,41 +136,4 @@
     </div>
 </section>
 <!--END PRODUCT-->
-<script>
-    var formAdded = false;
-    var form = '';
-
-    $('.size').click(function() {
-        var value = $(this).text();
-        if (!formAdded) {
-            form = `
-                <form method="POST" action="{{route('busket_new_form')}}">
-                    @csrf
-                    <input type="hidden" name="product_id" value="{{$prod->id}}">
-                    <input type="hidden" name="quantity" value="1">
-                    <input type="hidden" id="size_value" name="size_value" value="${value}">
-                    <button type="submit" class="btn btn-lg btn-custom-1 w-100 h-100">
-                        <div class="d-flex justify-content-start align-items-center">
-                            <div><i class="fa-solid fa-cart-shopping m-1"></i></div>
-                            <div>Dodaj do koszyka</div>
-                        </div>
-                    </button>
-                </form>`;
-            $('#busket').append(`
-                <div id="form-container">
-                    <p class="text-success" id="value-element">Wybrano: ${value}</p>
-                    ${form}
-                </div>
-            `);
-            valueElement = $('#value-element');
-            formAdded = true;
-        } else if (value !== valueElement.text().replace('Wybrano: ', '')) {
-            valueElement.text(`Wybrano: ${value}`);
-            $('#form-container form').replaceWith(form);
-            $('#size_value').val(value);
-        }
-
-        count++;
-    })
-</script>
 @endsection

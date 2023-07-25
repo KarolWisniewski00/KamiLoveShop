@@ -125,8 +125,9 @@
                                     <div class="d-flex flex-row justify-content-center align-items-center">
                                         @foreach($pro_prod as $p)
                                         @if ($p->id == $busket->product_id)
-                                        <form method="POST" action="">
+                                        <form method="POST" action="{{route('user.busket.minus')}}">
                                             @csrf
+                                            @method('PUT')
                                             <input type="hidden" name="product_id" value="{{$p->id}}">
                                             <input type="hidden" name="quantity" value="-1">
                                             <input type="hidden" name="size_value" value="{{$busket->size_value}}">
@@ -135,8 +136,9 @@
                                             </button>
                                         </form>
                                         <div class="fw-bold">{{$busket->quantity}}</div>
-                                        <form method="POST" action="">
+                                        <form method="POST" action="{{route('user.busket.plus')}}">
                                             @csrf
+                                            @method('PUT')
                                             <input type="hidden" name="product_id" value="{{$p->id}}">
                                             <input type="hidden" name="quantity" value="1">
                                             <input type="hidden" name="size_value" value="{{$busket->size_value}}">
@@ -163,7 +165,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                        <div><a href="" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');"><i class="fa-solid fa-trash"></i></a></div>
+                                        <div><a href="{{route('user.busket.delete',$busket->id)}}" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć ten produkt?');"><i class="fa-solid fa-trash"></i></a></div>
                                     </div>
                                 </td>
                             </tr>
@@ -192,7 +194,7 @@
                         </ul>
                         <div class="d-flex justify-content-start align-items-center mt-4">
                             @if (count($buskets)!=0)
-                            <a href="" class="me-2 btn btn-custom"><i class="fa-solid fa-forward me-2"></i>Przejdź do płatności</a>
+                            <a href="{{route('user.order.create')}}" class="me-2 btn btn-custom"><i class="fa-solid fa-forward me-2"></i>Przejdź do płatności</a>
                             @endif
                             <a href="{{route('category.show','default')}}" class="btn btn-custom-2"><i class="fa-solid fa-cart-shopping me-2"></i>Kup coś jeszcze</a>
                         </div>
