@@ -15,10 +15,10 @@
     </div>
     <div class="position-absolute top-0 start-100 p-2" style="transform:translateX(-100%)">
         @if ($p->new != 0)
-        <div class="bg-custom p-2 text-white mb-2 shadow">Nowość!</div>
+        <div class="bg-custom p-2 text-white mb-2 ">Nowość!</div>
         @endif
         @if ($p->sale_price != 0)
-        <div class="bg-custom-1 p-2 text-white shadow">-{{round(100-(($p->sale_price*100)/$p->normal_price),2)}}%</div>
+        <div class="bg-custom-1 p-2 text-white ">-{{round(100-(($p->sale_price*100)/$p->normal_price),2)}}%</div>
         @endif
     </div>
 </a>

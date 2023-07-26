@@ -138,24 +138,23 @@
                 <!--SORT-->
                 <div class="row mb-4">
                     <div class="col-6">
-                        <div class="text-muted">Pokazano {{ $prod->total() }}
-                            @if($prod->total() == 1)
-                            produkt
-                            @else
-                            produktów
-                            @endif
+                        <div class="d-flex justify-content-start align-items-center">
+                            <div class="text-muted">Pokazano {{ $prod->total() }}
+                                @if($prod->total() == 1)
+                                produkt
+                                @else
+                                produktów
+                                @endif
+                            </div>
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="d-flex justify-content-end align-items-center">
-                            <div class="dropdown">
-                                <button class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Sortuj</button>
-                                <ul class="dropdown-menu rounded-0">
-                                    <li><button class="dropdown-item">Domyślne sortowanie</button></li>
-                                    <li><button class="dropdown-item">Sortuj po cenie od najniższej</button></li>
-                                    <li><button class="dropdown-item">Sortuj po cenie od najwyższej</button></li>
-                                </ul>
-                            </div>
+                            <select id="sort_option" class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <option class="bg-white text-black" value="default">Domyślne sortowanie</option>
+                                <option class="bg-white text-black" value="low_to_high">Sortuj po cenie od najniższej</option>
+                                <option class="bg-white text-black" value="high_to_low">Sortuj po cenie od najwyższej</option>
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -188,9 +187,6 @@
 </section>
 <!--END PAGES-->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<!-- ... Twój istniejący kod HTML ... -->
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
         // Obsługa zmiany wartości na pasku suwakowym price_min
@@ -203,6 +199,29 @@
         $('#price_max').on('input', function() {
             var maxPrice = $(this).val();
             $('#price_max_value').text(maxPrice);
+        });
+        // Obsługa zmiany sortowania
+        $('#sort_option').on('change', function() {
+            var selectedOption = $(this).val();
+
+            if (selectedOption === 'default') {
+                // If the default sorting is selected, simply reset the products to their original order
+                $('.products').find('.single').sort(function(a, b) {
+                    return $(a).data('id') - $(b).data('id');
+                }).appendTo('.products');
+            } else {
+                // Sort products based on price
+                $('.products').find('.single').sort(function(a, b) {
+                    var priceA = parseFloat($(a).data('price'));
+                    var priceB = parseFloat($(b).data('price'));
+
+                    if (selectedOption === 'low_to_high') {
+                        return priceA - priceB;
+                    } else if (selectedOption === 'high_to_low') {
+                        return priceB - priceA;
+                    }
+                }).appendTo('.products');
+            }
         });
     });
 </script>

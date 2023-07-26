@@ -196,8 +196,8 @@ Route::get('/contact', [ContactController::class, 'contact'])->name('contact');
 
 //AUTH OLD
 Route::middleware(['AlreadyLoggedIn'])->group(function () {
-    Route::get('/login', [AuthController::class, 'login_page']);
-    Route::get('/register', [AuthController::class, 'register_page']);
+    Route::get('/login', [AuthController::class, 'login_page'])->name('login');
+    Route::get('/register', [AuthController::class, 'register_page'])->name('register');
     Route::post('/login', [AuthController::class, 'login_form'])->name('login_form');
     Route::post('/register', [AuthController::class, 'register_form'])->name('register_form');
 });

@@ -9,13 +9,14 @@ use App\Models\Product;
 use App\Models\Size;
 use App\Models\Subcategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class ProductAdminController extends Controller
 {
     public function index()
     {
         return view('admin.product.index', [
-            'prod' => Product::orderBy('order')->get(),
+            'prod' => Product::orderBy('order')->paginate(20),
         ]);
     }
     public function create()

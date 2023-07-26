@@ -10,7 +10,7 @@ class PageReturnAdminController extends Controller
 {
     public function index(){
         return view('admin.page-return.index',[
-            'section' => Ret::orderBy('order')->get(),
+            'section' => Ret::orderBy('order')->paginate(20),
         ]);
     }
     public function create()

@@ -11,7 +11,7 @@ class PageRuleAdminController extends Controller
     public function index()
     {
         return view('admin.page-rule.index', [
-            'section' => Rule::orderBy('order')->get(),
+            'section' => Rule::orderBy('order')->paginate(20),
         ]);
     }
     public function create()

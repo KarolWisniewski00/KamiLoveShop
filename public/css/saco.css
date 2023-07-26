@@ -226,3 +226,11 @@
     border-color: #618E09 !important;
     box-shadow: 0 0 0 .25rem rgba(97, 142, 9, .25) !important
 }
+.hover-footer{
+    scale: 1;
+    transition: 0.4s ease-in-out;
+}
+.hover-footer:hover{
+    scale: 1.1;
+    transition: 0.4s ease-in-out;
+}

@@ -14,7 +14,7 @@ class PhotoAdminController extends Controller
     {
         $files = collect(File::files(public_path('photos')));
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $perPage = 6;
+        $perPage = 12;
         
         $currentPageItems = $files->slice(($currentPage - 1) * $perPage, $perPage)->all();
         

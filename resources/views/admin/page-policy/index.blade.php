@@ -27,5 +27,6 @@
         </div>
     </div>
     @endforeach
+    {{ $section->links('client.saco.module.pagination') }}
 </div>
 @endsection

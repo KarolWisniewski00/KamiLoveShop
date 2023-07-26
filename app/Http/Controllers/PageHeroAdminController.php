@@ -11,7 +11,7 @@ class PageHeroAdminController extends Controller
     public function index()
     {
         return view('admin.page-hero.index', [
-            'her' => Hero::orderBy('order')->get()
+            'her' => Hero::orderBy('order')->paginate(8)
         ]);
     }
     public function create()

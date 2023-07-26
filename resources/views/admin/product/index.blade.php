@@ -128,6 +128,7 @@
                 @endforeach
             </tbody>
         </table>
+        {{ $prod->links('client.saco.module.pagination') }}
     </div>
 </div>
 @endsection

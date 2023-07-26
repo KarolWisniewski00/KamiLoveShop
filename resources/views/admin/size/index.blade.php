@@ -19,5 +19,6 @@
         </div>
     </div>
     @endforeach
+    {{ $siz->links('client.saco.module.pagination') }}
 </div>
 @endsection

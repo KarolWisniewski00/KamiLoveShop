@@ -11,7 +11,7 @@ class SizeAdminController extends Controller
     public function index()
     {
         return view('admin.size.index', [
-            'siz' => Size::get(),
+            'siz' => Size::paginate(16),
         ]);
     }
     public function create()

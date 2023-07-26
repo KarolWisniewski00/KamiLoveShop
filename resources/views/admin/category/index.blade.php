@@ -29,6 +29,7 @@
     </div>
     <hr>
     @foreach($subcat as $sc)
+    @if($sc->category != null)
     <div class="col-12 col-md-6 col-lg-3 mb-4">
         <div class="border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100">
             <img alt="category_photo" src="{{ asset('photos/'.$sc->category->photo)}}" class="img-fluid" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
@@ -43,6 +44,7 @@
             </div>
         </div>
     </div>
+    @endif
     @endforeach
 </div>
 @endsection

@@ -39,7 +39,7 @@
             </div>
 
             <div class="form-floating my-3">
-                <input type="text" class="form-control" id="sale_price" value="{{ old('sale_price') }}" name="sale_price">
+                <input type="text" class="form-control" id="sale_price" value="{{ old('sale_price') ? old('sale_price') : '0' }}" name="sale_price">
                 <label for="sale_price">Cena promocyjna</label>
                 <span class="text-danger">@error('sale_price') {{$message}} @enderror</span>
             </div>
@@ -51,7 +51,7 @@
             </div>
 
             <div class="form-floating my-3 w-100">
-                <input type="text" class="form-control" id="order" value="0" name="order">
+                <input type="text" class="form-control" id="order" value="{{ old('order') ? old('order') : 0 }}" name="order">
                 <label for="order">Kolejność</label>
                 <span class="text-danger">@error('order') {{$message}} @enderror</span>
             </div>
@@ -70,7 +70,7 @@
                 @endforeach
             </div>
 
-            <input type="hidden" name="size" value="" id="size" required>
+            <input type="hidden" name="size" value="{{ old('size') ? old('size') : '' }}" id="size" required>
 
             <div class="row rounded border p-4 mx-1 my-3">
                 <div class="col-12">
@@ -88,7 +88,7 @@
                 @endforeach
             </div>
 
-            <input type="hidden" name="category" value="" id="category" required>
+            <input type="hidden" name="category" value="{{ old('category') ? old('category') : '' }}" id="category" required>
 
             <div class="row rounded border p-4 mx-1 my-3">
                 <div class="col-12">
@@ -113,7 +113,7 @@
                 @endforeach
             </div>
 
-            <input type="hidden" name="subcategory" value="" id="subcategory" required>
+            <input type="hidden" name="subcategory" value="{{ old('subcategory') ? old('subcategory') : '' }}" id="subcategory" required>
 
             <div class="row border rounded p-4 mx-1 my-3">
                 <div class="col-12 col-md-6">
@@ -280,14 +280,25 @@
     });
     //SIZE
     $(document).ready(function() {
+        var sizeVal = $('#size').val();
         var selectedSizes = [];
+
+        if (sizeVal !== '') {
+            selectedSizes = sizeVal.split(',').map(function(item) {
+                return parseInt(item); // Assuming the size IDs are integers
+            });
+
+            // Add a class to the previously selected buttons
+            selectedSizes.forEach(function(size) {
+                $('.btn-size[data-id="' + size + '"]').addClass('border-primary');
+            });
+        }
 
         $('.btn-size').click(function() {
             $(this).toggleClass('border-primary');
-
             var size = $(this).data('id');
-
             var index = selectedSizes.indexOf(size);
+
             if (index === -1) {
                 selectedSizes.push(size);
             } else {
@@ -299,7 +310,7 @@
     });
     //CATEGORY
     $(document).ready(function() {
-        var selectedCategory = "";
+        var selectedCategory = $('#category').val();
 
         $('.btn-cat').click(function() {
             $('.btn-subcat').removeClass('border-primary');
@@ -312,10 +323,8 @@
             $('#category').val(selectedCategory);
             $('#subcategory').val(selectedSubcategory);
         });
-    });
-    //SUBCATEGORY
-    $(document).ready(function() {
-        var selectedSubcategory = "";
+
+        var selectedSubcategory = $('#subcategory').val();
 
         $('.btn-subcat').click(function() {
             $('.btn-cat').removeClass('border-primary');
@@ -328,6 +337,24 @@
             $('#subcategory').val(selectedSubcategory);
             $('#category').val(selectedCategory);
         });
+        if (selectedCategory !== '') {
+            if (selectedSubcategory !== '') {
+                $('.btn-subcat[data-id="' + selectedSubcategory + '"]').addClass('border-primary');
+            } else {
+                $('.btn-cat[data-id="' + selectedCategory + '"]').addClass('border-primary');
+            }
+        }
     });
 </script>
+<!--
+produkt nowy dokończyć zapis zdj przy walidacji
+edycja naprawa
+użytkownicy crud
+pages dla clienta
+opcjonalnie filtracja rozmiary dla klienta
+logowanie
+zamówienia show
+
+
+-->
 @endsection

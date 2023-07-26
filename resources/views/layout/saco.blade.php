@@ -120,7 +120,7 @@
         </div>
         <div class="bg-img-footer">
             <div class="d-flex justify-content-center align-items-center h-100 border-bot-custom">
-                <div class="border border-4 border-white px-4 py-2 fw-bold fs-1" style="background-color: rgba(0, 0, 0, 0.5);">420</div>
+                <a href="" class="border border-4 border-white px-4 py-2 fw-bold fs-1 text-decoration-none text-white hover-footer" style="background-color: rgba(0, 0, 0, 0.5);">420</a>
             </div>
         </div>
     </section>

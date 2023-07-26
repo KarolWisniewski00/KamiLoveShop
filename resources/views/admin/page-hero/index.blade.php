@@ -23,5 +23,6 @@
         </div>
     </div>
     @endforeach
+    {{ $her->links('client.saco.module.pagination') }}
 </div>
 @endsection

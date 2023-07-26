@@ -128,6 +128,7 @@
                 @endif
             </tbody>
         </table>
+        {{ $orders->links('client.saco.module.pagination') }}
     </div>
 </div>
 

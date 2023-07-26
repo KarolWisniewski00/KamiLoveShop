@@ -11,7 +11,7 @@ class PagePolicyAdminController extends Controller
     public function index()
     {
         return view('admin.page-policy.index', [
-            'section' => Policy::orderBy('order')->get(),
+            'section' => Policy::orderBy('order')->paginate(20),
         ]);
     }
     public function create()

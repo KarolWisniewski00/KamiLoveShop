@@ -39,7 +39,7 @@
                             <a href="{{ route('admin')}}" class="nav-link text-black"><i class="fa-solid fa-house me-2"></i>Zamówienia</a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.user')}}" class="nav-link text-black"><i class="fa-solid fa-user me-2"></i>Użytkownicy<span class="badge rounded-pill bg-primary ms-2">Wkrótce dostępne</span></a>
+                            <a href="{{ route('admin.user')}}" class="nav-link text-black"><i class="fa-solid fa-user me-2"></i>Użytkownicy</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin.photo')}}" class="nav-link text-black"><i class="fa-solid fa-photo-film me-2"></i>Zdjęcia</a>

@@ -82,7 +82,7 @@
                         @endif
                     </div>
                     @if (in_array($prod->id,$sizes_id))
-                    <p class="fw-bold mt-4">Wybierz rozmiar</p>
+                    <p class="fw-bold mt-4">Rozmiar</p>
                     @endif
                     <div class="d-flex flex-row justify-content-start align-items-center flex-wrap mb-2">
                         @if (in_array($prod->id,$sizes_id))
@@ -104,7 +104,7 @@
                             <input type="hidden" name="product_id" value="{{$prod->id}}">
                             <input type="hidden" name="quantity" value="1">
                             <input type="hidden" name="size" value="0">
-                            <button type="submit" class="btn btn-lg btn-custom w-100 h-100" {{in_array($prod->id,$sizes_id) ? 'disabled' : ''}}>
+                            <button type="submit" class="btn btn-lg btn-custom w-100 h-100">
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div><i class="fa-solid fa-cart-shopping me-2"></i></div>
                                     <div>Dodaj do koszyka</div>
