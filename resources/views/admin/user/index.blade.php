@@ -34,63 +34,44 @@
                     </th>
                     <th scope="col">
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">Edycja</div>
-                        </div>
-                    </th>
-                    <th scope="col">
-                        <div class="d-flex flex-column justify-content-center align-items-center">
                             <div class="fw-bold">Usuwanie</div>
                         </div>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">Brak użytkowników!</div>
-                        </div>
-                    </th>
-                    <th></th>
-                    <th></th>
-                </tr>
+                @foreach($user as $k => $u)
                 <tr>
                     <th>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">1</div>
+                            <div class="fw-bold">{{$k+1}}</div>
                         </div>
                     </th>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">imie</div>
+                            <div class="fw-bold">{{$u->name}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">nazwisko</div>
+                            <div class="fw-bold">{{$u->surname}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div class="fw-bold">email</div>
+                            <div class="fw-bold">{{$u->email}}</div>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="" class="btn btn-lg btn-primary"><i class="fa-solid fa-pen-to-square"></i></a></div>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="" class="btn btn-lg btn-danger"><i class="fa-solid fa-trash"></i></a></div>
+                            <div><a href="" class="btn btn-lg btn-danger {{ session('login_id') == $u->id ? 'disabled' : '' }}"><i class="fa-solid fa-trash"></i></a></div>
                         </div>
                     </td>
                 </tr>
+                @endforeach
             </tbody>
         </table>
+        {{ $user->links('client.saco.module.pagination') }}
     </div>
 </div>
 @endsection

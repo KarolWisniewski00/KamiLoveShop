@@ -113,7 +113,7 @@
                                 <div class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="{{ $size->size->id }}" name="sizes[]" id="flexCheck_{{ $size->size->id }}">
+                                            <input class="form-check-input" type="checkbox" {{ $request->sizes}} value="{{ $size->size->id }}" name="sizes[]" id="flexCheck_{{ $size->size->id }}">
                                             <label class="form-check-label fw-bold" for="flexCheck_{{ $size->size->id }}">
                                                 {{ $size->size->value }}
                                             </label>
