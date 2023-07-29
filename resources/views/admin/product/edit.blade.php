@@ -15,43 +15,43 @@
             @csrf
             @method('PUT')
             <div class="form-floating my-3">
-                <input type="text" class="form-control" id="name" value="{{$prod->name}}" name="name" required>
+                <input type="text" class="form-control" id="name" value="{{ old('name') ? old('name') : $prod->name}}" name="name" required>
                 <label for="name">Nazwa</label>
                 <span class="text-danger">@error('name') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3">
-                <input type="text" class="form-control" id="short_description" value="{{$prod->short_description}}" name="short_description">
+                <input type="text" class="form-control" id="short_description" value="{{ old('short_description') ? old('short_description') : $prod->short_description}}" name="short_description">
                 <label for="short_description">Krótki opis</label>
                 <span class="text-danger">@error('short_description') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3">
-                <input type="text" class="form-control" id="long_description" value="{{$prod->long_description}}" name="long_description">
+                <input type="text" class="form-control" id="long_description" value="{{ old('long_description') ? old('long_description') : $prod->long_description}}" name="long_description">
                 <label for="long_description">Długi opis</label>
                 <span class="text-danger">@error('long_description') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3">
-                <input type="text" class="form-control" id="normal_price" value="{{$prod->normal_price}}" name="normal_price" required>
+                <input type="text" class="form-control" id="normal_price" value="{{ old('normal_price') ? old('normal_price') : $prod->normal_price}}" name="normal_price" required>
                 <label for="normal_price">Cena regularna</label>
                 <span class="text-danger">@error('normal_price') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3">
-                <input type="text" class="form-control" id="sale_price" value="{{$prod->sale_price}}" name="sale_price">
+                <input type="text" class="form-control" id="sale_price" value="{{ old('sale_price') ? old('sale_price') : $prod->sale_price}}" name="sale_price">
                 <label for="sale_price">Cena promocyjna</label>
                 <span class="text-danger">@error('sale_price') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3">
-                <input type="text" class="form-control" id="SKU" value="{{$prod->SKU}}" name="SKU" required>
+                <input type="text" class="form-control" id="SKU" value="{{ old('SKU') ? old('SKU') : $prod->SKU}}" name="SKU" required>
                 <label for="SKU">SKU</label>
                 <span class="text-danger">@error('SKU') {{$message}} @enderror</span>
             </div>
 
             <div class="form-floating my-3 w-100">
-                <input type="text" class="form-control" id="order" value="{{$prod->order}}" name="order">
+                <input type="text" class="form-control" id="order" value="{{ old('order') ? old('order') : $prod->order}}" name="order">
                 <label for="order">Kolejność</label>
                 <span class="text-danger">@error('order') {{$message}} @enderror</span>
             </div>
@@ -70,7 +70,7 @@
                 @endforeach
             </div>
 
-            <input type="hidden" name="size" value="" id="size" required>
+            <input type="hidden" name="size" value="{{ old('size') ? old('size') : '' }}" id="size" required>
 
             <div class="row rounded border p-4 mx-1 my-3">
                 <div class="col-12">
@@ -79,7 +79,7 @@
                 </div>
                 @foreach($cat as $c)
                 <div class="col-12 col-md-6 col-lg-3 mb-4">
-                    <button data-id="{{$c->id}}" type="button" class="{{ $prod->subcategory_id != null ? '' : ($prod->category_id == $c->id ? 'border-primary' : '') }} btn-cat bg-white border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100 w-100">
+                    <button data-id="{{$c->id}}" type="button" class="{{ old('category') ? old('category') : ($prod->subcategory_id != null ? '' : ($prod->category_id == $c->id ? 'border-primary' : '')) }} btn-cat bg-white border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100 w-100">
                         <img alt="category_photo" src="{{ asset('photos/'.$c->photo)}}" class="img-fluid" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
                         <h1 class="mt-4 text-black">{{$c->plural}}</h1>
                         <p class="text-muted"><i class="fa-solid fa-link"></i>{{$c->url}}</p>
@@ -88,7 +88,7 @@
                 @endforeach
             </div>
 
-            <input type="hidden" name="category" value="{{$prod->category_id}}" id="category" required>
+            <input type="hidden" name="category" value="{{ old('category') ? old('category') : $prod->category_id }}" id="category" required>
 
             <div class="row rounded border p-4 mx-1 my-3">
                 <div class="col-12">
@@ -98,7 +98,7 @@
 
                 @foreach($subcat as $sc)
                 <div class="col-12 col-md-6 col-lg-3 mb-4">
-                    <button data-id="{{$sc->id}}" data-id-cat="{{$sc->category->id}}" type="button" class="{{ $prod->subcategory_id != null ? 'border-primary' : '' }} btn-subcat bg-white border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100 w-100">
+                    <button data-id="{{$sc->id}}" data-id-cat="{{$sc->category->id}}" type="button" class="{{ old('subcategory') ? old('subcategory') : ($prod->subcategory_id != null ? 'border-primary' : '') }} btn-subcat bg-white border p-4 d-flex flex-column justify-content-center align-items-center rounded h-100 w-100">
                         <img alt="category_photo" src="{{ asset('photos/'.$sc->category->photo)}}" class="img-fluid" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
                         <h1 class="mt-4 text-black txt-cat">{{$sc->category->plural}}</h1>
                         <p class="text-muted"><i class="fa-solid fa-link"></i>{{$sc->category->url}}</p>
@@ -114,13 +114,13 @@
                 @endforeach
             </div>
 
-            <input type="hidden" name="subcategory" value="{{$prod->subcategory_id}}" id="subcategory" required>
+            <input type="hidden" name="subcategory" value="{{ old('subcategory') ? old('subcategory') : $prod->subcategory_id }}" id="subcategory" required>
 
             <div class="row border rounded p-4 mx-1 my-3">
                 <div class="col-12 col-md-6">
                     <h4>Podgląd</h4>
                     <div class="d-flex flex-column justify-content-center align-items-center border">
-                        <img class="img-fluid bd-placeholder-img img-single" src="{{ asset('photos/'.$prod->photo) }}" alt="" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
+                        <img class="img-fluid bd-placeholder-img img-single" src="{{ old('photo') ? asset('photos/' . old('photo')) : asset('photos/'.$prod->photo) }}" alt="" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -141,7 +141,7 @@
                                     <div class="row">
                                         @foreach(File::files(public_path('photos')) as $file)
                                         <div class="col-12 col-md-4 p-2">
-                                            <button type="button" data-filename="{{basename($file)}}" class="{{ $prod->photo == basename($file) ? 'border-primary' : '' }} btn-single bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
+                                            <button type="button" data-filename="{{basename($file)}}" class="{{ old('photo') == basename($file) ? 'border-primary' : ($prod->photo == basename($file) && !old('photo') ? 'border-primary' : '') }} btn-single bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
                                                 <div class="d-flex flex-column justify-content-center align-items-center h-100 overflow-hidden">
                                                     <img alt="" src="{{ asset('photos/' . basename($file)) }}" class="img-fluid p-2" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
                                                 </div>
@@ -160,7 +160,7 @@
                 </div>
             </div>
 
-            <input type="hidden" name="photo" value="{{$prod->photo}}" id="photo" required>
+            <input type="hidden" name="photo" value="{{ old('photo') ? old('photo') : $prod->photo }}" id="photo" required>
 
             <div class="row border rounded p-4 mx-1 my-3">
                 <div class="col-12 col-md-6">
@@ -193,7 +193,7 @@
                                     <div class="row">
                                         @foreach(File::files(public_path('photos')) as $file)
                                         <div class="col-12 col-md-4 p-2">
-                                            <button type="button" data-filename="{{basename($file)}}" class=" @foreach (unserialize($prod->photos) as $k => $pho) {{ strval($pho) == strval(basename($file)) ? 'border-primary' : '' }} @endforeach btn-multi bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
+                                            <button type="button" data-filename="{{basename($file)}}" class="@foreach (unserialize($prod->photos) as $k => $pho) {{ str_contains(old('photos'), basename($file)) ? 'border-primary' : (strval($pho) == strval(basename($file)) && !old('photos') ? 'border-primary' : '') }} @endforeach btn-multi bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
                                                 <div class="d-flex flex-column justify-content-center align-items-center h-100 overflow-hidden">
                                                     <img alt="" src="{{ asset('photos/' . basename($file)) }}" class="img-fluid p-2" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
                                                 </div>
@@ -211,7 +211,9 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="photos" value="@foreach (unserialize($prod->photos) as $k => $pho){{$k == 0 ? $pho : ', '.$pho}}@endforeach" id="photos" required>
+            <input type="hidden" name="photos" value="@if(old('photos')){{old('photos')}}@else
+@foreach(unserialize($prod->photos) as $k => $pho){{$k == 0 ? $pho : ', '.$pho}}@endforeach
+@endif" id="photos" required>
 
             <div class="d-flex justify-content-start align-items-center mt-4">
                 <button class="btn btn-lg btn-primary me-2" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Zapisz</button>
@@ -250,8 +252,14 @@
     });
     //MULTI PHOTO
     $(document).ready(function() {
-        var str = $('#photos').val();
-        var selectedFileNames = str.split(", ");
+        function stringToArray(str) {
+            if (!str || typeof str !== 'string') {
+                return []; // Zwraca pustą tablicę dla nieprawidłowych lub pustych wejść
+            }
+
+            return str.split(',').map(item => item.trim());
+        }
+        var selectedFileNames = stringToArray($('#photos').val());
 
         $('.modal-body button.btn-multi').click(function() {
             $(this).toggleClass('border-primary');
@@ -265,6 +273,25 @@
                 selectedFileNames.splice(index, 1);
             }
         });
+        var photosVal = $('#photos').val();
+        if (photosVal != '') {
+            var photosValTab = photosVal.split(',').map(function(filename) {
+                return filename.trim();
+            });
+            var previewImage;
+            if (photosValTab.length === 0) {
+                previewImage = `
+        <img class="img-fluid bd-placeholder-img" src="{{ asset('svg/photos.svg') }}" alt="">
+    `;
+            } else {
+                previewImage = '';
+                for (var i = 0; i < photosValTab.length; i++) {
+                    var imagePath = "{{ asset('photos/') }}/" + photosValTab[i];
+                    previewImage += '<div class="col"><div class="d-flex flex-column justify-content-center align-items-center border"><img src="' + imagePath + '" class="img-fluid bd-placeholder-img p-2"></div></div>';
+                }
+            }
+            $('.img-multi').replaceWith('<div class="row border img-multi">' + previewImage + '</div>');
+        }
 
         $('#saveButton').click(function() {
             $('#photos').val(selectedFileNames.join(','));
@@ -288,7 +315,19 @@
     });
     //SIZE
     $(document).ready(function() {
+        var sizeVal = $('#size').val();
         var selectedSizes = [];
+
+        if (sizeVal !== '') {
+            selectedSizes = sizeVal.split(',').map(function(item) {
+                return parseInt(item); // Assuming the size IDs are integers
+            });
+
+            // Add a class to the previously selected buttons
+            selectedSizes.forEach(function(size) {
+                $('.btn-size[data-id="' + size + '"]').addClass('border-primary');
+            });
+        }
 
         $('.btn-size').click(function() {
             $(this).toggleClass('border-primary');
@@ -307,7 +346,7 @@
     });
     //CATEGORY
     $(document).ready(function() {
-        var selectedCategory = "";
+        var selectedCategory = $('#category').val();
 
         $('.btn-cat').click(function() {
             $('.btn-subcat').removeClass('border-primary');
@@ -315,15 +354,13 @@
             $(this).addClass('border-primary');
 
             selectedCategory = $(this).data('id');
-            selectedSubcategory = "";
+            selectedSubcategory = "none";
 
             $('#category').val(selectedCategory);
             $('#subcategory').val(selectedSubcategory);
         });
-    });
-    //SUBCATEGORY
-    $(document).ready(function() {
-        var selectedSubcategory = "";
+
+        var selectedSubcategory = $('#subcategory').val();
 
         $('.btn-subcat').click(function() {
             $('.btn-cat').removeClass('border-primary');
@@ -336,6 +373,15 @@
             $('#subcategory').val(selectedSubcategory);
             $('#category').val(selectedCategory);
         });
+        if (selectedCategory !== '') {
+            if (selectedSubcategory == 'none') {
+                $('.btn-cat[data-id="' + selectedCategory + '"]').addClass('border-primary');
+            }else if (selectedSubcategory !== ''){
+                $('.btn-subcat[data-id="' + selectedSubcategory + '"]').addClass('border-primary');
+            } else {
+                $('.btn-cat[data-id="' + selectedCategory + '"]').addClass('border-primary');
+            }
+        }
     });
 </script>
 @endsection

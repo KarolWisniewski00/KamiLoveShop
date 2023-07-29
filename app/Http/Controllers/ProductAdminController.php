@@ -89,8 +89,7 @@ class ProductAdminController extends Controller
         if (!$product) {
             return redirect()->route('admin.product')->with('fail', 'Produkt nie istnieje.');
         }
-
-        ($request->subcategory != null) ? $subcat = intval($request->subcategory) : $subcat = $request->subcategory;
+        ($request->subcategory == 'none') ? $subcat = null : (($request->subcategory != null) ? $subcat = intval($request->subcategory) : $subcat = $request->subcategory);
         ($request->photos != null) ? $photos = $request->photos : $photos = "";
         $week_ago = now()->subWeek();
 

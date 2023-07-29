@@ -119,7 +119,7 @@
                 <div class="col-12 col-md-6">
                     <h4>Podgląd</h4>
                     <div class="d-flex flex-column justify-content-center align-items-center border">
-                        <img class="img-fluid bd-placeholder-img img-single" src="{{ asset('svg/photos.svg') }}" alt="">
+                        <img class="img-fluid bd-placeholder-img img-single" src="{{ old('photo') ? asset('photos/' . old('photo')) : asset('svg/photos.svg') }}" alt="">
                     </div>
                 </div>
                 <div class="col-12 col-md-6">
@@ -140,7 +140,7 @@
                                     <div class="row">
                                         @foreach(File::files(public_path('photos')) as $file)
                                         <div class="col-12 col-md-4 p-2">
-                                            <button type="button" data-filename="{{basename($file)}}" class="btn-single bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
+                                            <button type="button" data-filename="{{basename($file)}}" class="{{ old('photo') == basename($file) ? 'border-primary' : '' }} btn-single bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
                                                 <div class="d-flex flex-column justify-content-center align-items-center h-100 overflow-hidden">
                                                     <img alt="" src="{{ asset('photos/' . basename($file)) }}" class="img-fluid p-2" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
                                                 </div>
@@ -159,7 +159,7 @@
                 </div>
             </div>
 
-            <input type="hidden" name="photo" value="" id="photo" required>
+            <input type="hidden" name="photo" value="{{ old('photo') ? old('photo') : '' }}" id="photo" required>
 
             <div class="row border rounded p-4 mx-1 my-3">
                 <div class="col-12 col-md-6">
@@ -186,7 +186,7 @@
                                     <div class="row">
                                         @foreach(File::files(public_path('photos')) as $file)
                                         <div class="col-12 col-md-4 p-2">
-                                            <button type="button" data-filename="{{basename($file)}}" class="btn-multi bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
+                                            <button type="button" data-filename="{{basename($file)}}" class="{{ str_contains(old('photos'), basename($file)) ? 'border-primary' : '' }} btn-multi bg-transparent d-flex flex-column justify-content-between align-items-center h-100 border">
                                                 <div class="d-flex flex-column justify-content-center align-items-center h-100 overflow-hidden">
                                                     <img alt="" src="{{ asset('photos/' . basename($file)) }}" class="img-fluid p-2" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;">
                                                 </div>
@@ -204,7 +204,7 @@
                     </div>
                 </div>
             </div>
-            <input type="hidden" name="photos" value="" id="photos" required>
+            <input type="hidden" name="photos" value="{{ old('photos') ? old('photos') : '' }}" id="photos" required>
 
             <div class="d-flex justify-content-start align-items-center mt-4">
                 <button class="btn btn-lg btn-primary me-2" type="submit"><i class="fa-solid fa-floppy-disk me-2"></i>Zapisz</button>
@@ -217,8 +217,7 @@
 <script>
     //SINGLE PHOTO
     $(document).ready(function() {
-        var selectedFileName = "";
-
+        var selectedFileName = $('#photo').val();
         $('.modal-body button.btn-single').click(function() {
             $('.modal-body button.btn-single').removeClass('border-primary');
             $(this).addClass('border-primary');
@@ -243,7 +242,14 @@
     });
     //MULTI PHOTO
     $(document).ready(function() {
-        var selectedFileNames = [];
+        function stringToArray(str) {
+            if (!str || typeof str !== 'string') {
+                return []; // Zwraca pustą tablicę dla nieprawidłowych lub pustych wejść
+            }
+
+            return str.split(',').map(item => item.trim());
+        }
+        var selectedFileNames = stringToArray($('#photos').val());
 
         $('.modal-body button.btn-multi').click(function() {
             $(this).toggleClass('border-primary');
@@ -257,6 +263,25 @@
                 selectedFileNames.splice(index, 1);
             }
         });
+        var photosVal = $('#photos').val();
+        if (photosVal != '') {
+            var photosValTab = photosVal.split(',').map(function(filename) {
+                return filename.trim();
+            });
+            var previewImage;
+            if (photosValTab.length === 0) {
+                previewImage = `
+        <img class="img-fluid bd-placeholder-img" src="{{ asset('svg/photos.svg') }}" alt="">
+    `;
+            } else {
+                previewImage = '';
+                for (var i = 0; i < photosValTab.length; i++) {
+                    var imagePath = "{{ asset('photos/') }}/" + photosValTab[i];
+                    previewImage += '<div class="col"><div class="d-flex flex-column justify-content-center align-items-center border"><img src="' + imagePath + '" class="img-fluid bd-placeholder-img p-2"></div></div>';
+                }
+            }
+            $('.img-multi').replaceWith('<div class="row border img-multi">' + previewImage + '</div>');
+        }
 
         $('#saveButton').click(function() {
             $('#photos').val(selectedFileNames.join(','));
@@ -349,7 +374,6 @@
 <!--
 produkt nowy dokończyć zapis zdj przy walidacji
 edycja naprawa
-użytkownicy crud
 pages dla clienta
 opcjonalnie filtracja rozmiary dla klienta
 logowanie
