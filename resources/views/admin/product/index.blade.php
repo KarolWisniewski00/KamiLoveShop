@@ -85,7 +85,9 @@
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
+                            @if($p->category != null)
                             <div class="fw-bold">{{$p->category->plural}}</div>
+                            @endif
                             @if($p->subcategory_id != null)
                             <div class="text-muted">{{$p->subcategory->plural}}</div>
                             @endif

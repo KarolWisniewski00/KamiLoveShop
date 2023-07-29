@@ -55,7 +55,7 @@ class OrderController2 extends Controller
     public function index()
     {
         return view('client.saco.account.order.index', [
-            'orders' => Order::where('user_id', '=', Session::get('login_id'))->get()
+            'orders' => Order::where('user_id', '=', Session::get('login_id'))->orderBy('created_at', 'desc')->get(),
         ]);
     }
     public function show($slug)

@@ -372,13 +372,7 @@
     });
 </script>
 <!--
-produkt nowy dokończyć zapis zdj przy walidacji
-edycja naprawa
 pages dla clienta
-opcjonalnie filtracja rozmiary dla klienta
 logowanie
-zamówienia show
-
-
 -->
 @endsection

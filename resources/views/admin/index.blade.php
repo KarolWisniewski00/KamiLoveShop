@@ -108,8 +108,10 @@
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             @if($order->status == "Oczekujące na płatność" || $order->status == "Anulowano")
                             <div class="fw-bold text-danger">{{$order->status}}</div>
+                            @elseif($order->status == "W trakcie realizacji")
+                            <div class="fw-bold text-warning">{{$order->status}}</div>
                             @else
-                            <div class="fw-bold text-custom-4">{{$order->status}}</div>
+                            <div class="fw-bold text-success">{{$order->status}}</div>
                             @endif
                         </div>
                     </td>
@@ -120,7 +122,7 @@
                     </td>
                     <td>
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <div><a href="{{url('/order/'.$order->id)}}" class="btn btn-lg btn-primary"><i class="fa-solid fa-magnifying-glass"></i></a></div>
+                            <div><a href="{{route('admin.order.show',$order->id)}}" class="btn btn-lg btn-primary"><i class="fa-solid fa-magnifying-glass"></i></a></div>
                         </div>
                     </td>
                 </tr>

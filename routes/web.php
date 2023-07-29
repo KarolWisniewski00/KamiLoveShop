@@ -9,6 +9,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController2;
 use App\Http\Controllers\StartAdminController;
 use App\Http\Controllers\CategoriesAdminController;
 use App\Http\Controllers\ProductsAdminController;
@@ -17,6 +18,8 @@ use App\Http\Controllers\BusketController;
 use App\Http\Controllers\BusketController2;
 use App\Http\Controllers\CategoryAdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController2;
+use App\Http\Controllers\OrderAdminController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RulesAdminController;
@@ -30,8 +33,11 @@ use App\Http\Controllers\PagePolicyAdminController;
 use App\Http\Controllers\PageReturnAdminController;
 use App\Http\Controllers\PageRuleAdminController;
 use App\Http\Controllers\PhotoAdminController;
+use App\Http\Controllers\PolicyController2;
 use App\Http\Controllers\ProductAdminController;
 use App\Http\Controllers\ProductController2;
+use App\Http\Controllers\ReturnController2;
+use App\Http\Controllers\RuleController;
 use App\Http\Controllers\SizeAdminController;
 use App\Http\Controllers\SubcategoryAdminController;
 use App\Http\Controllers\UserAdminController;
@@ -58,27 +64,32 @@ Route::prefix('/')->group(function () {
         Route::get('{slug}', [ProductController2::class, 'show'])->name('product.show');
     });
     Route::prefix('return')->group(function () {
-        Route::get('/', [IndexController::class, 'index'])->name('return');
+        Route::get('/', [ReturnController2::class, 'index'])->name('return');
     });
     Route::prefix('rule')->group(function () {
-        Route::get('/', [IndexController::class, 'index'])->name('rule');
+        Route::get('/', [RuleController::class, 'index'])->name('rule');
     });
     Route::prefix('policy')->group(function () {
-        Route::get('/', [IndexController::class, 'index'])->name('policy');
+        Route::get('/', [PolicyController2::class, 'index'])->name('policy');
     });
     Route::prefix('contact')->group(function () {
-        Route::get('/', [IndexController::class, 'index'])->name('contact');
+        Route::get('/', [ContactController2::class, 'index'])->name('contact');
     });
 });
 
 //AUTH
 Route::middleware(['AlreadyLoggedIn'])->group(function () {
     Route::prefix('auth')->group(function () {
+        Route::get('/login', [AuthController2::class, 'index'])->name('login');
+        Route::get('/register', [AuthController2::class, 'create'])->name('register');
+        Route::post('/login', [AuthController2::class, 'login'])->name('login.store');
+        Route::post('/register', [AuthController2::class, 'store'])->name('register.store');
     });
 });
 
 //LOGGED IN
 Route::middleware(['isLoggedIn'])->group(function () {
+    Route::get('/logout', [AuthController2::class, 'logout'])->name('logout');
     Route::prefix('user')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('user');
         Route::get('/edit/{slug}', [UserController::class, 'edit'])->name('user.edit');
@@ -107,6 +118,10 @@ Route::middleware(['AdminCheck'])->group(function () {
 
         Route::get('/', [AdminController::class, 'index'])->name('admin');
         Route::get('/old', [StartAdminController::class, 'admin'])->name('admin.old');
+        Route::prefix('order')->group(function () {
+            Route::get('/show/{slug}', [OrderAdminController::class, 'show'])->name('admin.order.show');
+            Route::get('/status/{id}/{slug}', [OrderAdminController::class, 'status'])->name('admin.order.status');
+        });
 
         Route::prefix('category')->group(function () {
             Route::get('/', [CategoryAdminController::class, 'index'])->name('admin.category');
@@ -184,7 +199,7 @@ Route::middleware(['AdminCheck'])->group(function () {
         });
     });
 });
-
+/*
 //ALL OLD
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/category/{url}', [PagesController::class, 'pages']);
@@ -292,3 +307,4 @@ Route::middleware(['AdminCheck'])->group(function () {
         });
     });
 });
+*/

@@ -15,6 +15,8 @@
                     <p class="text-muted fw-bold">Numer zamówienia: {{$order->number}}</p>
                     @if ($order->status == 'Oczekujące na płatność' || $order->status == 'Anulowano')
                     <p class="text-muted fw-bold">Status: <span class="text-danger">{{$order->status}}</span></p>
+                    @elseif($order->status == "W trakcie realizacji")
+                    <p class="text-muted fw-bold">Status: <span class="text-warning">{{$order->status}}</span></p>
                     @else
                     <p class="text-muted fw-bold">Status: <span class="text-custom-4">{{$order->status}}</span></p>
                     @endif
@@ -42,6 +44,9 @@
                 @endif
             </div>
             <div class="col-12 col-md-6 my-4">
+                <h3 class="my-4">Nasze dane firmowe</h3>
+                <p class="text-muted">PEŁNA NAZWA FIRMY</p>
+                <p class="text-muted">NIP:123456789</p>
                 <h3 class="my-4">Nasze dane bankowe</h3>
                 <h6>Nazwa banku</h6>
                 <p class="text-muted fw-bold">Numer konta: 28291000060000000002485597</p>

@@ -75,7 +75,7 @@
                     <div class="form-check text-start">
                         <input class="form-check-input" type="checkbox" value="" id="rules" required>
                         <label class="form-check-label" for="rules">
-                            Oświadczam, że zapoznałem/am się z treścią strony <a href="{{route('rules')}}">regulamin</a>
+                            Oświadczam, że zapoznałem/am się z treścią strony <a href="{{route('rule')}}">regulamin</a>
                         </label>
                     </div>
                     <input type="hidden" name="value" value="{{$sum+16}}">
