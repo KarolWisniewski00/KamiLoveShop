@@ -11,7 +11,7 @@ class AuthController2 extends Controller
 {
     public function index()
     {
-        return view('client.saco.auth.login');
+        return view('client.'.env('SHOP').'.auth.login');
     }
     public function login(Request $request)
     {
@@ -33,7 +33,7 @@ class AuthController2 extends Controller
     }
     public function create()
     {
-        return view('client.saco.auth.register');
+        return view('client.'.env('SHOP').'.auth.register');
     }
     public function store(Request $request)
     {

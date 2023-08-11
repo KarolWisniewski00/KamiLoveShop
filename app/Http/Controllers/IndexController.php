@@ -12,7 +12,7 @@ class IndexController extends Controller
 {
     public function index()
     {
-        return view('client.saco.index', [
+        return view('client.'.env('SHOP').'.index', [
             'her' => Hero::orderBy('order')->get(),
             'prod' => Product::orderBy('order')->get()
         ]);

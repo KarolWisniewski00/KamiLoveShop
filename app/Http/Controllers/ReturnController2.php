@@ -9,7 +9,7 @@ class ReturnController2 extends Controller
 {
     public function index()
     {
-        return view('client.saco.return.index', [
+        return view('client.'.env('SHOP').'.return.index', [
             'return' => Ret::orderBy('order')->get()
         ]);
     }

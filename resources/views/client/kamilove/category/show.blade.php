@@ -1,4 +1,4 @@
-@extends('layout.saco')
+@extends('layout.kamilove')
 @section('content')
 <!--PAGES-->
 <section>
@@ -17,7 +17,7 @@
             <section>
                 <div class="col-12">
                     <div class="d-flex justify-content-start align-items-center mb-4">
-                        <a href="{{route('index')}}" class="text-custom-2 mx-1 text-decoration-none">Strona główna</a>
+                        <a href="{{route('index')}}" class="text-custom-1 mx-1 text-decoration-none">Strona główna</a>
                         <div class="mx-1"><i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i></div>
                         <div class="mx-1">Kategorie</div>
                         <div class="mx-1"><i class="fa-solid fa-chevron-right" style="font-size: 0.75em;"></i></div>
@@ -127,7 +127,7 @@
                     @endif
                     <div class="accordion-item py-4">
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn btn-lg btn-custom rounded-0" type="submit">Filtruj</button>
+                            <button class="btn btn btn-lg btn-custom-1 rounded-0" type="submit">Filtruj</button>
                         </div>
                     </div>
                 </form>
@@ -150,7 +150,7 @@
                     </div>
                     <div class="col-6">
                         <div class="d-flex justify-content-end align-items-center">
-                            <select id="sort_option" class="btn btn-custom dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <select id="sort_option" class="btn btn-custom-1 rounded-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <option class="bg-white text-black" value="default">Domyślne sortowanie</option>
                                 <option class="bg-white text-black" value="low_to_high">Sortuj po cenie od najniższej</option>
                                 <option class="bg-white text-black" value="high_to_low">Sortuj po cenie od najwyższej</option>
@@ -166,18 +166,18 @@
                         @else
                         <div class="col-12 col-md-6 col-lg-4 mb-4 single" data-price="{{ $p->normal_price }}" data-id="{{ $p->id }}">
                             @endif
-                            @include('client.saco.module.product-card')
+                            @include('client.kamilove.module.product-card')
                         </div>
                         @endforeach
                         @if ($prod->total() == 0)
                         <div class="col-12">
                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                <img alt="" src="{{asset('svg/saco-product.svg')}}" class="img-fluid">
+                                <img alt="" src="{{asset('svg/kamilove-product.svg')}}" class="img-fluid">
                                 <div class="h4 m-0 p-0 my-3">Nie znaleziono produktów!</div>
                             </div>
                         </div>
                         @endif
-                        {{ $prod->links('client.saco.module.pagination') }}
+                        {{ $prod->links('client.kamilove.module.pagination') }}
                     </div>
                 </div>
                 <!--END PRODUCTS GRID-->

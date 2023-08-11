@@ -8,6 +8,6 @@ class ContactController2 extends Controller
 {
     public function index()
     {
-        return view('client.saco.contact.index');
+        return view('client.'.env('SHOP').'.contact.index');
     }
 }

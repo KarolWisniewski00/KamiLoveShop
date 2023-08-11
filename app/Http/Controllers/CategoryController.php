@@ -99,7 +99,7 @@ class CategoryController extends Controller
             $max = $prod->max('normal_price');
             $prod = $this->filter_by_price($prod, $request);
             $prod = $prod->paginate(15);
-            return view('client.saco.category.show', [
+            return view('client.'.env('SHOP').'.category.show', [
                 'slug' => $slug,
                 'prod' => $prod,
                 'request' => $request,
@@ -120,7 +120,7 @@ class CategoryController extends Controller
         $query = $this->filter_by_size($query, $cat, $request);
         $prod = $query->orderBy('order')->paginate(15);
 
-        return view('client.saco.category.show', [
+        return view('client.'.env('SHOP').'.category.show', [
             'slug' => $slug,
             'prod' => $prod,
             'request' => $request,

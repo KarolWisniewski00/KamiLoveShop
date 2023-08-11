@@ -70,7 +70,10 @@
                 @endforeach
             </div>
 
-            <input type="hidden" name="size" value="{{ old('size') ? old('size') : '' }}" id="size" required>
+            <input type="hidden" name="size" value="@if(old('size')){{old('size')}}@else
+@foreach($siz as $s)@foreach($broker as $b){{ $b->size_id == $s->id ? $s->id : '' }}@endforeach
+@endforeach
+@endif" id="size" required>
 
             <div class="row rounded border p-4 mx-1 my-3">
                 <div class="col-12">

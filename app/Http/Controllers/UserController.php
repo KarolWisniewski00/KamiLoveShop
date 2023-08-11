@@ -12,7 +12,7 @@ class UserController extends Controller
     public function index()
     {
         $user = User::where('id', '=', Session::get('login_id'))->first();
-        return view('client.saco.account.user.index', [
+        return view('client.'.env('SHOP').'.account.user.index', [
             'user' => $user,
         ]);
     }
@@ -21,12 +21,12 @@ class UserController extends Controller
         switch ($slug) {
             case 'account':
                 $user = User::where('id', '=', Session::get('login_id'))->first();
-                return view('client.saco.account.user.edit.account', [
+                return view('client.'.env('SHOP').'.account.user.edit.account', [
                     'user' => $user,
                 ]);
                 break;
             case 'password':
-                return view('client.saco.account.user.edit.password');
+                return view('client.'.env('SHOP').'.account.user.edit.password');
                 break;
         }
     }

@@ -54,14 +54,14 @@ class OrderController2 extends Controller
     }
     public function index()
     {
-        return view('client.saco.account.order.index', [
+        return view('client.'.env('SHOP').'.account.order.index', [
             'orders' => Order::where('user_id', '=', Session::get('login_id'))->orderBy('created_at', 'desc')->get(),
         ]);
     }
     public function show($slug)
     {
         $order = Order::where('id', '=', $slug)->get()->first();
-        return view('client.saco.account.order.show', [
+        return view('client.'.env('SHOP').'.account.order.show', [
             'order' => $order,
             'products' => Product::get(),
             'extras' => Extra::where('order_id', '=', $slug)->get()
@@ -73,7 +73,7 @@ class OrderController2 extends Controller
         $products = Product::get();
         $sum = $this->prepare_sum($buskets, $products);
 
-        return view('client.saco.account.order.create', [
+        return view('client.'.env('SHOP').'.account.order.create', [
             'buskets' => $buskets,
             'products' => $products,
             'sum' => $sum,

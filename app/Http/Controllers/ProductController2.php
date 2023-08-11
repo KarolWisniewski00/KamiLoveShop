@@ -23,7 +23,7 @@ class ProductController2 extends Controller
         $brokers_good = $this->prepare_brokers($brokers);
         $sizes_id = $this->prepare_sizes_id($brokers);
 
-        return view('client.saco.product.show', [
+        return view('client.'.env('SHOP').'.product.show', [
             'category_id' => $product->category_id,
             'prod' => $product,
             'products' => $products,
