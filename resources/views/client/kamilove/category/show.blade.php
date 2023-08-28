@@ -1,6 +1,10 @@
 @extends('layout.kamilove')
 @section('meta')
-<title>{{$plural}} | KamiLove Fashion sklep online</title>
+@foreach($pro_cat as $c)
+@if ($slug == $c->url)
+<title>{{$c->plural}} | KamiLove Fashion sklep online</title>
+@endif
+@endforeach
 @endsection
 @section('content')
 <!--PAGES-->
