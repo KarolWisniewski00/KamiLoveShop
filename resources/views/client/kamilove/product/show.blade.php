@@ -1,4 +1,5 @@
 @extends('layout.kamilove')
+@section('meta')
 <title>{{$prod->name}} | KamiLove Fashion sklep online</title>
 <meta property="og:title" content="{{$prod->name}} | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
 <meta name="twitter:title" content="{{$prod->name}} | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
