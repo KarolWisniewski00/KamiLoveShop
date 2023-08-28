@@ -1,4 +1,4 @@
-@extends('layout.kamilove'
+@extends('layout.kamilove')
 @section('meta')
 <title>KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria</title>
 <meta property="og:title" content="KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
@@ -7,7 +7,7 @@
 <meta property="og:description" content="Odkryj KamiLove Fashion to zestawienie modnych ubrań, biżuterii i dodatków dla każdej kobiety. Bezpieczne płatności." />
 <meta name="twitter:description" content="Odkryj KamiLove Fashion to zestawienie modnych ubrań, biżuterii i dodatków dla każdej kobiety. Bezpieczne płatności." />
 <meta name="keywords" content="KamiLove, KamiLove Fashion, Fashion, sklep, sklep damski,moda, moda damska, sukienki, sukienki damskie, ubrania, ubrania damskie">
-@endsection)
+@endsection
 @section('content')
 <!--HERO-->
 <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
