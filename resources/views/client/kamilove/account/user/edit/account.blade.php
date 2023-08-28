@@ -1,4 +1,7 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Konto | KamiLove Fashion sklep online</title>
+@endsection
 @section('content')
 <!--ACCOUNT-->
 <section>

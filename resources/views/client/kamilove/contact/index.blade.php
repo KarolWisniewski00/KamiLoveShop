@@ -1,4 +1,12 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Kontakt | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="Kontakt | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="Kontakt | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Kontakt">
+<meta property="og:description" content="Kontakt" />
+<meta name="twitter:description" content="Kontakt" />
+@endsection
 @section('content')
 <!--CONTACT-->
 <section>

@@ -1,4 +1,7 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>{{$plural}} | KamiLove Fashion sklep online</title>
+@endsection
 @section('content')
 <!--PAGES-->
 <section>
@@ -172,7 +175,7 @@
                         @if ($prod->total() == 0)
                         <div class="col-12">
                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                <img alt="" src="{{asset('svg/kamilove-product.svg')}}" class="img-fluid">
+                                <img alt="emptyplace" src="{{asset('svg/kamilove-product.svg')}}" class="img-fluid">
                                 <div class="h4 m-0 p-0 my-3">Nie znaleziono produktów!</div>
                             </div>
                         </div>

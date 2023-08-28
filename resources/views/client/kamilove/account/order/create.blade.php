@@ -1,4 +1,7 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Kasa | KamiLove Fashion sklep online</title>
+@endsection
 @section('content')
 <!--ORDER-->
 <section>

@@ -1,4 +1,12 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Polityka prywatności | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="Polityka prywatności | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="Polityka prywatności | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Polityka prywatności">
+<meta property="og:description" content="Polityka prywatności" />
+<meta name="twitter:description" content="Polityka prywatności" />
+@endsection
 @section('content')
 <!--POLICY-->
 <section>

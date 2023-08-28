@@ -1,4 +1,12 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Zwroty i reklamacje | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="Zwroty i reklamacje | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="Zwroty i reklamacje | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Zwroty i reklamacje">
+<meta property="og:description" content="Zwroty i reklamacje" />
+<meta name="twitter:description" content="Zwroty i reklamacje" />
+@endsection
 @section('content')
 <!--RETURN-->
 <section>

@@ -1,5 +1,5 @@
 <a href="{{ route('product.show', $p->id) }}" class="border text-center p-4 position-relative h-100 d-flex flex-column justify-content-between align-items-center text-decoration-none">
-    <img alt="bong" src="{{ asset('photos/'.$p->photo)}}" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;" class="img-fluid">
+    <img alt="product" src="{{ asset('photos/'.$p->photo)}}" onerror="this.onerror=null; this.src=`{{ asset('svg/photos.svg') }}`;" class="img-fluid">
     <h3 class="text-black">{{$p->name}}</h3>
     <p class="text-muted">{{$p->short_description}}</p>
     <div class="d-flex flex-row justify-content-center align-items-center mb-4">

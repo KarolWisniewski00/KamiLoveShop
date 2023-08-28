@@ -1,4 +1,8 @@
 @extends('layout.kamilove')
+<title>{{$product->name}} | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="{{$product->name}} | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="{{$product->name}} | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+@endsection
 @section('content')
 <!--PRODUCT-->
 <section>
@@ -30,7 +34,7 @@
             <!--END LINKS-->
             <div class="col-12 col-md-6">
                 <button type="button" class="p-0 m-0 mb-3 border-0 d-flex align-items-center justify-content-center bg-transparent overflow-hidden" id="button-studio-photo-main" data-bs-toggle="modal" data-bs-target="#studio-photo-main">
-                    <img src="{{asset('photos/'.$prod->photo)}}" alt="studio-photo-main" id="img-studio-photo-main" class="img-fluid ">
+                    <img src="{{asset('photos/'.$prod->photo)}}" alt="product-photo-main" id="img-studio-photo-main" class="img-fluid ">
                 </button>
                 <div class="modal fade" id="studio-photo-main" tabindex="-1" aria-labelledby="studio-photo-main-label" aria-hidden="true">
                     <div class="modal-dialog">
@@ -39,7 +43,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <img src="{{asset('photos/'.$prod->photo)}}" alt="studio-photo-main" class="img-fluid">
+                                <img src="{{asset('photos/'.$prod->photo)}}" alt="product-photo-main" class="img-fluid">
                             </div>
                         </div>
                     </div>
@@ -48,7 +52,7 @@
                     @foreach (unserialize($prod->photos) as $k => $pho)
                     @if($pho != null)
                     <button type="button" class="col p-3 m-0 mb-3 border-0 d-flex align-items-center justify-content-center bg-transparent overflow-hidden" id="button-studio-photo-{{$k}}" data-bs-toggle="modal" data-bs-target="#studio-photo-{{$k}}">
-                        <img src="{{asset('photos/'.$pho)}}" alt="studio-photo-{{$k}}" id="img-studio-photo-{{$k}}" class="img-fluid ">
+                        <img src="{{asset('photos/'.$pho)}}" alt="product-photo-{{$k}}" id="img-studio-photo-{{$k}}" class="img-fluid ">
                     </button>
                     <div class="modal fade" id="studio-photo-{{$k}}" tabindex="-1" aria-labelledby="studio-photo-{{$k}}-label" aria-hidden="true">
                         <div class="modal-dialog">
@@ -57,7 +61,7 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <img src="{{asset('photos/'.$pho)}}" alt="studio-photo-{{$k}}" class="img-fluid">
+                                    <img src="{{asset('photos/'.$pho)}}" alt="product-photo-{{$k}}" class="img-fluid">
                                 </div>
                             </div>
                         </div>

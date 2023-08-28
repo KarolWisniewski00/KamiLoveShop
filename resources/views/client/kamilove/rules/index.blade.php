@@ -1,4 +1,12 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Regulamin | KamiLove Fashion sklep online</title>
+<meta property="og:title" content="Regulamin | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="twitter:title" content="Regulamin | KamiLove Fashion sklep online - Sukienki, Biżuteria, Akcesoria" />
+<meta name="description" content="Regulamin">
+<meta property="og:description" content="Regulamin" />
+<meta name="twitter:description" content="Regulamin" />
+@endsection
 @section('content')
 <!--RULES-->
 <section>

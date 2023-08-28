@@ -1,4 +1,7 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Register | KamiLove Fashion sklep online</title>
+@endsection
 @section('content')
 <!--REGISTER-->
 <section>

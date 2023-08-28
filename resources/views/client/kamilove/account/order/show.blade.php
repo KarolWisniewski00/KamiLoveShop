@@ -1,4 +1,7 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Zamówienie {{$order->number}} | KamiLove Fashion sklep online</title>
+@endsection
 @section('content')
 <!--RESUME-->
 <section>

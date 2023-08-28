@@ -1,4 +1,7 @@
 @extends('layout.kamilove')
+@section('meta')
+<title>Koszyk | KamiLove Fashion sklep online</title>
+@endsection
 @section('content')
 <!--BUSKET-->
 <section>
@@ -63,7 +66,7 @@
                                         <div class="row">
                                             <div class="col-12 offset-md-3 col-md-6">
                                                 <div class="d-flex flex-column justify-content-center align-items-center">
-                                                    <img class="img-fluid" alt="" src="{{asset('svg/kamilove-shopping.svg')}}">
+                                                    <img class="img-fluid" alt="emptyplace" src="{{asset('svg/kamilove-shopping.svg')}}">
                                                     <div class="h4 m-0 p-0 my-3">Twój koszyk jest pusty!</div>
                                                     <a href="{{route('category.show','default')}}" class="btn btn-custom-1 my-3 btn-lg"><i class="fa-solid fa-cart-shopping me-2"></i>Zrób zakupy</a>
                                                 </div>
