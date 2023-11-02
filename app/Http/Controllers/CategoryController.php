@@ -119,10 +119,11 @@ class CategoryController extends Controller
         $query = $this->filter_by_price($query, $request);
         $query = $this->filter_by_size($query, $cat, $request);
         $prod = $query->orderBy('order')->paginate(15);
-
+        $prods = Product::orderBy('order');
         return view('client.'.env('SHOP').'.category.show', [
             'slug' => $slug,
             'prod' => $prod,
+            'prods' => $prods,
             'request' => $request,
             'max' => $max,
             'sizes' => $sizes

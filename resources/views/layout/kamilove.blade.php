@@ -28,7 +28,12 @@
             <ul class="nav nav-pills d-flex flex-row flex-wrap justify-content-center align-items-center">
                 <li class="nav-item"><a href="{{route('index')}}" class="text-dark nav-link">Start</a></li>
                 @foreach($pro_cat as $c)
+                @php
+                $count = $pro_prod->where('category_id', $c->id)->count();
+                @endphp
+                @if($count != 0)
                 <li class="nav-item"><a href="{{ route('category.show',$c->url)}}" class="text-dark nav-link">{{$c->plural}}</a></li>
+                @endif
                 @endforeach
                 @if (session()->has('login_id'))
                 <ul class="nav">

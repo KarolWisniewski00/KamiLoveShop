@@ -77,30 +77,34 @@
                         <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                             <div class="accordion-body">
                                 @foreach($pro_cat as $c)
+                                @php
+                                $count = $pro_prod->where('category_id', $c->id)->count();
+                                @endphp
+                                @if($count != 0)
                                 <a href="{{route('category.show', $c->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold">{{$c->plural}}</div>
                                     </div>
                                     <span class="badge bg-custom rounded-pill">
-                                        @php
-                                        $count = $prod->where('category_id', $c->id)->count();
-                                        @endphp
                                         {{$count}}
                                     </span>
                                 </a>
+                                @endif
                                 @foreach($pro_subcat as $sc)
                                 @if ($sc->category_id == $c->id)
+                                @php
+                                $count = $pro_prod->where('subcategory_id', $sc->id)->count();
+                                @endphp
+                                @if($count != 0)
                                 <a href="{{route('category.show', $c->url)}}" class="list-group-item d-flex justify-content-between align-items-start py-1">
                                     <div class="ms-2 me-auto">
                                         <div class="fw-bold text-muted ps-2" style="inline-size: 100%;overflow-wrap: break-word;">{{$sc->plural}}</div>
                                     </div>
                                     <span class="badge bg-custom-1 rounded-pill">
-                                        @php
-                                        $count = $prod->where('subcategory_id', $sc->id)->count();
-                                        @endphp
                                         {{$count}}
                                     </span>
                                 </a>
+                                @endif
                                 @endif
                                 @endforeach
                                 @endforeach
@@ -157,7 +161,7 @@
                     </div>
                     <div class="col-6">
                         <div class="d-flex justify-content-end align-items-center">
-                            <select id="sort_option" class="btn btn-custom-1 rounded-0 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <select id="sort_option" class="btn btn-custom-1 rounded dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <option class="bg-white text-black" value="default">Domyślne sortowanie</option>
                                 <option class="bg-white text-black" value="low_to_high">Sortuj po cenie od najniższej</option>
                                 <option class="bg-white text-black" value="high_to_low">Sortuj po cenie od najwyższej</option>

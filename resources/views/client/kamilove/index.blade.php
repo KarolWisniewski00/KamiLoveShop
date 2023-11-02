@@ -65,13 +65,14 @@
         @if(count($prod)>0)
         <h2 class="text-center my-4" style="font-size: 3em;">Nowości</h2>
         <div class="row g-4">
-            @foreach ($prod as $p)
-            <div class="col-12 col-md-6 col-lg-3 mb-4">
-            @include('client.kamilove.module.product-card')
-            </div>
-            @endforeach
+            @foreach ($prod as $k => $p)
+            @if($k <= 7) <div class="col-12 col-md-6 col-lg-3 mb-4">
+                @include('client.kamilove.module.product-card')
         </div>
         @endif
+        @endforeach
+    </div>
+    @endif
     </div>
 </section>
 <!--END PRODUCTS GRID-->
@@ -79,19 +80,27 @@
 <section>
     <div class="container">
         @foreach ($pro_cat as $key => $c)
+        @if ($c->id == 3)
+        @elseif ($c->id == 4)
+        @else
+        @php
+        $count = $pro_prod->where('category_id', $c->id)->count();
+        @endphp
+        @if($count != 0)
         <h2 class="text-start my-4" style="font-size: 3em;">{{$c->plural}}</h2>
         @if ($key % 2 == 0)
         <!--DEFAULT-->
         <div class="row g-4">
             <div class="col-12 col-lg-6">
                 <div class="row">
-                @foreach ($prod as $p)
-                @if($p->category_id == $c->id)
-                <div class="col-12 col-md-6 mb-4">
-                @include('client.kamilove.module.product-card')
-                </div>
-                @endif
-                @endforeach
+                    @foreach ($prod as $k => $p)
+                    @if($k <= 5) @if($p->category_id == $c->id)
+                        <div class="col-12 col-md-6 mb-4">
+                            @include('client.kamilove.module.product-card')
+                        </div>
+                        @endif
+                        @endif
+                        @endforeach
                 </div>
             </div>
             <div class="col-12 col-lg-6">
@@ -111,21 +120,23 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="row">
-                @foreach ($prod as $p)
-                @if($p->category_id == $c->id)
-                <div class="col-12 col-md-6 mb-4">
-                @include('client.kamilove.module.product-card')
-                </div>
-                @endif
-                @endforeach
+                    @foreach ($prod as $k => $p)
+                    @if($k <= 5) @if($p->category_id == $c->id)
+                        <div class="col-12 col-md-6 mb-4">
+                            @include('client.kamilove.module.product-card')
+                        </div>
+                        @endif
+                        @endif
+                        @endforeach
                 </div>
             </div>
         </div>
         <!--END REVERSED-->
+        @endif
+        @endif
         @endif
         @endforeach
     </div>
 </section>
 <!--END PRODUCTS WITH CATEGORY-->
 @endsection
-
